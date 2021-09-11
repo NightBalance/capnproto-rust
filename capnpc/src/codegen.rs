@@ -1380,7 +1380,7 @@ fn generate_node(gen: &GeneratorContext,
                 Branch(preamble),
                 (if !is_generic {
                     Branch(vec!(
-                        Line("#[derive(Copy, Clone)]".into()),
+                        Line("#[derive(Copy, Clone, crate::bison::SourcePath)]".into()),
                         Line("pub struct Owned(());".to_string()),
                         Line("impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }".to_string()),
                         Line("impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }".to_string()),
@@ -1388,7 +1388,7 @@ fn generate_node(gen: &GeneratorContext,
                     ))
                 } else {
                     Branch(vec!(
-                        Line("#[derive(Copy, Clone)]".into()),
+                        Line("#[derive(Copy, Clone, crate::bison::SourcePath)]".into()),
                         Line(format!("pub struct Owned<{}> {{", params.params)),
                             Indent(Box::new(Line(params.phantom_data_type.clone()))),
                         Line("}".to_string()),
@@ -1752,13 +1752,13 @@ fn generate_node(gen: &GeneratorContext,
 
             mod_interior.push(if !is_generic {
                 Branch(vec!(
-                    Line("#[derive(Copy, Clone)]".into()),
+                    Line("#[derive(Copy, Clone, crate::bison::SourcePath)]".into()),
                     Line("pub struct Owned(());".to_string()),
                     Line("impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Client; type Builder = Client; }".to_string()),
                     Line("impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Client; }".to_string())))
             } else {
                 Branch(vec!(
-                    Line("#[derive(Copy, Clone)]".into()),
+                    Line("#[derive(Copy, Clone, crate::bison::SourcePath)]".into()),
                     Line(format!("pub struct Owned<{}> {} {{", params.params, params.where_clause)),
                     Indent(Box::new(Line(params.phantom_data_type.clone()))),
                     Line("}".to_string()),
