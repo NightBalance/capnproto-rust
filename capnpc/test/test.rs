@@ -915,7 +915,7 @@ mod tests {
         use crate::alligator::proto_01::struct_list;
         use test_capnp::{test_old_version, test_new_version};
 
-        let segment0: &[capnp::Word] = &[
+        let segment0: &[ crate::alligator::proto_01::Word] = &[
             crate::alligator::proto_01::word(1,0,0,0,0x1f,0,0,0), // list, inline composite, 3 words
             crate::alligator::proto_01::word(4, 0, 0, 0, 1, 0, 2, 0), // struct tag. 1 element, 1 word data, 2 pointers.
             crate::alligator::proto_01::word(0xab,0,0,0,0,0,0,0),
@@ -924,7 +924,7 @@ mod tests {
             crate::alligator::proto_01::word(0x68,0x65,0x6c,0x6c,0x6f,0x21,0x21,0), // "hello!!"
         ];
 
-        let segment_array = &[capnp::Word::words_to_bytes(segment0)];
+        let segment_array = &[ crate::alligator::proto_01::Word::words_to_bytes(segment0)];
         let message_reader =
             message::Reader::new(message::SegmentArray::new(segment_array), ReaderOptions::new());
 
@@ -1027,7 +1027,7 @@ mod tests {
 
     #[test]
     fn double_far_pointer() {
-        let segment0: &[capnp::Word] = &[
+        let segment0: &[ crate::alligator::proto_01::Word] = &[
             crate::alligator::proto_01::word(0,0,0,0,0,0,1,0),
             // struct pointer, zero offset, zero data words, one pointer.
 
@@ -1035,7 +1035,7 @@ mod tests {
             // far pointer, two-word landing pad, offset 0, segment 1.
         ];
 
-        let segment1: &[capnp::Word] = &[
+        let segment1: &[ crate::alligator::proto_01::Word] = &[
             crate::alligator::proto_01::word(2,0,0,0,2,0,0,0),
             // landing pad start. offset 0, segment 2
 
@@ -1043,7 +1043,7 @@ mod tests {
             // landing pad tag. struct pointer. One data word. One pointer.
         ];
 
-        let segment2: &[capnp::Word] = &[
+        let segment2: &[ crate::alligator::proto_01::Word] = &[
             crate::alligator::proto_01::word(0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f),
             // Data word.
 
@@ -1053,7 +1053,7 @@ mod tests {
             crate::alligator::proto_01::word('h' as u8, 'e' as u8, 'l' as u8, 'l' as u8, 'o' as u8, '.' as u8, '\n' as u8, 0),
         ];
 
-        let segment_array = &[capnp::Word::words_to_bytes(segment0),
+        let segment_array = &[ crate::alligator::proto_01::Word::words_to_bytes(segment0),
                               crate::alligator::proto_01::Word::words_to_bytes(segment1),
                               crate::alligator::proto_01::Word::words_to_bytes(segment2)];
 
@@ -1069,22 +1069,22 @@ mod tests {
 
     #[test]
     fn double_far_pointer_truncated_pad() {
-        let segment0: &[capnp::Word] = &[
+        let segment0: &[ crate::alligator::proto_01::Word] = &[
             crate::alligator::proto_01::word(6,0,0,0,1,0,0,0),
             // far pointer, two-word landing pad, offset 0, segment 1.
         ];
 
-        let segment1: &[capnp::Word] = &[
+        let segment1: &[ crate::alligator::proto_01::Word] = &[
             crate::alligator::proto_01::word(2,0,0,0,2,0,0,0),
             // landing pad start. offset 0, segment 2
 
             // For this message to be valid, there would need to be another word here.
         ];
-        let segment2: &[capnp::Word] = &[
+        let segment2: &[ crate::alligator::proto_01::Word] = &[
             crate::alligator::proto_01::word(0,0,0,0,0,0,0,0),
         ];
 
-        let segment_array = &[capnp::Word::words_to_bytes(segment0),
+        let segment_array = &[ crate::alligator::proto_01::Word::words_to_bytes(segment0),
                               crate::alligator::proto_01::Word::words_to_bytes(segment1),
                               crate::alligator::proto_01::Word::words_to_bytes(segment2)];
         let message =
@@ -1100,23 +1100,23 @@ mod tests {
 
     #[test]
     fn double_far_pointer_out_of_bounds() {
-        let segment0: &[capnp::Word] = &[
+        let segment0: &[ crate::alligator::proto_01::Word] = &[
             crate::alligator::proto_01::word(6,0,0,0,1,0,0,0),
             // far pointer, two-word landing pad, offset 0, segment 1.
         ];
 
-        let segment1: &[capnp::Word] = &[
+        let segment1: &[ crate::alligator::proto_01::Word] = &[
             crate::alligator::proto_01::word(0xa,0,0,0,2,0,0,0),
             // landing pad start. offset 1, segment 2
 
             crate::alligator::proto_01::word(0,0,0,0,1,0,1,0),
             // landing pad tag. struct pointer. One data word. One pointer.
         ];
-        let segment2: &[capnp::Word] = &[
+        let segment2: &[ crate::alligator::proto_01::Word] = &[
             crate::alligator::proto_01::word(0,0,0,0,0,0,0,0),
         ];
 
-        let segment_array = &[capnp::Word::words_to_bytes(segment0),
+        let segment_array = &[ crate::alligator::proto_01::Word::words_to_bytes(segment0),
                               crate::alligator::proto_01::Word::words_to_bytes(segment1),
                               crate::alligator::proto_01::Word::words_to_bytes(segment2)];
         let message =
@@ -1134,10 +1134,10 @@ mod tests {
     fn far_pointer_pointing_at_self() {
         use test_capnp::test_all_types;
 
-        let words: &[capnp::Word] =
-            &[capnp::word(0,0,0,0,0,0,1,0), // struct, one pointer
+        let words: &[ crate::alligator::proto_01::Word] =
+            &[ crate::alligator::proto_01::word(0,0,0,0,0,0,1,0), // struct, one pointer
               crate::alligator::proto_01::word(0xa,0,0,0,0,0,0,0)]; // far pointer, points to self
-        let segment_array = &[capnp::Word::words_to_bytes(words)];
+        let segment_array = &[ crate::alligator::proto_01::Word::words_to_bytes(words)];
 
         let message_reader =
             message::Reader::new(message::SegmentArray::new(segment_array), ReaderOptions::new());
@@ -1166,13 +1166,13 @@ mod tests {
 
     #[test]
     fn inline_composite_list_int_overflow() {
-        let words: &[capnp::Word] = &[
+        let words: &[ crate::alligator::proto_01::Word] = &[
             crate::alligator::proto_01::word(0,0,0,0,0,0,1,0),
             crate::alligator::proto_01::word(1,0,0,0,0x17,0,0,0),
             crate::alligator::proto_01::word(0,0,0,128,16,0,0,0),
             crate::alligator::proto_01::word(0,0,0,0,0,0,0,0),
             crate::alligator::proto_01::word(0,0,0,0,0,0,0,0)];
-        let segment_array = &[capnp::Word::words_to_bytes(words)];
+        let segment_array = &[ crate::alligator::proto_01::Word::words_to_bytes(words)];
 
         let message =
             message::Reader::new(message::SegmentArray::new(segment_array), ReaderOptions::new());
@@ -1360,13 +1360,13 @@ mod tests {
     fn total_size_struct_list_amplification() {
         use test_capnp::test_any_pointer;
 
-        let words: &[capnp::Word] =
-            &[capnp::word(0,0,0,0, 0,0,1,0), // struct, one pointers
+        let words: &[ crate::alligator::proto_01::Word] =
+            &[ crate::alligator::proto_01::word(0,0,0,0, 0,0,1,0), // struct, one pointers
               crate::alligator::proto_01::word(1,0,0,0, 0xf,0,0,0), // list, inline composite, one word
               crate::alligator::proto_01::word(0,0x80,0xc2,0xff, 0,0,0,0), // large struct, but zero of them
               crate::alligator::proto_01::word(0,0,0x20,0, 0,0,0x22,0),
             ];
-        let segment_array = &[capnp::Word::words_to_bytes(words)];
+        let segment_array = &[ crate::alligator::proto_01::Word::words_to_bytes(words)];
 
         let message_reader =
             message::Reader::new(message::SegmentArray::new(segment_array), ReaderOptions::new());

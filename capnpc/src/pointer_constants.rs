@@ -50,7 +50,7 @@ pub fn word_array_declaration(name: &str,
 
     let vis = if options.public { "pub " } else { "" };
     Ok(Branch(vec![
-        Line(format!("{}static {}: [capnp::Word; {}] = [", vis, name, words.len() / 8)),
+        Line(format!("{}static {}: [ crate::alligator::proto_01::Word; {}] = [", vis, name, words.len() / 8)),
         Indent(Box::new(Branch(words_lines))),
         Line("];".to_string())
     ]))
