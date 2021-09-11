@@ -8,38 +8,38 @@ pub mod node {
 
   #[derive(Copy, Clone)]
   pub struct Owned(());
-  impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+  impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
   #[derive(Clone, Copy)]
-  pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+  pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-  impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-    fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+    fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
       Reader { reader,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-    fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+    fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-    fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+  impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+    fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
       self.reader
     }
   }
 
-  impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-    fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-      self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+    fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+      self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
     }
   }
 
@@ -48,7 +48,7 @@ pub mod node {
       Reader { .. *self }
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.reader.total_size()
     }
     #[inline]
@@ -56,8 +56,8 @@ pub mod node {
       self.reader.get_data_field::<u64>(0)
     }
     #[inline]
-    pub fn get_display_name(self) -> ::capnp::Result<::capnp::text::Reader<'a>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_display_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Reader<'a>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
     }
     pub fn has_display_name(&self) -> bool {
       !self.reader.get_pointer_field(0).is_null()
@@ -71,22 +71,22 @@ pub mod node {
       self.reader.get_data_field::<u64>(2)
     }
     #[inline]
-    pub fn get_nested_nodes(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::node::nested_node::Owned>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
+    pub fn get_nested_nodes(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::node::nested_node::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
     }
     pub fn has_nested_nodes(&self) -> bool {
       !self.reader.get_pointer_field(1).is_null()
     }
     #[inline]
-    pub fn get_annotations(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
+    pub fn get_annotations(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
     }
     pub fn has_annotations(&self) -> bool {
       !self.reader.get_pointer_field(2).is_null()
     }
     #[inline]
-    pub fn get_parameters(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::node::parameter::Owned>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(5), ::core::option::Option::None)
+    pub fn get_parameters(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::node::parameter::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(5), ::core::option::Option::None)
     }
     pub fn has_parameters(&self) -> bool {
       !self.reader.get_pointer_field(5).is_null()
@@ -96,7 +96,7 @@ pub mod node {
       self.reader.get_bool_field(288)
     }
     #[inline]
-    pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, ::capnp::NotInSchema> {
+    pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, crate::alligator::proto_01::NotInSchema> {
       match self.reader.get_data_field::<u16>(6) {
         0 => {
           ::core::result::Result::Ok(File(
@@ -105,80 +105,80 @@ pub mod node {
         }
         1 => {
           ::core::result::Result::Ok(Struct(
-            ::capnp::traits::FromStructReader::new(self.reader)
+            crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
           ))
         }
         2 => {
           ::core::result::Result::Ok(Enum(
-            ::capnp::traits::FromStructReader::new(self.reader)
+            crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
           ))
         }
         3 => {
           ::core::result::Result::Ok(Interface(
-            ::capnp::traits::FromStructReader::new(self.reader)
+            crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
           ))
         }
         4 => {
           ::core::result::Result::Ok(Const(
-            ::capnp::traits::FromStructReader::new(self.reader)
+            crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
           ))
         }
         5 => {
           ::core::result::Result::Ok(Annotation(
-            ::capnp::traits::FromStructReader::new(self.reader)
+            crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
           ))
         }
-        x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+        x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
       }
     }
   }
 
-  pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-  impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+  pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+  impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
     #[inline]
-    fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+    fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
   }
-  impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-    fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+    fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
       Builder { builder,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-    fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-      self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+    fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+      self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-    fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-      ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+    fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+      crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
     }
-    fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+    fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-    fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+  impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+    fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
   }
 
   impl <'a,> Builder<'a,>  {
     pub fn into_reader(self) -> Reader<'a,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
     pub fn reborrow(&mut self) -> Builder<'_,> {
       Builder { .. *self }
     }
     pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.builder.into_reader().total_size()
     }
     #[inline]
@@ -190,15 +190,15 @@ pub mod node {
       self.builder.set_data_field::<u64>(0, value);
     }
     #[inline]
-    pub fn get_display_name(self) -> ::capnp::Result<::capnp::text::Builder<'a>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_display_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Builder<'a>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_display_name(&mut self, value: ::capnp::text::Reader<'_>)  {
+    pub fn set_display_name(&mut self, value: crate::alligator::proto_01::text::Reader<'_>)  {
       self.builder.get_pointer_field(0).set_text(value);
     }
     #[inline]
-    pub fn init_display_name(self, size: u32) -> ::capnp::text::Builder<'a> {
+    pub fn init_display_name(self, size: u32) -> crate::alligator::proto_01::text::Builder<'a> {
       self.builder.get_pointer_field(0).init_text(size)
     }
     pub fn has_display_name(&self) -> bool {
@@ -221,31 +221,31 @@ pub mod node {
       self.builder.set_data_field::<u64>(2, value);
     }
     #[inline]
-    pub fn get_nested_nodes(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::node::nested_node::Owned>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
+    pub fn get_nested_nodes(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::node::nested_node::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_nested_nodes(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::node::nested_node::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
+    pub fn set_nested_nodes(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::node::nested_node::Owned>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
     }
     #[inline]
-    pub fn init_nested_nodes(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::node::nested_node::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
+    pub fn init_nested_nodes(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::node::nested_node::Owned> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
     }
     pub fn has_nested_nodes(&self) -> bool {
       !self.builder.get_pointer_field(1).is_null()
     }
     #[inline]
-    pub fn get_annotations(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
+    pub fn get_annotations(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_annotations(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(2), value, false)
+    pub fn set_annotations(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(2), value, false)
     }
     #[inline]
-    pub fn init_annotations(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), size)
+    pub fn init_annotations(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), size)
     }
     pub fn has_annotations(&self) -> bool {
       !self.builder.get_pointer_field(2).is_null()
@@ -264,27 +264,27 @@ pub mod node {
       self.builder.set_data_field::<u16>(15, 0u16);
       self.builder.set_data_field::<u32>(8, 0u32);
       self.builder.get_pointer_field(3).clear();
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
     pub fn init_enum(self, ) -> crate::schema_capnp::node::enum_::Builder<'a> {
       self.builder.set_data_field::<u16>(6, 2);
       self.builder.get_pointer_field(3).clear();
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
     pub fn init_interface(self, ) -> crate::schema_capnp::node::interface::Builder<'a> {
       self.builder.set_data_field::<u16>(6, 3);
       self.builder.get_pointer_field(3).clear();
       self.builder.get_pointer_field(4).clear();
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
     pub fn init_const(self, ) -> crate::schema_capnp::node::const_::Builder<'a> {
       self.builder.set_data_field::<u16>(6, 4);
       self.builder.get_pointer_field(3).clear();
       self.builder.get_pointer_field(4).clear();
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
     pub fn init_annotation(self, ) -> crate::schema_capnp::node::annotation::Builder<'a> {
@@ -302,19 +302,19 @@ pub mod node {
       self.builder.set_bool_field(121, false);
       self.builder.set_bool_field(122, false);
       self.builder.set_bool_field(123, false);
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
-    pub fn get_parameters(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::node::parameter::Owned>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(5), ::core::option::Option::None)
+    pub fn get_parameters(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::node::parameter::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(5), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_parameters(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::node::parameter::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(5), value, false)
+    pub fn set_parameters(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::node::parameter::Owned>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(5), value, false)
     }
     #[inline]
-    pub fn init_parameters(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::node::parameter::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(5), size)
+    pub fn init_parameters(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::node::parameter::Owned> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(5), size)
     }
     pub fn has_parameters(&self) -> bool {
       !self.builder.get_pointer_field(5).is_null()
@@ -328,7 +328,7 @@ pub mod node {
       self.builder.set_bool_field(288, value);
     }
     #[inline]
-    pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, ::capnp::NotInSchema> {
+    pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, crate::alligator::proto_01::NotInSchema> {
       match self.builder.get_data_field::<u16>(6) {
         0 => {
           ::core::result::Result::Ok(File(
@@ -337,44 +337,44 @@ pub mod node {
         }
         1 => {
           ::core::result::Result::Ok(Struct(
-            ::capnp::traits::FromStructBuilder::new(self.builder)
+            crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
           ))
         }
         2 => {
           ::core::result::Result::Ok(Enum(
-            ::capnp::traits::FromStructBuilder::new(self.builder)
+            crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
           ))
         }
         3 => {
           ::core::result::Result::Ok(Interface(
-            ::capnp::traits::FromStructBuilder::new(self.builder)
+            crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
           ))
         }
         4 => {
           ::core::result::Result::Ok(Const(
-            ::capnp::traits::FromStructBuilder::new(self.builder)
+            crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
           ))
         }
         5 => {
           ::core::result::Result::Ok(Annotation(
-            ::capnp::traits::FromStructBuilder::new(self.builder)
+            crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
           ))
         }
-        x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+        x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
       }
     }
   }
 
-  pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-  impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-    fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+  pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+  impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+    fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
       Pipeline { _typeless: typeless,  }
     }
   }
   impl Pipeline  {
   }
   mod _private {
-    use capnp::private::layout;
+    use crate::alligator::proto_01::private::layout;
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 5, pointers: 6 };
     pub const TYPE_ID: u64 = 0xe682_ab4c_f923_a417;
   }
@@ -392,38 +392,38 @@ pub mod node {
   pub mod parameter {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -432,76 +432,76 @@ pub mod node {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
-      pub fn get_name(self) -> ::capnp::Result<::capnp::text::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
       }
       pub fn has_name(&self) -> bool {
         !self.reader.get_pointer_field(0).is_null()
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
-      pub fn get_name(self) -> ::capnp::Result<::capnp::text::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_name(&mut self, value: ::capnp::text::Reader<'_>)  {
+      pub fn set_name(&mut self, value: crate::alligator::proto_01::text::Reader<'_>)  {
         self.builder.get_pointer_field(0).set_text(value);
       }
       #[inline]
-      pub fn init_name(self, size: u32) -> ::capnp::text::Builder<'a> {
+      pub fn init_name(self, size: u32) -> crate::alligator::proto_01::text::Builder<'a> {
         self.builder.get_pointer_field(0).init_text(size)
       }
       pub fn has_name(&self) -> bool {
@@ -509,16 +509,16 @@ pub mod node {
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 0, pointers: 1 };
       pub const TYPE_ID: u64 = 0xb952_1bcc_f10f_a3b1;
     }
@@ -527,38 +527,38 @@ pub mod node {
   pub mod nested_node {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -567,12 +567,12 @@ pub mod node {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
-      pub fn get_name(self) -> ::capnp::Result<::capnp::text::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
       }
       pub fn has_name(&self) -> bool {
         !self.reader.get_pointer_field(0).is_null()
@@ -583,64 +583,64 @@ pub mod node {
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
-      pub fn get_name(self) -> ::capnp::Result<::capnp::text::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_name(&mut self, value: ::capnp::text::Reader<'_>)  {
+      pub fn set_name(&mut self, value: crate::alligator::proto_01::text::Reader<'_>)  {
         self.builder.get_pointer_field(0).set_text(value);
       }
       #[inline]
-      pub fn init_name(self, size: u32) -> ::capnp::text::Builder<'a> {
+      pub fn init_name(self, size: u32) -> crate::alligator::proto_01::text::Builder<'a> {
         self.builder.get_pointer_field(0).init_text(size)
       }
       pub fn has_name(&self) -> bool {
@@ -656,16 +656,16 @@ pub mod node {
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 1, pointers: 1 };
       pub const TYPE_ID: u64 = 0xdebf_55bb_fa0f_c242;
     }
@@ -674,38 +674,38 @@ pub mod node {
   pub mod source_info {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -714,7 +714,7 @@ pub mod node {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
@@ -722,67 +722,67 @@ pub mod node {
         self.reader.get_data_field::<u64>(0)
       }
       #[inline]
-      pub fn get_doc_comment(self) -> ::capnp::Result<::capnp::text::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_doc_comment(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
       }
       pub fn has_doc_comment(&self) -> bool {
         !self.reader.get_pointer_field(0).is_null()
       }
       #[inline]
-      pub fn get_members(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::node::source_info::member::Owned>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
+      pub fn get_members(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::node::source_info::member::Owned>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
       }
       pub fn has_members(&self) -> bool {
         !self.reader.get_pointer_field(1).is_null()
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
@@ -794,47 +794,47 @@ pub mod node {
         self.builder.set_data_field::<u64>(0, value);
       }
       #[inline]
-      pub fn get_doc_comment(self) -> ::capnp::Result<::capnp::text::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_doc_comment(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_doc_comment(&mut self, value: ::capnp::text::Reader<'_>)  {
+      pub fn set_doc_comment(&mut self, value: crate::alligator::proto_01::text::Reader<'_>)  {
         self.builder.get_pointer_field(0).set_text(value);
       }
       #[inline]
-      pub fn init_doc_comment(self, size: u32) -> ::capnp::text::Builder<'a> {
+      pub fn init_doc_comment(self, size: u32) -> crate::alligator::proto_01::text::Builder<'a> {
         self.builder.get_pointer_field(0).init_text(size)
       }
       pub fn has_doc_comment(&self) -> bool {
         !self.builder.get_pointer_field(0).is_null()
       }
       #[inline]
-      pub fn get_members(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::node::source_info::member::Owned>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
+      pub fn get_members(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::node::source_info::member::Owned>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_members(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::node::source_info::member::Owned>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
+      pub fn set_members(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::node::source_info::member::Owned>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
       }
       #[inline]
-      pub fn init_members(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::node::source_info::member::Owned> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
+      pub fn init_members(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::node::source_info::member::Owned> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
       }
       pub fn has_members(&self) -> bool {
         !self.builder.get_pointer_field(1).is_null()
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 1, pointers: 2 };
       pub const TYPE_ID: u64 = 0xf38e_1de3_0413_57ae;
     }
@@ -842,38 +842,38 @@ pub mod node {
     pub mod member {
       #[derive(Copy, Clone)]
       pub struct Owned(());
-      impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-      impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-      impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+      impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+      impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+      impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
       #[derive(Clone, Copy)]
-      pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+      pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-      impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+      impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
         #[inline]
         fn type_id() -> u64 { _private::TYPE_ID }
       }
-      impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-        fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+      impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+        fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
           Reader { reader,  }
         }
       }
 
-      impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-        fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-          ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+      impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+        fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+          ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
         }
       }
 
-      impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-        fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+      impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+        fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
           self.reader
         }
       }
 
-      impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-        fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-          self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+      impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+        fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+          self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
         }
       }
 
@@ -882,76 +882,76 @@ pub mod node {
           Reader { .. *self }
         }
 
-        pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+        pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
           self.reader.total_size()
         }
         #[inline]
-        pub fn get_doc_comment(self) -> ::capnp::Result<::capnp::text::Reader<'a>> {
-          ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+        pub fn get_doc_comment(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Reader<'a>> {
+          crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
         }
         pub fn has_doc_comment(&self) -> bool {
           !self.reader.get_pointer_field(0).is_null()
         }
       }
 
-      pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-      impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+      pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+      impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
         #[inline]
-        fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+        fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
       }
-      impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+      impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
         #[inline]
         fn type_id() -> u64 { _private::TYPE_ID }
       }
-      impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-        fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+      impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+        fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
           Builder { builder,  }
         }
       }
 
-      impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-        fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-          self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+      impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+        fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+          self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
         }
       }
 
-      impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-        fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-          ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+      impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+        fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+          crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
         }
-        fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-          ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+        fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+          ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
         }
       }
 
-      impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-        fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+      impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+        fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
       }
 
       impl <'a,> Builder<'a,>  {
         pub fn into_reader(self) -> Reader<'a,> {
-          ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+          crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
         }
         pub fn reborrow(&mut self) -> Builder<'_,> {
           Builder { .. *self }
         }
         pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-          ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+          crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
         }
 
-        pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+        pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
           self.builder.into_reader().total_size()
         }
         #[inline]
-        pub fn get_doc_comment(self) -> ::capnp::Result<::capnp::text::Builder<'a>> {
-          ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+        pub fn get_doc_comment(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Builder<'a>> {
+          crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
         }
         #[inline]
-        pub fn set_doc_comment(&mut self, value: ::capnp::text::Reader<'_>)  {
+        pub fn set_doc_comment(&mut self, value: crate::alligator::proto_01::text::Reader<'_>)  {
           self.builder.get_pointer_field(0).set_text(value);
         }
         #[inline]
-        pub fn init_doc_comment(self, size: u32) -> ::capnp::text::Builder<'a> {
+        pub fn init_doc_comment(self, size: u32) -> crate::alligator::proto_01::text::Builder<'a> {
           self.builder.get_pointer_field(0).init_text(size)
         }
         pub fn has_doc_comment(&self) -> bool {
@@ -959,16 +959,16 @@ pub mod node {
         }
       }
 
-      pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-      impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-        fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+      pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+      impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+        fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
           Pipeline { _typeless: typeless,  }
         }
       }
       impl Pipeline  {
       }
       mod _private {
-        use capnp::private::layout;
+        use crate::alligator::proto_01::private::layout;
         pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 0, pointers: 1 };
         pub const TYPE_ID: u64 = 0xc2ba_9038_898e_1fa2;
       }
@@ -978,38 +978,38 @@ pub mod node {
   pub mod struct_ {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -1018,7 +1018,7 @@ pub mod node {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
@@ -1030,8 +1030,8 @@ pub mod node {
         self.reader.get_data_field::<u16>(12)
       }
       #[inline]
-      pub fn get_preferred_list_encoding(self) -> ::core::result::Result<crate::schema_capnp::ElementSize,::capnp::NotInSchema> {
-        ::capnp::traits::FromU16::from_u16(self.reader.get_data_field::<u16>(13))
+      pub fn get_preferred_list_encoding(self) -> ::core::result::Result<crate::schema_capnp::ElementSize, crate::alligator::proto_01::NotInSchema> {
+        crate::alligator::proto_01::traits::FromU16::from_u16(self.reader.get_data_field::<u16>(13))
       }
       #[inline]
       pub fn get_is_group(self) -> bool {
@@ -1046,60 +1046,60 @@ pub mod node {
         self.reader.get_data_field::<u32>(8)
       }
       #[inline]
-      pub fn get_fields(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::field::Owned>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
+      pub fn get_fields(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::field::Owned>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
       }
       pub fn has_fields(&self) -> bool {
         !self.reader.get_pointer_field(3).is_null()
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
@@ -1119,8 +1119,8 @@ pub mod node {
         self.builder.set_data_field::<u16>(12, value);
       }
       #[inline]
-      pub fn get_preferred_list_encoding(self) -> ::core::result::Result<crate::schema_capnp::ElementSize,::capnp::NotInSchema> {
-        ::capnp::traits::FromU16::from_u16(self.builder.get_data_field::<u16>(13))
+      pub fn get_preferred_list_encoding(self) -> ::core::result::Result<crate::schema_capnp::ElementSize, crate::alligator::proto_01::NotInSchema> {
+        crate::alligator::proto_01::traits::FromU16::from_u16(self.builder.get_data_field::<u16>(13))
       }
       #[inline]
       pub fn set_preferred_list_encoding(&mut self, value: crate::schema_capnp::ElementSize)  {
@@ -1151,32 +1151,32 @@ pub mod node {
         self.builder.set_data_field::<u32>(8, value);
       }
       #[inline]
-      pub fn get_fields(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::field::Owned>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
+      pub fn get_fields(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::field::Owned>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_fields(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::field::Owned>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
+      pub fn set_fields(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::field::Owned>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
       }
       #[inline]
-      pub fn init_fields(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::field::Owned> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), size)
+      pub fn init_fields(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::field::Owned> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), size)
       }
       pub fn has_fields(&self) -> bool {
         !self.builder.get_pointer_field(3).is_null()
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 5, pointers: 6 };
       pub const TYPE_ID: u64 = 0x9ea0_b19b_37fb_4435;
     }
@@ -1185,38 +1185,38 @@ pub mod node {
   pub mod enum_ {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -1225,93 +1225,93 @@ pub mod node {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
-      pub fn get_enumerants(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::enumerant::Owned>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
+      pub fn get_enumerants(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::enumerant::Owned>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
       }
       pub fn has_enumerants(&self) -> bool {
         !self.reader.get_pointer_field(3).is_null()
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
-      pub fn get_enumerants(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::enumerant::Owned>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
+      pub fn get_enumerants(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::enumerant::Owned>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_enumerants(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::enumerant::Owned>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
+      pub fn set_enumerants(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::enumerant::Owned>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
       }
       #[inline]
-      pub fn init_enumerants(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::enumerant::Owned> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), size)
+      pub fn init_enumerants(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::enumerant::Owned> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), size)
       }
       pub fn has_enumerants(&self) -> bool {
         !self.builder.get_pointer_field(3).is_null()
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 5, pointers: 6 };
       pub const TYPE_ID: u64 = 0xb54a_b336_4333_f598;
     }
@@ -1320,38 +1320,38 @@ pub mod node {
   pub mod interface {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -1360,115 +1360,115 @@ pub mod node {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
-      pub fn get_methods(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::method::Owned>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
+      pub fn get_methods(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::method::Owned>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
       }
       pub fn has_methods(&self) -> bool {
         !self.reader.get_pointer_field(3).is_null()
       }
       #[inline]
-      pub fn get_superclasses(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::superclass::Owned>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(4), ::core::option::Option::None)
+      pub fn get_superclasses(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::superclass::Owned>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(4), ::core::option::Option::None)
       }
       pub fn has_superclasses(&self) -> bool {
         !self.reader.get_pointer_field(4).is_null()
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
-      pub fn get_methods(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::method::Owned>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
+      pub fn get_methods(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::method::Owned>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_methods(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::method::Owned>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
+      pub fn set_methods(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::method::Owned>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
       }
       #[inline]
-      pub fn init_methods(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::method::Owned> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), size)
+      pub fn init_methods(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::method::Owned> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), size)
       }
       pub fn has_methods(&self) -> bool {
         !self.builder.get_pointer_field(3).is_null()
       }
       #[inline]
-      pub fn get_superclasses(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::superclass::Owned>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(4), ::core::option::Option::None)
+      pub fn get_superclasses(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::superclass::Owned>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(4), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_superclasses(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::superclass::Owned>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(4), value, false)
+      pub fn set_superclasses(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::superclass::Owned>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(4), value, false)
       }
       #[inline]
-      pub fn init_superclasses(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::superclass::Owned> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(4), size)
+      pub fn init_superclasses(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::superclass::Owned> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(4), size)
       }
       pub fn has_superclasses(&self) -> bool {
         !self.builder.get_pointer_field(4).is_null()
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 5, pointers: 6 };
       pub const TYPE_ID: u64 = 0xe827_53cf_f0c2_218f;
     }
@@ -1477,38 +1477,38 @@ pub mod node {
   pub mod const_ {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -1517,121 +1517,121 @@ pub mod node {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
-      pub fn get_type(self) -> ::capnp::Result<crate::schema_capnp::type_::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
+      pub fn get_type(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::type_::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
       }
       pub fn has_type(&self) -> bool {
         !self.reader.get_pointer_field(3).is_null()
       }
       #[inline]
-      pub fn get_value(self) -> ::capnp::Result<crate::schema_capnp::value::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(4), ::core::option::Option::None)
+      pub fn get_value(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::value::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(4), ::core::option::Option::None)
       }
       pub fn has_value(&self) -> bool {
         !self.reader.get_pointer_field(4).is_null()
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
-      pub fn get_type(self) -> ::capnp::Result<crate::schema_capnp::type_::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
+      pub fn get_type(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::type_::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_type(&mut self, value: crate::schema_capnp::type_::Reader<'_>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
+      pub fn set_type(&mut self, value: crate::schema_capnp::type_::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
       }
       #[inline]
       pub fn init_type(self, ) -> crate::schema_capnp::type_::Builder<'a> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), 0)
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), 0)
       }
       pub fn has_type(&self) -> bool {
         !self.builder.get_pointer_field(3).is_null()
       }
       #[inline]
-      pub fn get_value(self) -> ::capnp::Result<crate::schema_capnp::value::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(4), ::core::option::Option::None)
+      pub fn get_value(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::value::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(4), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_value(&mut self, value: crate::schema_capnp::value::Reader<'_>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(4), value, false)
+      pub fn set_value(&mut self, value: crate::schema_capnp::value::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(4), value, false)
       }
       #[inline]
       pub fn init_value(self, ) -> crate::schema_capnp::value::Builder<'a> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(4), 0)
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(4), 0)
       }
       pub fn has_value(&self) -> bool {
         !self.builder.get_pointer_field(4).is_null()
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
       pub fn get_type(&self) -> crate::schema_capnp::type_::Pipeline {
-        ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(3))
+        crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(3))
       }
       pub fn get_value(&self) -> crate::schema_capnp::value::Pipeline {
-        ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(4))
+        crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(4))
       }
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 5, pointers: 6 };
       pub const TYPE_ID: u64 = 0xb18a_a5ac_7a0d_9420;
     }
@@ -1640,38 +1640,38 @@ pub mod node {
   pub mod annotation {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -1680,12 +1680,12 @@ pub mod node {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
-      pub fn get_type(self) -> ::capnp::Result<crate::schema_capnp::type_::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
+      pub fn get_type(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::type_::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
       }
       pub fn has_type(&self) -> bool {
         !self.reader.get_pointer_field(3).is_null()
@@ -1740,65 +1740,65 @@ pub mod node {
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
-      pub fn get_type(self) -> ::capnp::Result<crate::schema_capnp::type_::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
+      pub fn get_type(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::type_::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_type(&mut self, value: crate::schema_capnp::type_::Reader<'_>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
+      pub fn set_type(&mut self, value: crate::schema_capnp::type_::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
       }
       #[inline]
       pub fn init_type(self, ) -> crate::schema_capnp::type_::Builder<'a> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), 0)
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), 0)
       }
       pub fn has_type(&self) -> bool {
         !self.builder.get_pointer_field(3).is_null()
@@ -1901,19 +1901,19 @@ pub mod node {
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
       pub fn get_type(&self) -> crate::schema_capnp::type_::Pipeline {
-        ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(3))
+        crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(3))
       }
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 5, pointers: 6 };
       pub const TYPE_ID: u64 = 0xec16_19d4_400a_0290;
     }
@@ -1925,38 +1925,38 @@ pub mod field {
 
   #[derive(Copy, Clone)]
   pub struct Owned(());
-  impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+  impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
   #[derive(Clone, Copy)]
-  pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+  pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-  impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-    fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+    fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
       Reader { reader,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-    fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+    fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-    fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+  impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+    fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
       self.reader
     }
   }
 
-  impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-    fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-      self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+    fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+      self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
     }
   }
 
@@ -1965,12 +1965,12 @@ pub mod field {
       Reader { .. *self }
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.reader.total_size()
     }
     #[inline]
-    pub fn get_name(self) -> ::capnp::Result<::capnp::text::Reader<'a>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Reader<'a>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
     }
     pub fn has_name(&self) -> bool {
       !self.reader.get_pointer_field(0).is_null()
@@ -1980,8 +1980,8 @@ pub mod field {
       self.reader.get_data_field::<u16>(0)
     }
     #[inline]
-    pub fn get_annotations(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
+    pub fn get_annotations(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
     }
     pub fn has_annotations(&self) -> bool {
       !self.reader.get_pointer_field(1).is_null()
@@ -1992,84 +1992,84 @@ pub mod field {
     }
     #[inline]
     pub fn get_ordinal(self) -> crate::schema_capnp::field::ordinal::Reader<'a> {
-      ::capnp::traits::FromStructReader::new(self.reader)
+      crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
     }
     #[inline]
-    pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, ::capnp::NotInSchema> {
+    pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, crate::alligator::proto_01::NotInSchema> {
       match self.reader.get_data_field::<u16>(4) {
         0 => {
           ::core::result::Result::Ok(Slot(
-            ::capnp::traits::FromStructReader::new(self.reader)
+            crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
           ))
         }
         1 => {
           ::core::result::Result::Ok(Group(
-            ::capnp::traits::FromStructReader::new(self.reader)
+            crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
           ))
         }
-        x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+        x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
       }
     }
   }
 
-  pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-  impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+  pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+  impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
     #[inline]
-    fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+    fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
   }
-  impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-    fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+    fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
       Builder { builder,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-    fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-      self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+    fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+      self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-    fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-      ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+    fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+      crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
     }
-    fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+    fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-    fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+  impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+    fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
   }
 
   impl <'a,> Builder<'a,>  {
     pub fn into_reader(self) -> Reader<'a,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
     pub fn reborrow(&mut self) -> Builder<'_,> {
       Builder { .. *self }
     }
     pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.builder.into_reader().total_size()
     }
     #[inline]
-    pub fn get_name(self) -> ::capnp::Result<::capnp::text::Builder<'a>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Builder<'a>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_name(&mut self, value: ::capnp::text::Reader<'_>)  {
+    pub fn set_name(&mut self, value: crate::alligator::proto_01::text::Reader<'_>)  {
       self.builder.get_pointer_field(0).set_text(value);
     }
     #[inline]
-    pub fn init_name(self, size: u32) -> ::capnp::text::Builder<'a> {
+    pub fn init_name(self, size: u32) -> crate::alligator::proto_01::text::Builder<'a> {
       self.builder.get_pointer_field(0).init_text(size)
     }
     pub fn has_name(&self) -> bool {
@@ -2084,16 +2084,16 @@ pub mod field {
       self.builder.set_data_field::<u16>(0, value);
     }
     #[inline]
-    pub fn get_annotations(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
+    pub fn get_annotations(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_annotations(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
+    pub fn set_annotations(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
     }
     #[inline]
-    pub fn init_annotations(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
+    pub fn init_annotations(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
     }
     pub fn has_annotations(&self) -> bool {
       !self.builder.get_pointer_field(1).is_null()
@@ -2113,55 +2113,55 @@ pub mod field {
       self.builder.get_pointer_field(2).clear();
       self.builder.get_pointer_field(3).clear();
       self.builder.set_bool_field(128, false);
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
     pub fn init_group(self, ) -> crate::schema_capnp::field::group::Builder<'a> {
       self.builder.set_data_field::<u16>(4, 1);
       self.builder.set_data_field::<u64>(2, 0u64);
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
     pub fn get_ordinal(self) -> crate::schema_capnp::field::ordinal::Builder<'a> {
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
     pub fn init_ordinal(self, ) -> crate::schema_capnp::field::ordinal::Builder<'a> {
       self.builder.set_data_field::<u16>(5, 0);
       self.builder.set_data_field::<u16>(6, 0u16);
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
-    pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, ::capnp::NotInSchema> {
+    pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, crate::alligator::proto_01::NotInSchema> {
       match self.builder.get_data_field::<u16>(4) {
         0 => {
           ::core::result::Result::Ok(Slot(
-            ::capnp::traits::FromStructBuilder::new(self.builder)
+            crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
           ))
         }
         1 => {
           ::core::result::Result::Ok(Group(
-            ::capnp::traits::FromStructBuilder::new(self.builder)
+            crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
           ))
         }
-        x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+        x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
       }
     }
   }
 
-  pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-  impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-    fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+  pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+  impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+    fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
       Pipeline { _typeless: typeless,  }
     }
   }
   impl Pipeline  {
     pub fn get_ordinal(&self) -> crate::schema_capnp::field::ordinal::Pipeline {
-      ::capnp::capability::FromTypelessPipeline::new(self._typeless.noop())
+      crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.noop())
     }
   }
   mod _private {
-    use capnp::private::layout;
+    use crate::alligator::proto_01::private::layout;
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 4 };
     pub const TYPE_ID: u64 = 0x9aad_50a4_1f4a_f45f;
   }
@@ -2176,38 +2176,38 @@ pub mod field {
   pub mod slot {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -2216,7 +2216,7 @@ pub mod field {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
@@ -2224,15 +2224,15 @@ pub mod field {
         self.reader.get_data_field::<u32>(1)
       }
       #[inline]
-      pub fn get_type(self) -> ::capnp::Result<crate::schema_capnp::type_::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
+      pub fn get_type(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::type_::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
       }
       pub fn has_type(&self) -> bool {
         !self.reader.get_pointer_field(2).is_null()
       }
       #[inline]
-      pub fn get_default_value(self) -> ::capnp::Result<crate::schema_capnp::value::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
+      pub fn get_default_value(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::value::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
       }
       pub fn has_default_value(&self) -> bool {
         !self.reader.get_pointer_field(3).is_null()
@@ -2243,52 +2243,52 @@ pub mod field {
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
@@ -2300,31 +2300,31 @@ pub mod field {
         self.builder.set_data_field::<u32>(1, value);
       }
       #[inline]
-      pub fn get_type(self) -> ::capnp::Result<crate::schema_capnp::type_::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
+      pub fn get_type(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::type_::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_type(&mut self, value: crate::schema_capnp::type_::Reader<'_>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(2), value, false)
+      pub fn set_type(&mut self, value: crate::schema_capnp::type_::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(2), value, false)
       }
       #[inline]
       pub fn init_type(self, ) -> crate::schema_capnp::type_::Builder<'a> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), 0)
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), 0)
       }
       pub fn has_type(&self) -> bool {
         !self.builder.get_pointer_field(2).is_null()
       }
       #[inline]
-      pub fn get_default_value(self) -> ::capnp::Result<crate::schema_capnp::value::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
+      pub fn get_default_value(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::value::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_default_value(&mut self, value: crate::schema_capnp::value::Reader<'_>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
+      pub fn set_default_value(&mut self, value: crate::schema_capnp::value::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
       }
       #[inline]
       pub fn init_default_value(self, ) -> crate::schema_capnp::value::Builder<'a> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), 0)
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), 0)
       }
       pub fn has_default_value(&self) -> bool {
         !self.builder.get_pointer_field(3).is_null()
@@ -2339,22 +2339,22 @@ pub mod field {
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
       pub fn get_type(&self) -> crate::schema_capnp::type_::Pipeline {
-        ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(2))
+        crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(2))
       }
       pub fn get_default_value(&self) -> crate::schema_capnp::value::Pipeline {
-        ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(3))
+        crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(3))
       }
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 4 };
       pub const TYPE_ID: u64 = 0xc423_0547_6bb4_746f;
     }
@@ -2363,38 +2363,38 @@ pub mod field {
   pub mod group {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -2403,7 +2403,7 @@ pub mod field {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
@@ -2412,52 +2412,52 @@ pub mod field {
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
@@ -2470,16 +2470,16 @@ pub mod field {
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 4 };
       pub const TYPE_ID: u64 = 0xcafc_cddb_68db_1d11;
     }
@@ -2490,38 +2490,38 @@ pub mod field {
 
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -2530,11 +2530,11 @@ pub mod field {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
-      pub fn which(self) -> ::core::result::Result<WhichReader, ::capnp::NotInSchema> {
+      pub fn which(self) -> ::core::result::Result<WhichReader, crate::alligator::proto_01::NotInSchema> {
         match self.reader.get_data_field::<u16>(5) {
           0 => {
             ::core::result::Result::Ok(Implicit(
@@ -2546,57 +2546,57 @@ pub mod field {
               self.reader.get_data_field::<u16>(6)
             ))
           }
-          x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+          x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
         }
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
@@ -2609,7 +2609,7 @@ pub mod field {
         self.builder.set_data_field::<u16>(6, value);
       }
       #[inline]
-      pub fn which(self) -> ::core::result::Result<WhichBuilder, ::capnp::NotInSchema> {
+      pub fn which(self) -> ::core::result::Result<WhichBuilder, crate::alligator::proto_01::NotInSchema> {
         match self.builder.get_data_field::<u16>(5) {
           0 => {
             ::core::result::Result::Ok(Implicit(
@@ -2621,21 +2621,21 @@ pub mod field {
               self.builder.get_data_field::<u16>(6)
             ))
           }
-          x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+          x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
         }
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 4 };
       pub const TYPE_ID: u64 = 0xbb90_d5c2_8787_0be6;
     }
@@ -2651,38 +2651,38 @@ pub mod field {
 pub mod enumerant {
   #[derive(Copy, Clone)]
   pub struct Owned(());
-  impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+  impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
   #[derive(Clone, Copy)]
-  pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+  pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-  impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-    fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+    fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
       Reader { reader,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-    fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+    fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-    fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+  impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+    fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
       self.reader
     }
   }
 
-  impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-    fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-      self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+    fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+      self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
     }
   }
 
@@ -2691,12 +2691,12 @@ pub mod enumerant {
       Reader { .. *self }
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.reader.total_size()
     }
     #[inline]
-    pub fn get_name(self) -> ::capnp::Result<::capnp::text::Reader<'a>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Reader<'a>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
     }
     pub fn has_name(&self) -> bool {
       !self.reader.get_pointer_field(0).is_null()
@@ -2706,72 +2706,72 @@ pub mod enumerant {
       self.reader.get_data_field::<u16>(0)
     }
     #[inline]
-    pub fn get_annotations(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
+    pub fn get_annotations(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
     }
     pub fn has_annotations(&self) -> bool {
       !self.reader.get_pointer_field(1).is_null()
     }
   }
 
-  pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-  impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+  pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+  impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
     #[inline]
-    fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+    fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
   }
-  impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-    fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+    fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
       Builder { builder,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-    fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-      self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+    fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+      self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-    fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-      ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+    fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+      crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
     }
-    fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+    fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-    fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+  impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+    fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
   }
 
   impl <'a,> Builder<'a,>  {
     pub fn into_reader(self) -> Reader<'a,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
     pub fn reborrow(&mut self) -> Builder<'_,> {
       Builder { .. *self }
     }
     pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.builder.into_reader().total_size()
     }
     #[inline]
-    pub fn get_name(self) -> ::capnp::Result<::capnp::text::Builder<'a>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Builder<'a>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_name(&mut self, value: ::capnp::text::Reader<'_>)  {
+    pub fn set_name(&mut self, value: crate::alligator::proto_01::text::Reader<'_>)  {
       self.builder.get_pointer_field(0).set_text(value);
     }
     #[inline]
-    pub fn init_name(self, size: u32) -> ::capnp::text::Builder<'a> {
+    pub fn init_name(self, size: u32) -> crate::alligator::proto_01::text::Builder<'a> {
       self.builder.get_pointer_field(0).init_text(size)
     }
     pub fn has_name(&self) -> bool {
@@ -2786,32 +2786,32 @@ pub mod enumerant {
       self.builder.set_data_field::<u16>(0, value);
     }
     #[inline]
-    pub fn get_annotations(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
+    pub fn get_annotations(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_annotations(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
+    pub fn set_annotations(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
     }
     #[inline]
-    pub fn init_annotations(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
+    pub fn init_annotations(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
     }
     pub fn has_annotations(&self) -> bool {
       !self.builder.get_pointer_field(1).is_null()
     }
   }
 
-  pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-  impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-    fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+  pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+  impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+    fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
       Pipeline { _typeless: typeless,  }
     }
   }
   impl Pipeline  {
   }
   mod _private {
-    use capnp::private::layout;
+    use crate::alligator::proto_01::private::layout;
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 1, pointers: 2 };
     pub const TYPE_ID: u64 = 0x978a_7ceb_dc54_9a4d;
   }
@@ -2820,38 +2820,38 @@ pub mod enumerant {
 pub mod superclass {
   #[derive(Copy, Clone)]
   pub struct Owned(());
-  impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+  impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
   #[derive(Clone, Copy)]
-  pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+  pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-  impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-    fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+    fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
       Reader { reader,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-    fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+    fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-    fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+  impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+    fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
       self.reader
     }
   }
 
-  impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-    fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-      self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+    fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+      self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
     }
   }
 
@@ -2860,7 +2860,7 @@ pub mod superclass {
       Reader { .. *self }
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.reader.total_size()
     }
     #[inline]
@@ -2868,60 +2868,60 @@ pub mod superclass {
       self.reader.get_data_field::<u64>(0)
     }
     #[inline]
-    pub fn get_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Reader<'a>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Reader<'a>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
     }
     pub fn has_brand(&self) -> bool {
       !self.reader.get_pointer_field(0).is_null()
     }
   }
 
-  pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-  impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+  pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+  impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
     #[inline]
-    fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+    fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
   }
-  impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-    fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+    fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
       Builder { builder,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-    fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-      self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+    fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+      self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-    fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-      ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+    fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+      crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
     }
-    fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+    fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-    fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+  impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+    fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
   }
 
   impl <'a,> Builder<'a,>  {
     pub fn into_reader(self) -> Reader<'a,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
     pub fn reborrow(&mut self) -> Builder<'_,> {
       Builder { .. *self }
     }
     pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.builder.into_reader().total_size()
     }
     #[inline]
@@ -2933,35 +2933,35 @@ pub mod superclass {
       self.builder.set_data_field::<u64>(0, value);
     }
     #[inline]
-    pub fn get_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Builder<'a>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Builder<'a>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
+    pub fn set_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_brand(self, ) -> crate::schema_capnp::brand::Builder<'a> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     pub fn has_brand(&self) -> bool {
       !self.builder.get_pointer_field(0).is_null()
     }
   }
 
-  pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-  impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-    fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+  pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+  impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+    fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
       Pipeline { _typeless: typeless,  }
     }
   }
   impl Pipeline  {
     pub fn get_brand(&self) -> crate::schema_capnp::brand::Pipeline {
-      ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
+      crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
     }
   }
   mod _private {
-    use capnp::private::layout;
+    use crate::alligator::proto_01::private::layout;
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 1, pointers: 1 };
     pub const TYPE_ID: u64 = 0xa996_2a9e_d0a4_d7f8;
   }
@@ -2970,38 +2970,38 @@ pub mod superclass {
 pub mod method {
   #[derive(Copy, Clone)]
   pub struct Owned(());
-  impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+  impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
   #[derive(Clone, Copy)]
-  pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+  pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-  impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-    fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+    fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
       Reader { reader,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-    fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+    fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-    fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+  impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+    fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
       self.reader
     }
   }
 
-  impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-    fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-      self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+    fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+      self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
     }
   }
 
@@ -3010,12 +3010,12 @@ pub mod method {
       Reader { .. *self }
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.reader.total_size()
     }
     #[inline]
-    pub fn get_name(self) -> ::capnp::Result<::capnp::text::Reader<'a>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Reader<'a>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
     }
     pub fn has_name(&self) -> bool {
       !self.reader.get_pointer_field(0).is_null()
@@ -3033,93 +3033,93 @@ pub mod method {
       self.reader.get_data_field::<u64>(2)
     }
     #[inline]
-    pub fn get_annotations(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
+    pub fn get_annotations(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
     }
     pub fn has_annotations(&self) -> bool {
       !self.reader.get_pointer_field(1).is_null()
     }
     #[inline]
-    pub fn get_param_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Reader<'a>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
+    pub fn get_param_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Reader<'a>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
     }
     pub fn has_param_brand(&self) -> bool {
       !self.reader.get_pointer_field(2).is_null()
     }
     #[inline]
-    pub fn get_result_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Reader<'a>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
+    pub fn get_result_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Reader<'a>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
     }
     pub fn has_result_brand(&self) -> bool {
       !self.reader.get_pointer_field(3).is_null()
     }
     #[inline]
-    pub fn get_implicit_parameters(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::node::parameter::Owned>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(4), ::core::option::Option::None)
+    pub fn get_implicit_parameters(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::node::parameter::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(4), ::core::option::Option::None)
     }
     pub fn has_implicit_parameters(&self) -> bool {
       !self.reader.get_pointer_field(4).is_null()
     }
   }
 
-  pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-  impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+  pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+  impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
     #[inline]
-    fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+    fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
   }
-  impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-    fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+    fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
       Builder { builder,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-    fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-      self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+    fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+      self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-    fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-      ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+    fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+      crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
     }
-    fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+    fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-    fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+  impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+    fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
   }
 
   impl <'a,> Builder<'a,>  {
     pub fn into_reader(self) -> Reader<'a,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
     pub fn reborrow(&mut self) -> Builder<'_,> {
       Builder { .. *self }
     }
     pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.builder.into_reader().total_size()
     }
     #[inline]
-    pub fn get_name(self) -> ::capnp::Result<::capnp::text::Builder<'a>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Builder<'a>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_name(&mut self, value: ::capnp::text::Reader<'_>)  {
+    pub fn set_name(&mut self, value: crate::alligator::proto_01::text::Reader<'_>)  {
       self.builder.get_pointer_field(0).set_text(value);
     }
     #[inline]
-    pub fn init_name(self, size: u32) -> ::capnp::text::Builder<'a> {
+    pub fn init_name(self, size: u32) -> crate::alligator::proto_01::text::Builder<'a> {
       self.builder.get_pointer_field(0).init_text(size)
     }
     pub fn has_name(&self) -> bool {
@@ -3150,83 +3150,83 @@ pub mod method {
       self.builder.set_data_field::<u64>(2, value);
     }
     #[inline]
-    pub fn get_annotations(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
+    pub fn get_annotations(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_annotations(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
+    pub fn set_annotations(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::annotation::Owned>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
     }
     #[inline]
-    pub fn init_annotations(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
+    pub fn init_annotations(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::annotation::Owned> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
     }
     pub fn has_annotations(&self) -> bool {
       !self.builder.get_pointer_field(1).is_null()
     }
     #[inline]
-    pub fn get_param_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Builder<'a>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
+    pub fn get_param_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Builder<'a>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_param_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(2), value, false)
+    pub fn set_param_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(2), value, false)
     }
     #[inline]
     pub fn init_param_brand(self, ) -> crate::schema_capnp::brand::Builder<'a> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), 0)
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), 0)
     }
     pub fn has_param_brand(&self) -> bool {
       !self.builder.get_pointer_field(2).is_null()
     }
     #[inline]
-    pub fn get_result_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Builder<'a>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
+    pub fn get_result_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Builder<'a>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_result_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
+    pub fn set_result_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
     }
     #[inline]
     pub fn init_result_brand(self, ) -> crate::schema_capnp::brand::Builder<'a> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), 0)
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), 0)
     }
     pub fn has_result_brand(&self) -> bool {
       !self.builder.get_pointer_field(3).is_null()
     }
     #[inline]
-    pub fn get_implicit_parameters(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::node::parameter::Owned>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(4), ::core::option::Option::None)
+    pub fn get_implicit_parameters(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::node::parameter::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(4), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_implicit_parameters(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::node::parameter::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(4), value, false)
+    pub fn set_implicit_parameters(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::node::parameter::Owned>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(4), value, false)
     }
     #[inline]
-    pub fn init_implicit_parameters(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::node::parameter::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(4), size)
+    pub fn init_implicit_parameters(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::node::parameter::Owned> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(4), size)
     }
     pub fn has_implicit_parameters(&self) -> bool {
       !self.builder.get_pointer_field(4).is_null()
     }
   }
 
-  pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-  impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-    fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+  pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+  impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+    fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
       Pipeline { _typeless: typeless,  }
     }
   }
   impl Pipeline  {
     pub fn get_param_brand(&self) -> crate::schema_capnp::brand::Pipeline {
-      ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(2))
+      crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(2))
     }
     pub fn get_result_brand(&self) -> crate::schema_capnp::brand::Pipeline {
-      ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(3))
+      crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(3))
     }
   }
   mod _private {
-    use capnp::private::layout;
+    use crate::alligator::proto_01::private::layout;
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 5 };
     pub const TYPE_ID: u64 = 0x9500_cce2_3b33_4d80;
   }
@@ -3237,38 +3237,38 @@ pub mod type_ {
 
   #[derive(Copy, Clone)]
   pub struct Owned(());
-  impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+  impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
   #[derive(Clone, Copy)]
-  pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+  pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-  impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-    fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+    fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
       Reader { reader,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-    fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+    fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-    fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+  impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+    fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
       self.reader
     }
   }
 
-  impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-    fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-      self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+    fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+      self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
     }
   }
 
@@ -3277,11 +3277,11 @@ pub mod type_ {
       Reader { .. *self }
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.reader.total_size()
     }
     #[inline]
-    pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, ::capnp::NotInSchema> {
+    pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, crate::alligator::proto_01::NotInSchema> {
       match self.reader.get_data_field::<u16>(0) {
         0 => {
           ::core::result::Result::Ok(Void(
@@ -3355,80 +3355,80 @@ pub mod type_ {
         }
         14 => {
           ::core::result::Result::Ok(List(
-            ::capnp::traits::FromStructReader::new(self.reader)
+            crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
           ))
         }
         15 => {
           ::core::result::Result::Ok(Enum(
-            ::capnp::traits::FromStructReader::new(self.reader)
+            crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
           ))
         }
         16 => {
           ::core::result::Result::Ok(Struct(
-            ::capnp::traits::FromStructReader::new(self.reader)
+            crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
           ))
         }
         17 => {
           ::core::result::Result::Ok(Interface(
-            ::capnp::traits::FromStructReader::new(self.reader)
+            crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
           ))
         }
         18 => {
           ::core::result::Result::Ok(AnyPointer(
-            ::capnp::traits::FromStructReader::new(self.reader)
+            crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
           ))
         }
-        x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+        x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
       }
     }
   }
 
-  pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-  impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+  pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+  impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
     #[inline]
-    fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+    fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
   }
-  impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-    fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+    fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
       Builder { builder,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-    fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-      self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+    fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+      self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-    fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-      ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+    fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+      crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
     }
-    fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+    fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-    fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+  impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+    fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
   }
 
   impl <'a,> Builder<'a,>  {
     pub fn into_reader(self) -> Reader<'a,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
     pub fn reborrow(&mut self) -> Builder<'_,> {
       Builder { .. *self }
     }
     pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.builder.into_reader().total_size()
     }
     #[inline]
@@ -3491,28 +3491,28 @@ pub mod type_ {
     pub fn init_list(self, ) -> crate::schema_capnp::type_::list::Builder<'a> {
       self.builder.set_data_field::<u16>(0, 14);
       self.builder.get_pointer_field(0).clear();
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
     pub fn init_enum(self, ) -> crate::schema_capnp::type_::enum_::Builder<'a> {
       self.builder.set_data_field::<u16>(0, 15);
       self.builder.set_data_field::<u64>(1, 0u64);
       self.builder.get_pointer_field(0).clear();
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
     pub fn init_struct(self, ) -> crate::schema_capnp::type_::struct_::Builder<'a> {
       self.builder.set_data_field::<u16>(0, 16);
       self.builder.set_data_field::<u64>(1, 0u64);
       self.builder.get_pointer_field(0).clear();
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
     pub fn init_interface(self, ) -> crate::schema_capnp::type_::interface::Builder<'a> {
       self.builder.set_data_field::<u16>(0, 17);
       self.builder.set_data_field::<u64>(1, 0u64);
       self.builder.get_pointer_field(0).clear();
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
     pub fn init_any_pointer(self, ) -> crate::schema_capnp::type_::any_pointer::Builder<'a> {
@@ -3522,10 +3522,10 @@ pub mod type_ {
       self.builder.set_data_field::<u64>(2, 0u64);
       self.builder.set_data_field::<u16>(5, 0u16);
       self.builder.set_data_field::<u16>(5, 0u16);
-      ::capnp::traits::FromStructBuilder::new(self.builder)
+      crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
     }
     #[inline]
-    pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, ::capnp::NotInSchema> {
+    pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, crate::alligator::proto_01::NotInSchema> {
       match self.builder.get_data_field::<u16>(0) {
         0 => {
           ::core::result::Result::Ok(Void(
@@ -3599,44 +3599,44 @@ pub mod type_ {
         }
         14 => {
           ::core::result::Result::Ok(List(
-            ::capnp::traits::FromStructBuilder::new(self.builder)
+            crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
           ))
         }
         15 => {
           ::core::result::Result::Ok(Enum(
-            ::capnp::traits::FromStructBuilder::new(self.builder)
+            crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
           ))
         }
         16 => {
           ::core::result::Result::Ok(Struct(
-            ::capnp::traits::FromStructBuilder::new(self.builder)
+            crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
           ))
         }
         17 => {
           ::core::result::Result::Ok(Interface(
-            ::capnp::traits::FromStructBuilder::new(self.builder)
+            crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
           ))
         }
         18 => {
           ::core::result::Result::Ok(AnyPointer(
-            ::capnp::traits::FromStructBuilder::new(self.builder)
+            crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
           ))
         }
-        x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+        x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
       }
     }
   }
 
-  pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-  impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-    fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+  pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+  impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+    fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
       Pipeline { _typeless: typeless,  }
     }
   }
   impl Pipeline  {
   }
   mod _private {
-    use capnp::private::layout;
+    use crate::alligator::proto_01::private::layout;
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 1 };
     pub const TYPE_ID: u64 = 0xd073_78ed_e1f9_cc60;
   }
@@ -3667,38 +3667,38 @@ pub mod type_ {
   pub mod list {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -3707,96 +3707,96 @@ pub mod type_ {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
-      pub fn get_element_type(self) -> ::capnp::Result<crate::schema_capnp::type_::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_element_type(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::type_::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
       }
       pub fn has_element_type(&self) -> bool {
         !self.reader.get_pointer_field(0).is_null()
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
-      pub fn get_element_type(self) -> ::capnp::Result<crate::schema_capnp::type_::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_element_type(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::type_::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_element_type(&mut self, value: crate::schema_capnp::type_::Reader<'_>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
+      pub fn set_element_type(&mut self, value: crate::schema_capnp::type_::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
       }
       #[inline]
       pub fn init_element_type(self, ) -> crate::schema_capnp::type_::Builder<'a> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
       }
       pub fn has_element_type(&self) -> bool {
         !self.builder.get_pointer_field(0).is_null()
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
       pub fn get_element_type(&self) -> crate::schema_capnp::type_::Pipeline {
-        ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
+        crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
       }
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 1 };
       pub const TYPE_ID: u64 = 0x87e7_3925_0a60_ea97;
     }
@@ -3805,38 +3805,38 @@ pub mod type_ {
   pub mod enum_ {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -3845,7 +3845,7 @@ pub mod type_ {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
@@ -3853,60 +3853,60 @@ pub mod type_ {
         self.reader.get_data_field::<u64>(1)
       }
       #[inline]
-      pub fn get_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
       }
       pub fn has_brand(&self) -> bool {
         !self.reader.get_pointer_field(0).is_null()
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
@@ -3918,35 +3918,35 @@ pub mod type_ {
         self.builder.set_data_field::<u64>(1, value);
       }
       #[inline]
-      pub fn get_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
+      pub fn set_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
       }
       #[inline]
       pub fn init_brand(self, ) -> crate::schema_capnp::brand::Builder<'a> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
       }
       pub fn has_brand(&self) -> bool {
         !self.builder.get_pointer_field(0).is_null()
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
       pub fn get_brand(&self) -> crate::schema_capnp::brand::Pipeline {
-        ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
+        crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
       }
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 1 };
       pub const TYPE_ID: u64 = 0x9e0e_7871_1a7f_87a9;
     }
@@ -3955,38 +3955,38 @@ pub mod type_ {
   pub mod struct_ {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -3995,7 +3995,7 @@ pub mod type_ {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
@@ -4003,60 +4003,60 @@ pub mod type_ {
         self.reader.get_data_field::<u64>(1)
       }
       #[inline]
-      pub fn get_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
       }
       pub fn has_brand(&self) -> bool {
         !self.reader.get_pointer_field(0).is_null()
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
@@ -4068,35 +4068,35 @@ pub mod type_ {
         self.builder.set_data_field::<u64>(1, value);
       }
       #[inline]
-      pub fn get_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
+      pub fn set_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
       }
       #[inline]
       pub fn init_brand(self, ) -> crate::schema_capnp::brand::Builder<'a> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
       }
       pub fn has_brand(&self) -> bool {
         !self.builder.get_pointer_field(0).is_null()
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
       pub fn get_brand(&self) -> crate::schema_capnp::brand::Pipeline {
-        ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
+        crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
       }
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 1 };
       pub const TYPE_ID: u64 = 0xac3a_6f60_ef4c_c6d3;
     }
@@ -4105,38 +4105,38 @@ pub mod type_ {
   pub mod interface {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -4145,7 +4145,7 @@ pub mod type_ {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
@@ -4153,60 +4153,60 @@ pub mod type_ {
         self.reader.get_data_field::<u64>(1)
       }
       #[inline]
-      pub fn get_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
       }
       pub fn has_brand(&self) -> bool {
         !self.reader.get_pointer_field(0).is_null()
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
@@ -4218,35 +4218,35 @@ pub mod type_ {
         self.builder.set_data_field::<u64>(1, value);
       }
       #[inline]
-      pub fn get_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
+      pub fn set_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
       }
       #[inline]
       pub fn init_brand(self, ) -> crate::schema_capnp::brand::Builder<'a> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
       }
       pub fn has_brand(&self) -> bool {
         !self.builder.get_pointer_field(0).is_null()
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
       pub fn get_brand(&self) -> crate::schema_capnp::brand::Pipeline {
-        ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
+        crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
       }
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 1 };
       pub const TYPE_ID: u64 = 0xed8b_ca69_f7fb_0cbf;
     }
@@ -4257,38 +4257,38 @@ pub mod type_ {
 
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -4297,132 +4297,132 @@ pub mod type_ {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
-      pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, ::capnp::NotInSchema> {
+      pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, crate::alligator::proto_01::NotInSchema> {
         match self.reader.get_data_field::<u16>(4) {
           0 => {
             ::core::result::Result::Ok(Unconstrained(
-              ::capnp::traits::FromStructReader::new(self.reader)
+              crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
             ))
           }
           1 => {
             ::core::result::Result::Ok(Parameter(
-              ::capnp::traits::FromStructReader::new(self.reader)
+              crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
             ))
           }
           2 => {
             ::core::result::Result::Ok(ImplicitMethodParameter(
-              ::capnp::traits::FromStructReader::new(self.reader)
+              crate::alligator::proto_01::traits::FromStructReader::new(self.reader)
             ))
           }
-          x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+          x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
         }
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
       pub fn init_unconstrained(self, ) -> crate::schema_capnp::type_::any_pointer::unconstrained::Builder<'a> {
         self.builder.set_data_field::<u16>(4, 0);
         self.builder.set_data_field::<u16>(5, 0);
-        ::capnp::traits::FromStructBuilder::new(self.builder)
+        crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
       }
       #[inline]
       pub fn init_parameter(self, ) -> crate::schema_capnp::type_::any_pointer::parameter::Builder<'a> {
         self.builder.set_data_field::<u16>(4, 1);
         self.builder.set_data_field::<u64>(2, 0u64);
         self.builder.set_data_field::<u16>(5, 0u16);
-        ::capnp::traits::FromStructBuilder::new(self.builder)
+        crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
       }
       #[inline]
       pub fn init_implicit_method_parameter(self, ) -> crate::schema_capnp::type_::any_pointer::implicit_method_parameter::Builder<'a> {
         self.builder.set_data_field::<u16>(4, 2);
         self.builder.set_data_field::<u16>(5, 0u16);
-        ::capnp::traits::FromStructBuilder::new(self.builder)
+        crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
       }
       #[inline]
-      pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, ::capnp::NotInSchema> {
+      pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, crate::alligator::proto_01::NotInSchema> {
         match self.builder.get_data_field::<u16>(4) {
           0 => {
             ::core::result::Result::Ok(Unconstrained(
-              ::capnp::traits::FromStructBuilder::new(self.builder)
+              crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
             ))
           }
           1 => {
             ::core::result::Result::Ok(Parameter(
-              ::capnp::traits::FromStructBuilder::new(self.builder)
+              crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
             ))
           }
           2 => {
             ::core::result::Result::Ok(ImplicitMethodParameter(
-              ::capnp::traits::FromStructBuilder::new(self.builder)
+              crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)
             ))
           }
-          x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+          x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
         }
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 1 };
       pub const TYPE_ID: u64 = 0xc257_3fe8_a23e_49f1;
     }
@@ -4439,38 +4439,38 @@ pub mod type_ {
 
       #[derive(Copy, Clone)]
       pub struct Owned(());
-      impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-      impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-      impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+      impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+      impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+      impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
       #[derive(Clone, Copy)]
-      pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+      pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-      impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+      impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
         #[inline]
         fn type_id() -> u64 { _private::TYPE_ID }
       }
-      impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-        fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+      impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+        fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
           Reader { reader,  }
         }
       }
 
-      impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-        fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-          ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+      impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+        fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+          ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
         }
       }
 
-      impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-        fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+      impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+        fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
           self.reader
         }
       }
 
-      impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-        fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-          self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+      impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+        fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+          self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
         }
       }
 
@@ -4479,11 +4479,11 @@ pub mod type_ {
           Reader { .. *self }
         }
 
-        pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+        pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
           self.reader.total_size()
         }
         #[inline]
-        pub fn which(self) -> ::core::result::Result<WhichReader, ::capnp::NotInSchema> {
+        pub fn which(self) -> ::core::result::Result<WhichReader, crate::alligator::proto_01::NotInSchema> {
           match self.reader.get_data_field::<u16>(5) {
             0 => {
               ::core::result::Result::Ok(AnyKind(
@@ -4505,57 +4505,57 @@ pub mod type_ {
                 ()
               ))
             }
-            x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+            x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
           }
         }
       }
 
-      pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-      impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+      pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+      impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
         #[inline]
-        fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+        fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
       }
-      impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+      impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
         #[inline]
         fn type_id() -> u64 { _private::TYPE_ID }
       }
-      impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-        fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+      impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+        fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
           Builder { builder,  }
         }
       }
 
-      impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-        fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-          self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+      impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+        fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+          self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
         }
       }
 
-      impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-        fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-          ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+      impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+        fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+          crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
         }
-        fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-          ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+        fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+          ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
         }
       }
 
-      impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-        fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+      impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+        fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
       }
 
       impl <'a,> Builder<'a,>  {
         pub fn into_reader(self) -> Reader<'a,> {
-          ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+          crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
         }
         pub fn reborrow(&mut self) -> Builder<'_,> {
           Builder { .. *self }
         }
         pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-          ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+          crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
         }
 
-        pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+        pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
           self.builder.into_reader().total_size()
         }
         #[inline]
@@ -4575,7 +4575,7 @@ pub mod type_ {
           self.builder.set_data_field::<u16>(5, 3);
         }
         #[inline]
-        pub fn which(self) -> ::core::result::Result<WhichBuilder, ::capnp::NotInSchema> {
+        pub fn which(self) -> ::core::result::Result<WhichBuilder, crate::alligator::proto_01::NotInSchema> {
           match self.builder.get_data_field::<u16>(5) {
             0 => {
               ::core::result::Result::Ok(AnyKind(
@@ -4597,21 +4597,21 @@ pub mod type_ {
                 ()
               ))
             }
-            x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+            x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
           }
         }
       }
 
-      pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-      impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-        fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+      pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+      impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+        fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
           Pipeline { _typeless: typeless,  }
         }
       }
       impl Pipeline  {
       }
       mod _private {
-        use capnp::private::layout;
+        use crate::alligator::proto_01::private::layout;
         pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 1 };
         pub const TYPE_ID: u64 = 0x8e3b_5f79_fe59_3656;
       }
@@ -4628,38 +4628,38 @@ pub mod type_ {
     pub mod parameter {
       #[derive(Copy, Clone)]
       pub struct Owned(());
-      impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-      impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-      impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+      impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+      impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+      impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
       #[derive(Clone, Copy)]
-      pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+      pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-      impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+      impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
         #[inline]
         fn type_id() -> u64 { _private::TYPE_ID }
       }
-      impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-        fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+      impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+        fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
           Reader { reader,  }
         }
       }
 
-      impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-        fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-          ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+      impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+        fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+          ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
         }
       }
 
-      impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-        fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+      impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+        fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
           self.reader
         }
       }
 
-      impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-        fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-          self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+      impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+        fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+          self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
         }
       }
 
@@ -4668,7 +4668,7 @@ pub mod type_ {
           Reader { .. *self }
         }
 
-        pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+        pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
           self.reader.total_size()
         }
         #[inline]
@@ -4681,52 +4681,52 @@ pub mod type_ {
         }
       }
 
-      pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-      impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+      pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+      impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
         #[inline]
-        fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+        fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
       }
-      impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+      impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
         #[inline]
         fn type_id() -> u64 { _private::TYPE_ID }
       }
-      impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-        fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+      impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+        fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
           Builder { builder,  }
         }
       }
 
-      impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-        fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-          self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+      impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+        fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+          self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
         }
       }
 
-      impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-        fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-          ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+      impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+        fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+          crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
         }
-        fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-          ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+        fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+          ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
         }
       }
 
-      impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-        fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+      impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+        fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
       }
 
       impl <'a,> Builder<'a,>  {
         pub fn into_reader(self) -> Reader<'a,> {
-          ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+          crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
         }
         pub fn reborrow(&mut self) -> Builder<'_,> {
           Builder { .. *self }
         }
         pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-          ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+          crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
         }
 
-        pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+        pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
           self.builder.into_reader().total_size()
         }
         #[inline]
@@ -4747,16 +4747,16 @@ pub mod type_ {
         }
       }
 
-      pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-      impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-        fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+      pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+      impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+        fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
           Pipeline { _typeless: typeless,  }
         }
       }
       impl Pipeline  {
       }
       mod _private {
-        use capnp::private::layout;
+        use crate::alligator::proto_01::private::layout;
         pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 1 };
         pub const TYPE_ID: u64 = 0x9dd1_f724_f461_4a85;
       }
@@ -4765,38 +4765,38 @@ pub mod type_ {
     pub mod implicit_method_parameter {
       #[derive(Copy, Clone)]
       pub struct Owned(());
-      impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-      impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-      impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+      impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+      impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+      impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
       #[derive(Clone, Copy)]
-      pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+      pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-      impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+      impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
         #[inline]
         fn type_id() -> u64 { _private::TYPE_ID }
       }
-      impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-        fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+      impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+        fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
           Reader { reader,  }
         }
       }
 
-      impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-        fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-          ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+      impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+        fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+          ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
         }
       }
 
-      impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-        fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+      impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+        fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
           self.reader
         }
       }
 
-      impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-        fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-          self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+      impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+        fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+          self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
         }
       }
 
@@ -4805,7 +4805,7 @@ pub mod type_ {
           Reader { .. *self }
         }
 
-        pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+        pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
           self.reader.total_size()
         }
         #[inline]
@@ -4814,52 +4814,52 @@ pub mod type_ {
         }
       }
 
-      pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-      impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+      pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+      impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
         #[inline]
-        fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+        fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
       }
-      impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+      impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
         #[inline]
         fn type_id() -> u64 { _private::TYPE_ID }
       }
-      impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-        fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+      impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+        fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
           Builder { builder,  }
         }
       }
 
-      impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-        fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-          self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+      impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+        fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+          self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
         }
       }
 
-      impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-        fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-          ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+      impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+        fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+          crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
         }
-        fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-          ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+        fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+          ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
         }
       }
 
-      impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-        fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+      impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+        fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
       }
 
       impl <'a,> Builder<'a,>  {
         pub fn into_reader(self) -> Reader<'a,> {
-          ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+          crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
         }
         pub fn reborrow(&mut self) -> Builder<'_,> {
           Builder { .. *self }
         }
         pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-          ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+          crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
         }
 
-        pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+        pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
           self.builder.into_reader().total_size()
         }
         #[inline]
@@ -4872,16 +4872,16 @@ pub mod type_ {
         }
       }
 
-      pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-      impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-        fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+      pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+      impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+        fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
           Pipeline { _typeless: typeless,  }
         }
       }
       impl Pipeline  {
       }
       mod _private {
-        use capnp::private::layout;
+        use crate::alligator::proto_01::private::layout;
         pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 3, pointers: 1 };
         pub const TYPE_ID: u64 = 0xbaef_c912_0c56_e274;
       }
@@ -4892,38 +4892,38 @@ pub mod type_ {
 pub mod brand {
   #[derive(Copy, Clone)]
   pub struct Owned(());
-  impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+  impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
   #[derive(Clone, Copy)]
-  pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+  pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-  impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-    fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+    fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
       Reader { reader,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-    fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+    fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-    fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+  impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+    fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
       self.reader
     }
   }
 
-  impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-    fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-      self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+    fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+      self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
     }
   }
 
@@ -4932,93 +4932,93 @@ pub mod brand {
       Reader { .. *self }
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.reader.total_size()
     }
     #[inline]
-    pub fn get_scopes(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::brand::scope::Owned>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_scopes(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::brand::scope::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
     }
     pub fn has_scopes(&self) -> bool {
       !self.reader.get_pointer_field(0).is_null()
     }
   }
 
-  pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-  impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+  pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+  impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
     #[inline]
-    fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+    fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
   }
-  impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-    fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+    fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
       Builder { builder,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-    fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-      self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+    fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+      self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-    fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-      ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+    fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+      crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
     }
-    fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+    fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-    fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+  impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+    fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
   }
 
   impl <'a,> Builder<'a,>  {
     pub fn into_reader(self) -> Reader<'a,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
     pub fn reborrow(&mut self) -> Builder<'_,> {
       Builder { .. *self }
     }
     pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.builder.into_reader().total_size()
     }
     #[inline]
-    pub fn get_scopes(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::brand::scope::Owned>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_scopes(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::brand::scope::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_scopes(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::brand::scope::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
+    pub fn set_scopes(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::brand::scope::Owned>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
     }
     #[inline]
-    pub fn init_scopes(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::brand::scope::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), size)
+    pub fn init_scopes(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::brand::scope::Owned> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), size)
     }
     pub fn has_scopes(&self) -> bool {
       !self.builder.get_pointer_field(0).is_null()
     }
   }
 
-  pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-  impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-    fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+  pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+  impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+    fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
       Pipeline { _typeless: typeless,  }
     }
   }
   impl Pipeline  {
   }
   mod _private {
-    use capnp::private::layout;
+    use crate::alligator::proto_01::private::layout;
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 0, pointers: 1 };
     pub const TYPE_ID: u64 = 0x9034_55f0_6065_422b;
   }
@@ -5028,38 +5028,38 @@ pub mod brand {
 
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -5068,7 +5068,7 @@ pub mod brand {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
@@ -5080,11 +5080,11 @@ pub mod brand {
         !self.reader.get_pointer_field(0).is_null()
       }
       #[inline]
-      pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, ::capnp::NotInSchema> {
+      pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, crate::alligator::proto_01::NotInSchema> {
         match self.reader.get_data_field::<u16>(4) {
           0 => {
             ::core::result::Result::Ok(Bind(
-              ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+              crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
             ))
           }
           1 => {
@@ -5092,57 +5092,57 @@ pub mod brand {
               ()
             ))
           }
-          x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+          x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
         }
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
@@ -5154,14 +5154,14 @@ pub mod brand {
         self.builder.set_data_field::<u64>(0, value);
       }
       #[inline]
-      pub fn set_bind(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::brand::binding::Owned>) -> ::capnp::Result<()> {
+      pub fn set_bind(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::brand::binding::Owned>) -> crate::alligator::proto_01::Result<()> {
         self.builder.set_data_field::<u16>(4, 0);
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
       }
       #[inline]
-      pub fn init_bind(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::brand::binding::Owned> {
+      pub fn init_bind(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::brand::binding::Owned> {
         self.builder.set_data_field::<u16>(4, 0);
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), size)
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), size)
       }
       pub fn has_bind(&self) -> bool {
         if self.builder.get_data_field::<u16>(4) != 0 { return false; }
@@ -5172,11 +5172,11 @@ pub mod brand {
         self.builder.set_data_field::<u16>(4, 1);
       }
       #[inline]
-      pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, ::capnp::NotInSchema> {
+      pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, crate::alligator::proto_01::NotInSchema> {
         match self.builder.get_data_field::<u16>(4) {
           0 => {
             ::core::result::Result::Ok(Bind(
-              ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+              crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
             ))
           }
           1 => {
@@ -5184,21 +5184,21 @@ pub mod brand {
               ()
             ))
           }
-          x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+          x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
         }
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 2, pointers: 1 };
       pub const TYPE_ID: u64 = 0xabd7_3485_a963_6bc9;
     }
@@ -5206,8 +5206,8 @@ pub mod brand {
       Bind(A0),
       Inherit(()),
     }
-    pub type WhichReader<'a,> = Which<::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::brand::binding::Owned>>>;
-    pub type WhichBuilder<'a,> = Which<::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::brand::binding::Owned>>>;
+    pub type WhichReader<'a,> = Which< crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::brand::binding::Owned>>>;
+    pub type WhichBuilder<'a,> = Which< crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::brand::binding::Owned>>>;
   }
 
   pub mod binding {
@@ -5215,38 +5215,38 @@ pub mod brand {
 
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -5255,7 +5255,7 @@ pub mod brand {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       pub fn has_type(&self) -> bool {
@@ -5263,7 +5263,7 @@ pub mod brand {
         !self.reader.get_pointer_field(0).is_null()
       }
       #[inline]
-      pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, ::capnp::NotInSchema> {
+      pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, crate::alligator::proto_01::NotInSchema> {
         match self.reader.get_data_field::<u16>(0) {
           0 => {
             ::core::result::Result::Ok(Unbound(
@@ -5272,60 +5272,60 @@ pub mod brand {
           }
           1 => {
             ::core::result::Result::Ok(Type(
-              ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+              crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
             ))
           }
-          x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+          x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
         }
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
@@ -5333,21 +5333,21 @@ pub mod brand {
         self.builder.set_data_field::<u16>(0, 0);
       }
       #[inline]
-      pub fn set_type(&mut self, value: crate::schema_capnp::type_::Reader<'_>) -> ::capnp::Result<()> {
+      pub fn set_type(&mut self, value: crate::schema_capnp::type_::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
         self.builder.set_data_field::<u16>(0, 1);
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
       }
       #[inline]
       pub fn init_type(self, ) -> crate::schema_capnp::type_::Builder<'a> {
         self.builder.set_data_field::<u16>(0, 1);
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
       }
       pub fn has_type(&self) -> bool {
         if self.builder.get_data_field::<u16>(0) != 1 { return false; }
         !self.builder.get_pointer_field(0).is_null()
       }
       #[inline]
-      pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, ::capnp::NotInSchema> {
+      pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, crate::alligator::proto_01::NotInSchema> {
         match self.builder.get_data_field::<u16>(0) {
           0 => {
             ::core::result::Result::Ok(Unbound(
@@ -5356,24 +5356,24 @@ pub mod brand {
           }
           1 => {
             ::core::result::Result::Ok(Type(
-              ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+              crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
             ))
           }
-          x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+          x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
         }
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 1, pointers: 1 };
       pub const TYPE_ID: u64 = 0xc863_cd16_969e_e7fc;
     }
@@ -5381,8 +5381,8 @@ pub mod brand {
       Unbound(()),
       Type(A0),
     }
-    pub type WhichReader<'a,> = Which<::capnp::Result<crate::schema_capnp::type_::Reader<'a>>>;
-    pub type WhichBuilder<'a,> = Which<::capnp::Result<crate::schema_capnp::type_::Builder<'a>>>;
+    pub type WhichReader<'a,> = Which< crate::alligator::proto_01::Result<crate::schema_capnp::type_::Reader<'a>>>;
+    pub type WhichBuilder<'a,> = Which< crate::alligator::proto_01::Result<crate::schema_capnp::type_::Builder<'a>>>;
   }
 }
 
@@ -5391,38 +5391,38 @@ pub mod value {
 
   #[derive(Copy, Clone)]
   pub struct Owned(());
-  impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+  impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
   #[derive(Clone, Copy)]
-  pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+  pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-  impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-    fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+    fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
       Reader { reader,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-    fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+    fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-    fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+  impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+    fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
       self.reader
     }
   }
 
-  impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-    fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-      self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+    fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+      self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
     }
   }
 
@@ -5431,7 +5431,7 @@ pub mod value {
       Reader { .. *self }
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.reader.total_size()
     }
     pub fn has_text(&self) -> bool {
@@ -5455,7 +5455,7 @@ pub mod value {
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, ::capnp::NotInSchema> {
+    pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, crate::alligator::proto_01::NotInSchema> {
       match self.reader.get_data_field::<u16>(0) {
         0 => {
           ::core::result::Result::Ok(Void(
@@ -5519,17 +5519,17 @@ pub mod value {
         }
         12 => {
           ::core::result::Result::Ok(Text(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+            crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
         13 => {
           ::core::result::Result::Ok(Data(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+            crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
         14 => {
           ::core::result::Result::Ok(List(
-            ::capnp::any_pointer::Reader::new(self.reader.get_pointer_field(0))
+            crate::alligator::proto_01::any_pointer::Reader::new(self.reader.get_pointer_field(0))
           ))
         }
         15 => {
@@ -5539,7 +5539,7 @@ pub mod value {
         }
         16 => {
           ::core::result::Result::Ok(Struct(
-            ::capnp::any_pointer::Reader::new(self.reader.get_pointer_field(0))
+            crate::alligator::proto_01::any_pointer::Reader::new(self.reader.get_pointer_field(0))
           ))
         }
         17 => {
@@ -5549,60 +5549,60 @@ pub mod value {
         }
         18 => {
           ::core::result::Result::Ok(AnyPointer(
-            ::capnp::any_pointer::Reader::new(self.reader.get_pointer_field(0))
+            crate::alligator::proto_01::any_pointer::Reader::new(self.reader.get_pointer_field(0))
           ))
         }
-        x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+        x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
       }
     }
   }
 
-  pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-  impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+  pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+  impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
     #[inline]
-    fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+    fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
   }
-  impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-    fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+    fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
       Builder { builder,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-    fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-      self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+    fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+      self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-    fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-      ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+    fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+      crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
     }
-    fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+    fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-    fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+  impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+    fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
   }
 
   impl <'a,> Builder<'a,>  {
     pub fn into_reader(self) -> Reader<'a,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
     pub fn reborrow(&mut self) -> Builder<'_,> {
       Builder { .. *self }
     }
     pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.builder.into_reader().total_size()
     }
     #[inline]
@@ -5665,12 +5665,12 @@ pub mod value {
       self.builder.set_data_field::<f64>(1, value);
     }
     #[inline]
-    pub fn set_text(&mut self, value: ::capnp::text::Reader<'_>)  {
+    pub fn set_text(&mut self, value: crate::alligator::proto_01::text::Reader<'_>)  {
       self.builder.set_data_field::<u16>(0, 12);
       self.builder.get_pointer_field(0).set_text(value);
     }
     #[inline]
-    pub fn init_text(self, size: u32) -> ::capnp::text::Builder<'a> {
+    pub fn init_text(self, size: u32) -> crate::alligator::proto_01::text::Builder<'a> {
       self.builder.set_data_field::<u16>(0, 12);
       self.builder.get_pointer_field(0).init_text(size)
     }
@@ -5679,12 +5679,12 @@ pub mod value {
       !self.builder.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn set_data(&mut self, value: ::capnp::data::Reader<'_>)  {
+    pub fn set_data(&mut self, value: crate::alligator::proto_01::data::Reader<'_>)  {
       self.builder.set_data_field::<u16>(0, 13);
       self.builder.get_pointer_field(0).set_data(value);
     }
     #[inline]
-    pub fn init_data(self, size: u32) -> ::capnp::data::Builder<'a> {
+    pub fn init_data(self, size: u32) -> crate::alligator::proto_01::data::Builder<'a> {
       self.builder.set_data_field::<u16>(0, 13);
       self.builder.get_pointer_field(0).init_data(size)
     }
@@ -5693,9 +5693,9 @@ pub mod value {
       !self.builder.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn init_list(self, ) -> ::capnp::any_pointer::Builder<'a> {
+    pub fn init_list(self, ) -> crate::alligator::proto_01::any_pointer::Builder<'a> {
       self.builder.set_data_field::<u16>(0, 14);
-      let mut result = ::capnp::any_pointer::Builder::new(self.builder.get_pointer_field(0));
+      let mut result = crate::alligator::proto_01::any_pointer::Builder::new(self.builder.get_pointer_field(0));
       result.clear();
       result
     }
@@ -5709,9 +5709,9 @@ pub mod value {
       self.builder.set_data_field::<u16>(1, value);
     }
     #[inline]
-    pub fn init_struct(self, ) -> ::capnp::any_pointer::Builder<'a> {
+    pub fn init_struct(self, ) -> crate::alligator::proto_01::any_pointer::Builder<'a> {
       self.builder.set_data_field::<u16>(0, 16);
-      let mut result = ::capnp::any_pointer::Builder::new(self.builder.get_pointer_field(0));
+      let mut result = crate::alligator::proto_01::any_pointer::Builder::new(self.builder.get_pointer_field(0));
       result.clear();
       result
     }
@@ -5724,9 +5724,9 @@ pub mod value {
       self.builder.set_data_field::<u16>(0, 17);
     }
     #[inline]
-    pub fn init_any_pointer(self, ) -> ::capnp::any_pointer::Builder<'a> {
+    pub fn init_any_pointer(self, ) -> crate::alligator::proto_01::any_pointer::Builder<'a> {
       self.builder.set_data_field::<u16>(0, 18);
-      let mut result = ::capnp::any_pointer::Builder::new(self.builder.get_pointer_field(0));
+      let mut result = crate::alligator::proto_01::any_pointer::Builder::new(self.builder.get_pointer_field(0));
       result.clear();
       result
     }
@@ -5735,7 +5735,7 @@ pub mod value {
       !self.builder.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, ::capnp::NotInSchema> {
+    pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, crate::alligator::proto_01::NotInSchema> {
       match self.builder.get_data_field::<u16>(0) {
         0 => {
           ::core::result::Result::Ok(Void(
@@ -5799,17 +5799,17 @@ pub mod value {
         }
         12 => {
           ::core::result::Result::Ok(Text(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+            crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
         13 => {
           ::core::result::Result::Ok(Data(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+            crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
         14 => {
           ::core::result::Result::Ok(List(
-            ::capnp::any_pointer::Builder::new(self.builder.get_pointer_field(0))
+            crate::alligator::proto_01::any_pointer::Builder::new(self.builder.get_pointer_field(0))
           ))
         }
         15 => {
@@ -5819,7 +5819,7 @@ pub mod value {
         }
         16 => {
           ::core::result::Result::Ok(Struct(
-            ::capnp::any_pointer::Builder::new(self.builder.get_pointer_field(0))
+            crate::alligator::proto_01::any_pointer::Builder::new(self.builder.get_pointer_field(0))
           ))
         }
         17 => {
@@ -5829,24 +5829,24 @@ pub mod value {
         }
         18 => {
           ::core::result::Result::Ok(AnyPointer(
-            ::capnp::any_pointer::Builder::new(self.builder.get_pointer_field(0))
+            crate::alligator::proto_01::any_pointer::Builder::new(self.builder.get_pointer_field(0))
           ))
         }
-        x => ::core::result::Result::Err(::capnp::NotInSchema(x))
+        x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))
       }
     }
   }
 
-  pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-  impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-    fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+  pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+  impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+    fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
       Pipeline { _typeless: typeless,  }
     }
   }
   impl Pipeline  {
   }
   mod _private {
-    use capnp::private::layout;
+    use crate::alligator::proto_01::private::layout;
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 2, pointers: 1 };
     pub const TYPE_ID: u64 = 0xce23_dcd2_d7b0_0c9b;
   }
@@ -5871,45 +5871,45 @@ pub mod value {
     Interface(()),
     AnyPointer(A4),
   }
-  pub type WhichReader<'a,> = Which<::capnp::Result<::capnp::text::Reader<'a>>,::capnp::Result<::capnp::data::Reader<'a>>,::capnp::any_pointer::Reader<'a>,::capnp::any_pointer::Reader<'a>,::capnp::any_pointer::Reader<'a>>;
-  pub type WhichBuilder<'a,> = Which<::capnp::Result<::capnp::text::Builder<'a>>,::capnp::Result<::capnp::data::Builder<'a>>,::capnp::any_pointer::Builder<'a>,::capnp::any_pointer::Builder<'a>,::capnp::any_pointer::Builder<'a>>;
+  pub type WhichReader<'a,> = Which< crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Reader<'a>>, crate::alligator::proto_01::Result< crate::alligator::proto_01::data::Reader<'a>>, crate::alligator::proto_01::any_pointer::Reader<'a>, crate::alligator::proto_01::any_pointer::Reader<'a>, crate::alligator::proto_01::any_pointer::Reader<'a>>;
+  pub type WhichBuilder<'a,> = Which< crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Builder<'a>>, crate::alligator::proto_01::Result< crate::alligator::proto_01::data::Builder<'a>>, crate::alligator::proto_01::any_pointer::Builder<'a>, crate::alligator::proto_01::any_pointer::Builder<'a>, crate::alligator::proto_01::any_pointer::Builder<'a>>;
 }
 
 pub mod annotation {
   #[derive(Copy, Clone)]
   pub struct Owned(());
-  impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+  impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
   #[derive(Clone, Copy)]
-  pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+  pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-  impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-    fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+    fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
       Reader { reader,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-    fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+    fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-    fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+  impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+    fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
       self.reader
     }
   }
 
-  impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-    fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-      self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+    fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+      self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
     }
   }
 
@@ -5918,7 +5918,7 @@ pub mod annotation {
       Reader { .. *self }
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.reader.total_size()
     }
     #[inline]
@@ -5926,67 +5926,67 @@ pub mod annotation {
       self.reader.get_data_field::<u64>(0)
     }
     #[inline]
-    pub fn get_value(self) -> ::capnp::Result<crate::schema_capnp::value::Reader<'a>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_value(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::value::Reader<'a>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
     }
     pub fn has_value(&self) -> bool {
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn get_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Reader<'a>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
+    pub fn get_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Reader<'a>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
     }
     pub fn has_brand(&self) -> bool {
       !self.reader.get_pointer_field(1).is_null()
     }
   }
 
-  pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-  impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+  pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+  impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
     #[inline]
-    fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+    fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
   }
-  impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-    fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+    fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
       Builder { builder,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-    fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-      self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+    fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+      self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-    fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-      ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+    fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+      crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
     }
-    fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+    fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-    fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+  impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+    fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
   }
 
   impl <'a,> Builder<'a,>  {
     pub fn into_reader(self) -> Reader<'a,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
     pub fn reborrow(&mut self) -> Builder<'_,> {
       Builder { .. *self }
     }
     pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.builder.into_reader().total_size()
     }
     #[inline]
@@ -5998,53 +5998,53 @@ pub mod annotation {
       self.builder.set_data_field::<u64>(0, value);
     }
     #[inline]
-    pub fn get_value(self) -> ::capnp::Result<crate::schema_capnp::value::Builder<'a>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_value(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::value::Builder<'a>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_value(&mut self, value: crate::schema_capnp::value::Reader<'_>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
+    pub fn set_value(&mut self, value: crate::schema_capnp::value::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_value(self, ) -> crate::schema_capnp::value::Builder<'a> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     pub fn has_value(&self) -> bool {
       !self.builder.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn get_brand(self) -> ::capnp::Result<crate::schema_capnp::brand::Builder<'a>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
+    pub fn get_brand(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::brand::Builder<'a>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
+    pub fn set_brand(&mut self, value: crate::schema_capnp::brand::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
     }
     #[inline]
     pub fn init_brand(self, ) -> crate::schema_capnp::brand::Builder<'a> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), 0)
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), 0)
     }
     pub fn has_brand(&self) -> bool {
       !self.builder.get_pointer_field(1).is_null()
     }
   }
 
-  pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-  impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-    fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+  pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+  impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+    fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
       Pipeline { _typeless: typeless,  }
     }
   }
   impl Pipeline  {
     pub fn get_value(&self) -> crate::schema_capnp::value::Pipeline {
-      ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
+      crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
     }
     pub fn get_brand(&self) -> crate::schema_capnp::brand::Pipeline {
-      ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(1))
+      crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(1))
     }
   }
   mod _private {
-    use capnp::private::layout;
+    use crate::alligator::proto_01::private::layout;
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 1, pointers: 2 };
     pub const TYPE_ID: u64 = 0xf1c8_950d_ab25_7542;
   }
@@ -6062,9 +6062,9 @@ pub enum ElementSize {
   Pointer = 6,
   InlineComposite = 7,
 }
-impl ::capnp::traits::FromU16 for ElementSize {
+impl crate::alligator::proto_01::traits::FromU16 for ElementSize {
   #[inline]
-  fn from_u16(value: u16) -> ::core::result::Result<ElementSize, ::capnp::NotInSchema> {
+  fn from_u16(value: u16) -> ::core::result::Result<ElementSize, crate::alligator::proto_01::NotInSchema> {
     match value {
       0 => ::core::result::Result::Ok(ElementSize::Empty),
       1 => ::core::result::Result::Ok(ElementSize::Bit),
@@ -6074,15 +6074,15 @@ impl ::capnp::traits::FromU16 for ElementSize {
       5 => ::core::result::Result::Ok(ElementSize::EightBytes),
       6 => ::core::result::Result::Ok(ElementSize::Pointer),
       7 => ::core::result::Result::Ok(ElementSize::InlineComposite),
-      n => ::core::result::Result::Err(::capnp::NotInSchema(n)),
+      n => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(n)),
     }
   }
 }
-impl ::capnp::traits::ToU16 for ElementSize {
+impl crate::alligator::proto_01::traits::ToU16 for ElementSize {
   #[inline]
   fn to_u16(self) -> u16 { self as u16 }
 }
-impl ::capnp::traits::HasTypeId for ElementSize {
+impl crate::alligator::proto_01::traits::HasTypeId for ElementSize {
   #[inline]
   fn type_id() -> u64 { 0xd195_8f7d_ba52_1926u64 }
 }
@@ -6090,38 +6090,38 @@ impl ::capnp::traits::HasTypeId for ElementSize {
 pub mod capnp_version {
   #[derive(Copy, Clone)]
   pub struct Owned(());
-  impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+  impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
   #[derive(Clone, Copy)]
-  pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+  pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-  impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-    fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+    fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
       Reader { reader,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-    fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+    fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-    fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+  impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+    fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
       self.reader
     }
   }
 
-  impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-    fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-      self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+    fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+      self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
     }
   }
 
@@ -6130,7 +6130,7 @@ pub mod capnp_version {
       Reader { .. *self }
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.reader.total_size()
     }
     #[inline]
@@ -6147,52 +6147,52 @@ pub mod capnp_version {
     }
   }
 
-  pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-  impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+  pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+  impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
     #[inline]
-    fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+    fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
   }
-  impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-    fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+    fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
       Builder { builder,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-    fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-      self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+    fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+      self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-    fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-      ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+    fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+      crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
     }
-    fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+    fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-    fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+  impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+    fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
   }
 
   impl <'a,> Builder<'a,>  {
     pub fn into_reader(self) -> Reader<'a,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
     pub fn reborrow(&mut self) -> Builder<'_,> {
       Builder { .. *self }
     }
     pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.builder.into_reader().total_size()
     }
     #[inline]
@@ -6221,16 +6221,16 @@ pub mod capnp_version {
     }
   }
 
-  pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-  impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-    fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+  pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+  impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+    fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
       Pipeline { _typeless: typeless,  }
     }
   }
   impl Pipeline  {
   }
   mod _private {
-    use capnp::private::layout;
+    use crate::alligator::proto_01::private::layout;
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 1, pointers: 0 };
     pub const TYPE_ID: u64 = 0xd85d_305b_7d83_9963;
   }
@@ -6239,38 +6239,38 @@ pub mod capnp_version {
 pub mod code_generator_request {
   #[derive(Copy, Clone)]
   pub struct Owned(());
-  impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-  impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+  impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+  impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
   #[derive(Clone, Copy)]
-  pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+  pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-  impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-    fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+    fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
       Reader { reader,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-    fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+    fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-    fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+  impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+    fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
       self.reader
     }
   }
 
-  impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-    fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-      self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+    fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+      self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
     }
   }
 
@@ -6279,162 +6279,162 @@ pub mod code_generator_request {
       Reader { .. *self }
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.reader.total_size()
     }
     #[inline]
-    pub fn get_nodes(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::node::Owned>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_nodes(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::node::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
     }
     pub fn has_nodes(&self) -> bool {
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn get_requested_files(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::code_generator_request::requested_file::Owned>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
+    pub fn get_requested_files(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::code_generator_request::requested_file::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
     }
     pub fn has_requested_files(&self) -> bool {
       !self.reader.get_pointer_field(1).is_null()
     }
     #[inline]
-    pub fn get_capnp_version(self) -> ::capnp::Result<crate::schema_capnp::capnp_version::Reader<'a>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
+    pub fn get_capnp_version(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::capnp_version::Reader<'a>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
     }
     pub fn has_capnp_version(&self) -> bool {
       !self.reader.get_pointer_field(2).is_null()
     }
     #[inline]
-    pub fn get_source_info(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::node::source_info::Owned>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
+    pub fn get_source_info(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::node::source_info::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
     }
     pub fn has_source_info(&self) -> bool {
       !self.reader.get_pointer_field(3).is_null()
     }
   }
 
-  pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-  impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+  pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+  impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
     #[inline]
-    fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+    fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
   }
-  impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+  impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
     #[inline]
     fn type_id() -> u64 { _private::TYPE_ID }
   }
-  impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-    fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+  impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+    fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
       Builder { builder,  }
     }
   }
 
-  impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-    fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-      self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+  impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+    fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+      self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
     }
   }
 
-  impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-    fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-      ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+  impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+    fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+      crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
     }
-    fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-      ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+    fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+      ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
     }
   }
 
-  impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-    fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+  impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+    fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
   }
 
   impl <'a,> Builder<'a,>  {
     pub fn into_reader(self) -> Reader<'a,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
     pub fn reborrow(&mut self) -> Builder<'_,> {
       Builder { .. *self }
     }
     pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-      ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+      crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
     }
 
-    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+    pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
       self.builder.into_reader().total_size()
     }
     #[inline]
-    pub fn get_nodes(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::node::Owned>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+    pub fn get_nodes(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::node::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_nodes(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::node::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
+    pub fn set_nodes(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::node::Owned>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(0), value, false)
     }
     #[inline]
-    pub fn init_nodes(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::node::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), size)
+    pub fn init_nodes(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::node::Owned> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), size)
     }
     pub fn has_nodes(&self) -> bool {
       !self.builder.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn get_requested_files(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::code_generator_request::requested_file::Owned>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
+    pub fn get_requested_files(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::code_generator_request::requested_file::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_requested_files(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::code_generator_request::requested_file::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
+    pub fn set_requested_files(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::code_generator_request::requested_file::Owned>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
     }
     #[inline]
-    pub fn init_requested_files(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::code_generator_request::requested_file::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
+    pub fn init_requested_files(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::code_generator_request::requested_file::Owned> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
     }
     pub fn has_requested_files(&self) -> bool {
       !self.builder.get_pointer_field(1).is_null()
     }
     #[inline]
-    pub fn get_capnp_version(self) -> ::capnp::Result<crate::schema_capnp::capnp_version::Builder<'a>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
+    pub fn get_capnp_version(self) -> crate::alligator::proto_01::Result<crate::schema_capnp::capnp_version::Builder<'a>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_capnp_version(&mut self, value: crate::schema_capnp::capnp_version::Reader<'_>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(2), value, false)
+    pub fn set_capnp_version(&mut self, value: crate::schema_capnp::capnp_version::Reader<'_>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(2), value, false)
     }
     #[inline]
     pub fn init_capnp_version(self, ) -> crate::schema_capnp::capnp_version::Builder<'a> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), 0)
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), 0)
     }
     pub fn has_capnp_version(&self) -> bool {
       !self.builder.get_pointer_field(2).is_null()
     }
     #[inline]
-    pub fn get_source_info(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::node::source_info::Owned>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
+    pub fn get_source_info(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::node::source_info::Owned>> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_source_info(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::node::source_info::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
+    pub fn set_source_info(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::node::source_info::Owned>) -> crate::alligator::proto_01::Result<()> {
+      crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(3), value, false)
     }
     #[inline]
-    pub fn init_source_info(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::node::source_info::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), size)
+    pub fn init_source_info(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::node::source_info::Owned> {
+      crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), size)
     }
     pub fn has_source_info(&self) -> bool {
       !self.builder.get_pointer_field(3).is_null()
     }
   }
 
-  pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-  impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-    fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+  pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+  impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+    fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
       Pipeline { _typeless: typeless,  }
     }
   }
   impl Pipeline  {
     pub fn get_capnp_version(&self) -> crate::schema_capnp::capnp_version::Pipeline {
-      ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(2))
+      crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(2))
     }
   }
   mod _private {
-    use capnp::private::layout;
+    use crate::alligator::proto_01::private::layout;
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 0, pointers: 4 };
     pub const TYPE_ID: u64 = 0xbfc5_46f6_210a_d7ce;
   }
@@ -6442,38 +6442,38 @@ pub mod code_generator_request {
   pub mod requested_file {
     #[derive(Copy, Clone)]
     pub struct Owned(());
-    impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-    impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+    impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+    impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
     #[derive(Clone, Copy)]
-    pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+    pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-    impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-      fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+      fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
         Reader { reader,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-      fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+      fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-      fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+    impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+      fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
         self.reader
       }
     }
 
-    impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-      fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-        self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+      fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+        self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
       }
     }
 
@@ -6482,7 +6482,7 @@ pub mod code_generator_request {
         Reader { .. *self }
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.reader.total_size()
       }
       #[inline]
@@ -6490,67 +6490,67 @@ pub mod code_generator_request {
         self.reader.get_data_field::<u64>(0)
       }
       #[inline]
-      pub fn get_filename(self) -> ::capnp::Result<::capnp::text::Reader<'a>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_filename(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Reader<'a>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
       }
       pub fn has_filename(&self) -> bool {
         !self.reader.get_pointer_field(0).is_null()
       }
       #[inline]
-      pub fn get_imports(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::schema_capnp::code_generator_request::requested_file::import::Owned>> {
-        ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
+      pub fn get_imports(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::code_generator_request::requested_file::import::Owned>> {
+        crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(1), ::core::option::Option::None)
       }
       pub fn has_imports(&self) -> bool {
         !self.reader.get_pointer_field(1).is_null()
       }
     }
 
-    pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-    impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+    pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+    impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
       #[inline]
-      fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+      fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
     }
-    impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+    impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
       #[inline]
       fn type_id() -> u64 { _private::TYPE_ID }
     }
-    impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-      fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+    impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+      fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
         Builder { builder,  }
       }
     }
 
-    impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-      fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-        self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+      fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+        self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
       }
     }
 
-    impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-      fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-        ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+    impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+      fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+        crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
       }
-      fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-        ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+      fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+        ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
       }
     }
 
-    impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-      fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+    impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+      fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
     }
 
     impl <'a,> Builder<'a,>  {
       pub fn into_reader(self) -> Reader<'a,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
       pub fn reborrow(&mut self) -> Builder<'_,> {
         Builder { .. *self }
       }
       pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-        ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+        crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
       }
 
-      pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
         self.builder.into_reader().total_size()
       }
       #[inline]
@@ -6562,47 +6562,47 @@ pub mod code_generator_request {
         self.builder.set_data_field::<u64>(0, value);
       }
       #[inline]
-      pub fn get_filename(self) -> ::capnp::Result<::capnp::text::Builder<'a>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+      pub fn get_filename(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Builder<'a>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_filename(&mut self, value: ::capnp::text::Reader<'_>)  {
+      pub fn set_filename(&mut self, value: crate::alligator::proto_01::text::Reader<'_>)  {
         self.builder.get_pointer_field(0).set_text(value);
       }
       #[inline]
-      pub fn init_filename(self, size: u32) -> ::capnp::text::Builder<'a> {
+      pub fn init_filename(self, size: u32) -> crate::alligator::proto_01::text::Builder<'a> {
         self.builder.get_pointer_field(0).init_text(size)
       }
       pub fn has_filename(&self) -> bool {
         !self.builder.get_pointer_field(0).is_null()
       }
       #[inline]
-      pub fn get_imports(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::schema_capnp::code_generator_request::requested_file::import::Owned>> {
-        ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
+      pub fn get_imports(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::code_generator_request::requested_file::import::Owned>> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(1), ::core::option::Option::None)
       }
       #[inline]
-      pub fn set_imports(&mut self, value: ::capnp::struct_list::Reader<'a,crate::schema_capnp::code_generator_request::requested_file::import::Owned>) -> ::capnp::Result<()> {
-        ::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
+      pub fn set_imports(&mut self, value: crate::alligator::proto_01::struct_list::Reader<'a,crate::schema_capnp::code_generator_request::requested_file::import::Owned>) -> crate::alligator::proto_01::Result<()> {
+        crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field(1), value, false)
       }
       #[inline]
-      pub fn init_imports(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::schema_capnp::code_generator_request::requested_file::import::Owned> {
-        ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
+      pub fn init_imports(self, size: u32) -> crate::alligator::proto_01::struct_list::Builder<'a,crate::schema_capnp::code_generator_request::requested_file::import::Owned> {
+        crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(1), size)
       }
       pub fn has_imports(&self) -> bool {
         !self.builder.get_pointer_field(1).is_null()
       }
     }
 
-    pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-    impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-      fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+    pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+    impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+      fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
         Pipeline { _typeless: typeless,  }
       }
     }
     impl Pipeline  {
     }
     mod _private {
-      use capnp::private::layout;
+      use crate::alligator::proto_01::private::layout;
       pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 1, pointers: 2 };
       pub const TYPE_ID: u64 = 0xcfea_0eb0_2e81_0062;
     }
@@ -6610,38 +6610,38 @@ pub mod code_generator_request {
     pub mod import {
       #[derive(Copy, Clone)]
       pub struct Owned(());
-      impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-      impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
-      impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+      impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+      impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
+      impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }
 
       #[derive(Clone, Copy)]
-      pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+      pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }
 
-      impl <'a,> ::capnp::traits::HasTypeId for Reader<'a,>  {
+      impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,>  {
         #[inline]
         fn type_id() -> u64 { _private::TYPE_ID }
       }
-      impl <'a,> ::capnp::traits::FromStructReader<'a> for Reader<'a,>  {
-        fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,> {
+      impl <'a,> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,>  {
+        fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,> {
           Reader { reader,  }
         }
       }
 
-      impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
-        fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,>> {
-          ::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))
+      impl <'a,> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,>  {
+        fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,>> {
+          ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))
         }
       }
 
-      impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
-        fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+      impl <'a,> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+        fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {
           self.reader
         }
       }
 
-      impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
-        fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
-          self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+      impl <'a,> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,>  {
+        fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {
+          self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))
         }
       }
 
@@ -6650,7 +6650,7 @@ pub mod code_generator_request {
           Reader { .. *self }
         }
 
-        pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+        pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
           self.reader.total_size()
         }
         #[inline]
@@ -6658,60 +6658,60 @@ pub mod code_generator_request {
           self.reader.get_data_field::<u64>(0)
         }
         #[inline]
-        pub fn get_name(self) -> ::capnp::Result<::capnp::text::Reader<'a>> {
-          ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+        pub fn get_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Reader<'a>> {
+          crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
         }
         pub fn has_name(&self) -> bool {
           !self.reader.get_pointer_field(0).is_null()
         }
       }
 
-      pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
-      impl <'a,> ::capnp::traits::HasStructSize for Builder<'a,>  {
+      pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }
+      impl <'a,> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,>  {
         #[inline]
-        fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }
+        fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }
       }
-      impl <'a,> ::capnp::traits::HasTypeId for Builder<'a,>  {
+      impl <'a,> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,>  {
         #[inline]
         fn type_id() -> u64 { _private::TYPE_ID }
       }
-      impl <'a,> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,>  {
-        fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, > {
+      impl <'a,> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,>  {
+        fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, > {
           Builder { builder,  }
         }
       }
 
-      impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
-        fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
-          self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+      impl <'a,> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,>  {
+        fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {
+          self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))
         }
       }
 
-      impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
-        fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
-          ::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
+      impl <'a,> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+        fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,> {
+          crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))
         }
-        fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,>> {
-          ::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
+        fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,>> {
+          ::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))
         }
       }
 
-      impl <'a,> ::capnp::traits::SetPointerBuilder for Reader<'a,>  {
-        fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+      impl <'a,> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,>  {
+        fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
       }
 
       impl <'a,> Builder<'a,>  {
         pub fn into_reader(self) -> Reader<'a,> {
-          ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+          crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
         }
         pub fn reborrow(&mut self) -> Builder<'_,> {
           Builder { .. *self }
         }
         pub fn reborrow_as_reader(&self) -> Reader<'_,> {
-          ::capnp::traits::FromStructReader::new(self.builder.into_reader())
+          crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())
         }
 
-        pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+        pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {
           self.builder.into_reader().total_size()
         }
         #[inline]
@@ -6723,15 +6723,15 @@ pub mod code_generator_request {
           self.builder.set_data_field::<u64>(0, value);
         }
         #[inline]
-        pub fn get_name(self) -> ::capnp::Result<::capnp::text::Builder<'a>> {
-          ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+        pub fn get_name(self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::text::Builder<'a>> {
+          crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
         }
         #[inline]
-        pub fn set_name(&mut self, value: ::capnp::text::Reader<'_>)  {
+        pub fn set_name(&mut self, value: crate::alligator::proto_01::text::Reader<'_>)  {
           self.builder.get_pointer_field(0).set_text(value);
         }
         #[inline]
-        pub fn init_name(self, size: u32) -> ::capnp::text::Builder<'a> {
+        pub fn init_name(self, size: u32) -> crate::alligator::proto_01::text::Builder<'a> {
           self.builder.get_pointer_field(0).init_text(size)
         }
         pub fn has_name(&self) -> bool {
@@ -6739,16 +6739,16 @@ pub mod code_generator_request {
         }
       }
 
-      pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
-      impl ::capnp::capability::FromTypelessPipeline for Pipeline {
-        fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline {
+      pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }
+      impl crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline {
+        fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline {
           Pipeline { _typeless: typeless,  }
         }
       }
       impl Pipeline  {
       }
       mod _private {
-        use capnp::private::layout;
+        use crate::alligator::proto_01::private::layout;
         pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 1, pointers: 1 };
         pub const TYPE_ID: u64 = 0xae50_4193_1223_57e5;
       }

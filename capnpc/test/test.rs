@@ -74,8 +74,8 @@ mod test_util;
 
 #[cfg(test)]
 mod tests {
-    use capnp::message;
-    use capnp::message::{ReaderOptions};
+    use crate::alligator::proto_01::message;
+    use crate::alligator::proto_01::message::{ReaderOptions};
 
     #[test]
     fn test_prim_list () {
@@ -495,7 +495,7 @@ mod tests {
     fn test_default_initialization_multi_segment() {
         use test_capnp::test_defaults;
         let builder_options = message::HeapAllocator::new()
-            .first_segment_words(1).allocation_strategy(::capnp::message::AllocationStrategy::FixedSize);
+            .first_segment_words(1).allocation_strategy( crate::alligator::proto_01::message::AllocationStrategy::FixedSize);
         let mut message = message::Builder::new(builder_options);
         let test_defaults = message.init_root::<test_defaults::Builder<'_>>();
         ::test_util::CheckTestMessage::check_test_message(test_defaults);
@@ -512,7 +512,7 @@ mod tests {
 
         {
             let reader = test_any_pointer.reborrow().into_reader();
-            assert_eq!(reader.get_any_pointer_field().get_as::<::capnp::text::Reader<'_>>().unwrap(), "xyzzy");
+            assert_eq!(reader.get_any_pointer_field().get_as::< crate::alligator::proto_01::text::Reader<'_>>().unwrap(), "xyzzy");
         }
 
         test_any_pointer.reborrow().get_any_pointer_field().init_as::<test_empty_struct::Builder<'_>>();
@@ -620,14 +620,14 @@ mod tests {
 
     #[test]
     fn test_generics() {
-        use capnp::text;
+        use crate::alligator::proto_01::text;
         use test_capnp::{test_generics, test_all_types};
         let mut message = message::Builder::new_default();
         let mut root: test_generics::Builder<'_, test_all_types::Owned, text::Owned> = message.init_root();
         ::test_util::init_test_message(root.reborrow().get_foo().unwrap());
         root.reborrow().get_dub().unwrap().set_foo("Hello").unwrap();
         {
-            let mut bar: ::capnp::primitive_list::Builder<'_,u8> = root.reborrow().get_dub().unwrap().initn_bar(1);
+            let mut bar: crate::alligator::proto_01::primitive_list::Builder<'_,u8> = root.reborrow().get_dub().unwrap().initn_bar(1);
             bar.set(0, 11);
         }
         {
@@ -650,7 +650,7 @@ mod tests {
 
     #[test]
     fn test_generic_union() {
-        use capnp::primitive_list;
+        use crate::alligator::proto_01::primitive_list;
         use test_capnp::{test_generics_union, test_all_types};
         let mut message = message::Builder::new_default();
         {
@@ -874,14 +874,14 @@ mod tests {
             let mut root = builder.init_root::<test_any_pointer::Builder<'_>>();
             {
                 let mut list = root.reborrow()
-                    .get_any_pointer_field().initn_as::<::capnp::primitive_list::Builder<'_,u8>>(3);
+                    .get_any_pointer_field().initn_as::< crate::alligator::proto_01::primitive_list::Builder<'_,u8>>(3);
                 list.set(0, 12);
                 list.set(1, 34);
                 list.set(2, 56);
             }
             {
                 let mut l = root.get_any_pointer_field()
-                    .get_as::<::capnp::struct_list::Builder<'_,test_lists::struct8::Owned>>().unwrap();
+                    .get_as::< crate::alligator::proto_01::struct_list::Builder<'_,test_lists::struct8::Owned>>().unwrap();
                 assert_eq!(3, l.len());
                 assert_eq!(12, l.reborrow().get(0).get_f());
                 assert_eq!(34, l.reborrow().get(1).get_f());
@@ -894,14 +894,14 @@ mod tests {
             let mut root = builder.init_root::<test_any_pointer::Builder<'_>>();
             {
                 let mut list = root.reborrow()
-                    .get_any_pointer_field().initn_as::<::capnp::text_list::Builder<'_>>(3);
+                    .get_any_pointer_field().initn_as::< crate::alligator::proto_01::text_list::Builder<'_>>(3);
                 list.set(0, "foo");
                 list.set(1, "bar");
                 list.set(2, "baz");
             }
             {
                 let mut l = root.get_any_pointer_field()
-                    .get_as::<::capnp::struct_list::Builder<'_,test_lists::struct_p::Owned>>().unwrap();
+                    .get_as::< crate::alligator::proto_01::struct_list::Builder<'_,test_lists::struct_p::Owned>>().unwrap();
                 assert_eq!(3, l.len());
                 assert_eq!("foo", &*l.reborrow().get(0).get_f().unwrap());
                 assert_eq!("bar", &*l.reborrow().get(1).get_f().unwrap());
@@ -912,16 +912,16 @@ mod tests {
 
     #[test]
     fn upgrade_struct_list() {
-        use capnp::struct_list;
+        use crate::alligator::proto_01::struct_list;
         use test_capnp::{test_old_version, test_new_version};
 
         let segment0: &[capnp::Word] = &[
-            capnp::word(1,0,0,0,0x1f,0,0,0), // list, inline composite, 3 words
-            capnp::word(4, 0, 0, 0, 1, 0, 2, 0), // struct tag. 1 element, 1 word data, 2 pointers.
-            capnp::word(0xab,0,0,0,0,0,0,0),
-            capnp::word(0x05,0,0,0, 0x42,0,0,0), // list pointer, offset 1, type = BYTE, length 8.
-            capnp::word(0,0,0,0,0,0,0,0),
-            capnp::word(0x68,0x65,0x6c,0x6c,0x6f,0x21,0x21,0), // "hello!!"
+            crate::alligator::proto_01::word(1,0,0,0,0x1f,0,0,0), // list, inline composite, 3 words
+            crate::alligator::proto_01::word(4, 0, 0, 0, 1, 0, 2, 0), // struct tag. 1 element, 1 word data, 2 pointers.
+            crate::alligator::proto_01::word(0xab,0,0,0,0,0,0,0),
+            crate::alligator::proto_01::word(0x05,0,0,0, 0x42,0,0,0), // list pointer, offset 1, type = BYTE, length 8.
+            crate::alligator::proto_01::word(0,0,0,0,0,0,0,0),
+            crate::alligator::proto_01::word(0x68,0x65,0x6c,0x6c,0x6f,0x21,0x21,0), // "hello!!"
         ];
 
         let segment_array = &[capnp::Word::words_to_bytes(segment0)];
@@ -976,7 +976,7 @@ mod tests {
         use test_capnp::{test_all_types};
 
         let builder_options = message::HeapAllocator::new()
-            .first_segment_words(1).allocation_strategy(::capnp::message::AllocationStrategy::FixedSize);
+            .first_segment_words(1).allocation_strategy( crate::alligator::proto_01::message::AllocationStrategy::FixedSize);
         let mut message = message::Builder::new(builder_options);
         ::test_util::init_test_message(message.init_root());
         ::test_util::CheckTestMessage::check_test_message(message.get_root::<test_all_types::Builder<'_>>().unwrap());
@@ -1006,14 +1006,14 @@ mod tests {
         {
             let builder_options = message::HeapAllocator::new()
                 .first_segment_words(1)
-                .allocation_strategy(::capnp::message::AllocationStrategy::FixedSize);
+                .allocation_strategy( crate::alligator::proto_01::message::AllocationStrategy::FixedSize);
             let mut message = message::Builder::new(builder_options);
 
             ::test_util::init_test_message(message.init_root::<test_all_types::Builder<'_>>());
 
             let builder_options = message::HeapAllocator::new()
                 .first_segment_words(1)
-                .allocation_strategy(::capnp::message::AllocationStrategy::FixedSize);
+                .allocation_strategy( crate::alligator::proto_01::message::AllocationStrategy::FixedSize);
             let mut message2 = message::Builder::new(builder_options);
             let mut all_types2 = message2.init_root::<test_all_types::Builder<'_>>();
 
@@ -1028,34 +1028,34 @@ mod tests {
     #[test]
     fn double_far_pointer() {
         let segment0: &[capnp::Word] = &[
-            capnp::word(0,0,0,0,0,0,1,0),
+            crate::alligator::proto_01::word(0,0,0,0,0,0,1,0),
             // struct pointer, zero offset, zero data words, one pointer.
 
-            capnp::word(6,0,0,0,1,0,0,0),
+            crate::alligator::proto_01::word(6,0,0,0,1,0,0,0),
             // far pointer, two-word landing pad, offset 0, segment 1.
         ];
 
         let segment1: &[capnp::Word] = &[
-            capnp::word(2,0,0,0,2,0,0,0),
+            crate::alligator::proto_01::word(2,0,0,0,2,0,0,0),
             // landing pad start. offset 0, segment 2
 
-            capnp::word(0,0,0,0,1,0,1,0),
+            crate::alligator::proto_01::word(0,0,0,0,1,0,1,0),
             // landing pad tag. struct pointer. One data word. One pointer.
         ];
 
         let segment2: &[capnp::Word] = &[
-            capnp::word(0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f),
+            crate::alligator::proto_01::word(0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f),
             // Data word.
 
-            capnp::word(1,0,0,0,0x42,0,0,0),
+            crate::alligator::proto_01::word(1,0,0,0,0x42,0,0,0),
             // text pointer. offset zero. 1-byte elements. 8 total elements.
 
-            capnp::word('h' as u8, 'e' as u8, 'l' as u8, 'l' as u8, 'o' as u8, '.' as u8, '\n' as u8, 0),
+            crate::alligator::proto_01::word('h' as u8, 'e' as u8, 'l' as u8, 'l' as u8, 'o' as u8, '.' as u8, '\n' as u8, 0),
         ];
 
         let segment_array = &[capnp::Word::words_to_bytes(segment0),
-                              capnp::Word::words_to_bytes(segment1),
-                              capnp::Word::words_to_bytes(segment2)];
+                              crate::alligator::proto_01::Word::words_to_bytes(segment1),
+                              crate::alligator::proto_01::Word::words_to_bytes(segment2)];
 
         let message =
             message::Reader::new(message::SegmentArray::new(segment_array), ReaderOptions::new());
@@ -1070,23 +1070,23 @@ mod tests {
     #[test]
     fn double_far_pointer_truncated_pad() {
         let segment0: &[capnp::Word] = &[
-            capnp::word(6,0,0,0,1,0,0,0),
+            crate::alligator::proto_01::word(6,0,0,0,1,0,0,0),
             // far pointer, two-word landing pad, offset 0, segment 1.
         ];
 
         let segment1: &[capnp::Word] = &[
-            capnp::word(2,0,0,0,2,0,0,0),
+            crate::alligator::proto_01::word(2,0,0,0,2,0,0,0),
             // landing pad start. offset 0, segment 2
 
             // For this message to be valid, there would need to be another word here.
         ];
         let segment2: &[capnp::Word] = &[
-            capnp::word(0,0,0,0,0,0,0,0),
+            crate::alligator::proto_01::word(0,0,0,0,0,0,0,0),
         ];
 
         let segment_array = &[capnp::Word::words_to_bytes(segment0),
-                              capnp::Word::words_to_bytes(segment1),
-                              capnp::Word::words_to_bytes(segment2)];
+                              crate::alligator::proto_01::Word::words_to_bytes(segment1),
+                              crate::alligator::proto_01::Word::words_to_bytes(segment2)];
         let message =
             message::Reader::new(message::SegmentArray::new(segment_array), ReaderOptions::new());
 
@@ -1101,24 +1101,24 @@ mod tests {
     #[test]
     fn double_far_pointer_out_of_bounds() {
         let segment0: &[capnp::Word] = &[
-            capnp::word(6,0,0,0,1,0,0,0),
+            crate::alligator::proto_01::word(6,0,0,0,1,0,0,0),
             // far pointer, two-word landing pad, offset 0, segment 1.
         ];
 
         let segment1: &[capnp::Word] = &[
-            capnp::word(0xa,0,0,0,2,0,0,0),
+            crate::alligator::proto_01::word(0xa,0,0,0,2,0,0,0),
             // landing pad start. offset 1, segment 2
 
-            capnp::word(0,0,0,0,1,0,1,0),
+            crate::alligator::proto_01::word(0,0,0,0,1,0,1,0),
             // landing pad tag. struct pointer. One data word. One pointer.
         ];
         let segment2: &[capnp::Word] = &[
-            capnp::word(0,0,0,0,0,0,0,0),
+            crate::alligator::proto_01::word(0,0,0,0,0,0,0,0),
         ];
 
         let segment_array = &[capnp::Word::words_to_bytes(segment0),
-                              capnp::Word::words_to_bytes(segment1),
-                              capnp::Word::words_to_bytes(segment2)];
+                              crate::alligator::proto_01::Word::words_to_bytes(segment1),
+                              crate::alligator::proto_01::Word::words_to_bytes(segment2)];
         let message =
             message::Reader::new(message::SegmentArray::new(segment_array), ReaderOptions::new());
 
@@ -1136,7 +1136,7 @@ mod tests {
 
         let words: &[capnp::Word] =
             &[capnp::word(0,0,0,0,0,0,1,0), // struct, one pointer
-              capnp::word(0xa,0,0,0,0,0,0,0)]; // far pointer, points to self
+              crate::alligator::proto_01::word(0xa,0,0,0,0,0,0,0)]; // far pointer, points to self
         let segment_array = &[capnp::Word::words_to_bytes(words)];
 
         let message_reader =
@@ -1144,7 +1144,7 @@ mod tests {
 
         let reader = message_reader.get_root::<test_all_types::Reader<'_>>().unwrap();
         assert!(reader.total_size().is_err());
-        let mut builder = ::capnp::message::Builder::new_default();
+        let mut builder = crate::alligator::proto_01::message::Builder::new_default();
         assert!(builder.set_root(reader).is_err());
     }
 
@@ -1156,10 +1156,10 @@ mod tests {
         let mut message = message::Builder::new_default();
         {
             let mut root = message.init_root::<test_any_pointer::Builder<'_>>();
-            let _: ::capnp::data::Builder<'_> = root.reborrow().get_any_pointer_field().initn_as(0);
+            let _: crate::alligator::proto_01::data::Builder<'_> = root.reborrow().get_any_pointer_field().initn_as(0);
 
             // No NUL terminator!
-            let result = root.get_any_pointer_field().get_as::<::capnp::text::Builder<'_>>();
+            let result = root.get_any_pointer_field().get_as::< crate::alligator::proto_01::text::Builder<'_>>();
             assert!(result.is_err());
         }
     }
@@ -1167,11 +1167,11 @@ mod tests {
     #[test]
     fn inline_composite_list_int_overflow() {
         let words: &[capnp::Word] = &[
-            capnp::word(0,0,0,0,0,0,1,0),
-            capnp::word(1,0,0,0,0x17,0,0,0),
-            capnp::word(0,0,0,128,16,0,0,0),
-            capnp::word(0,0,0,0,0,0,0,0),
-            capnp::word(0,0,0,0,0,0,0,0)];
+            crate::alligator::proto_01::word(0,0,0,0,0,0,1,0),
+            crate::alligator::proto_01::word(1,0,0,0,0x17,0,0,0),
+            crate::alligator::proto_01::word(0,0,0,128,16,0,0,0),
+            crate::alligator::proto_01::word(0,0,0,0,0,0,0,0),
+            crate::alligator::proto_01::word(0,0,0,0,0,0,0,0)];
         let segment_array = &[capnp::Word::words_to_bytes(words)];
 
         let message =
@@ -1186,7 +1186,7 @@ mod tests {
 
         {
             let result = root.get_any_pointer_field()
-                .get_as::<::capnp::struct_list::Reader<'_,::test_capnp::test_all_types::Owned>>();
+                .get_as::< crate::alligator::proto_01::struct_list::Reader<'_,::test_capnp::test_all_types::Owned>>();
 
             assert!(result.is_err());
         }
@@ -1314,7 +1314,7 @@ mod tests {
         let mut message = message::Builder::new_default();
         {
             let root = message.init_root::<test_any_pointer::Builder<'_>>();
-            let _: ::capnp::primitive_list::Builder<'_,()> =
+            let _: crate::alligator::proto_01::primitive_list::Builder<'_,()> =
                 root.get_any_pointer_field().initn_as((1 << 29) - 1);
         }
         let segments = message.get_segments_for_output();
@@ -1324,7 +1324,7 @@ mod tests {
         let reader = message::Reader::new(message::SegmentArray::new(&segments),
                                           ReaderOptions::new());
         let root = reader.get_root::<test_any_pointer::Reader<'_>>().unwrap();
-        let result = root.get_any_pointer_field().get_as::<::capnp::struct_list::Reader<'_,test_all_types::Owned>>();
+        let result = root.get_any_pointer_field().get_as::< crate::alligator::proto_01::struct_list::Reader<'_,test_all_types::Owned>>();
         assert!(result.is_err());
     }
 
@@ -1335,7 +1335,7 @@ mod tests {
         let mut message = message::Builder::new_default();
         {
             let root = message.init_root::<test_any_pointer::Builder<'_>>();
-            let _ : ::capnp::struct_list::Builder<'_, test_empty_struct::Owned> =
+            let _ : crate::alligator::proto_01::struct_list::Builder<'_, test_empty_struct::Owned> =
                 root.get_any_pointer_field().initn_as((1 << 29) - 1);
         }
         {
@@ -1347,7 +1347,7 @@ mod tests {
                 message::Reader::new(message::SegmentArray::new(&segments),
                                      ReaderOptions::new());
             let root = reader.get_root::<test_any_pointer::Reader<'_>>().unwrap();
-            let result = root.get_any_pointer_field().get_as::<::capnp::struct_list::Reader<'_, test_all_types::Owned>>();
+            let result = root.get_any_pointer_field().get_as::< crate::alligator::proto_01::struct_list::Reader<'_, test_all_types::Owned>>();
             assert!(result.is_err());
         }
 
@@ -1362,9 +1362,9 @@ mod tests {
 
         let words: &[capnp::Word] =
             &[capnp::word(0,0,0,0, 0,0,1,0), // struct, one pointers
-              capnp::word(1,0,0,0, 0xf,0,0,0), // list, inline composite, one word
-              capnp::word(0,0x80,0xc2,0xff, 0,0,0,0), // large struct, but zero of them
-              capnp::word(0,0,0x20,0, 0,0,0x22,0),
+              crate::alligator::proto_01::word(1,0,0,0, 0xf,0,0,0), // list, inline composite, one word
+              crate::alligator::proto_01::word(0,0x80,0xc2,0xff, 0,0,0,0), // large struct, but zero of them
+              crate::alligator::proto_01::word(0,0,0x20,0, 0,0,0x22,0),
             ];
         let segment_array = &[capnp::Word::words_to_bytes(words)];
 
@@ -1374,7 +1374,7 @@ mod tests {
         let reader = message_reader.get_root::<test_any_pointer::Reader<'_>>().unwrap();
         reader.total_size().unwrap();
 
-        let mut builder = ::capnp::message::Builder::new_default();
+        let mut builder = crate::alligator::proto_01::message::Builder::new_default();
         assert!(builder.set_root(reader).is_err()); // read limit exceeded
     }
 
@@ -1433,7 +1433,7 @@ mod tests {
 
     #[test]
     fn get_raw_struct_data() {
-        use capnp::traits::HasStructSize;
+        use crate::alligator::proto_01::traits::HasStructSize;
         use test_capnp::test_all_types;
         let mut message = message::Builder::new_default();
         let mut root: test_all_types::Builder<'_> = message.init_root();
@@ -1442,7 +1442,7 @@ mod tests {
         let struct_size = <test_all_types::Builder<'_> as HasStructSize>::struct_size();
         {
             let raw_bytes =
-                ::capnp::raw::get_struct_data_section(root.reborrow().into_reader());
+                crate::alligator::proto_01::raw::get_struct_data_section(root.reborrow().into_reader());
             assert_eq!(raw_bytes.len(), (struct_size.data * 8) as usize);
             assert_eq!(raw_bytes[0], 0); // boolField
             assert_eq!(raw_bytes[1], 3); // int8Field
@@ -1464,15 +1464,15 @@ mod tests {
             uint16_list.set(3, 13);
             uint16_list.set(4, 14);
             assert_eq!(
-                ::capnp::raw::get_list_element_size(uint16_list.reborrow().into_reader()),
-                ::capnp::private::layout::ElementSize::TwoBytes);
+                crate::alligator::proto_01::raw::get_list_element_size(uint16_list.reborrow().into_reader()),
+                crate::alligator::proto_01::private::layout::ElementSize::TwoBytes);
 
             assert_eq!(
-                ::capnp::raw::get_list_step_size_in_bits(uint16_list.reborrow().into_reader()),
+                crate::alligator::proto_01::raw::get_list_step_size_in_bits(uint16_list.reborrow().into_reader()),
                 16);
 
             assert_eq!(
-                ::capnp::raw::get_list_bytes(uint16_list.reborrow().into_reader()),
+                crate::alligator::proto_01::raw::get_list_bytes(uint16_list.reborrow().into_reader()),
                 &[10, 0, 11, 0, 12, 0, 13, 0, 14, 0]);
         }
     }
@@ -1483,7 +1483,7 @@ mod tests {
         let mut message = message::Builder::new_default();
         let mut root: test_all_types::Builder<'_> = message.init_root();
         ::test_util::init_test_message(root.reborrow().init_struct_field());
-        let pointers = ::capnp::raw::get_struct_pointer_section(root.into_reader());
+        let pointers = crate::alligator::proto_01::raw::get_struct_pointer_section(root.into_reader());
         let substruct: test_all_types::Reader<'_> = pointers.get(2).get_as().unwrap();
         ::test_util::CheckTestMessage::check_test_message(substruct);
     }

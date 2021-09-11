@@ -64,30 +64,35 @@ pub mod codegen;
 pub mod codegen_types;
 mod pointer_constants;
 
+mod alligator
+{
+    pub use capnp as proto_01;
+}
+
 use std::path::{Path, PathBuf};
 
 // Copied from capnp/src/lib.rs, where this conversion lives behind the "std" feature flag,
 // which we don't want to depend on here.
-pub(crate) fn convert_io_err(err: std::io::Error) -> capnp::Error {
+pub(crate) fn convert_io_err(err: std::io::Error) -> crate::alligator::proto_01::Error {
     use std::io;
     let kind = match err.kind() {
-        io::ErrorKind::TimedOut => capnp::ErrorKind::Overloaded,
+        io::ErrorKind::TimedOut => crate::alligator::proto_01::ErrorKind::Overloaded,
         io::ErrorKind::BrokenPipe |
         io::ErrorKind::ConnectionRefused |
         io::ErrorKind::ConnectionReset |
         io::ErrorKind::ConnectionAborted |
-        io::ErrorKind::NotConnected  => capnp::ErrorKind::Disconnected,
-        _ => capnp::ErrorKind::Failed,
+        io::ErrorKind::NotConnected  => crate::alligator::proto_01::ErrorKind::Disconnected,
+        _ => crate::alligator::proto_01::ErrorKind::Failed,
     };
-    capnp::Error { description: format!("{}", err), kind: kind }
+    crate::alligator::proto_01::Error { description: format!("{}", err), kind: kind }
 }
 
-fn run_command(mut command: ::std::process::Command, mut code_generation_command: codegen::CodeGenerationCommand) -> ::capnp::Result<()> {
+fn run_command(mut command: ::std::process::Command, mut code_generation_command: codegen::CodeGenerationCommand) -> crate::alligator::proto_01::Result<()> {
     let mut p = command.spawn().map_err(convert_io_err)?;
     code_generation_command.run(p.stdout.take().unwrap())?;
     let exit_status = p.wait().map_err(convert_io_err)?;
     if !exit_status.success() {
-        Err(::capnp::Error::failed(format!(
+        Err( crate::alligator::proto_01::Error::failed(format!(
             "Non-success exit status: {}",
             exit_status
         )))
@@ -202,7 +207,7 @@ impl CompilerCommand {
 
     /// Runs the command.
     /// Returns an error if `OUT_DIR` or a custom output directory was not set, or if `capnp compile` fails.
-    pub fn run(&mut self) -> ::capnp::Result<()> {
+    pub fn run(&mut self) -> crate::alligator::proto_01::Result<()> {
         let mut command = if let Some(executable) = &self.executable_path {
             ::std::process::Command::new(executable)
         } else {
@@ -230,7 +235,7 @@ impl CompilerCommand {
                     Err(..) => "<unknown working directory>".to_string(),
                 };
 
-                ::capnp::Error::failed(format!(
+                crate::alligator::proto_01::Error::failed(format!(
                     "Unable to stat capnp input file `{}` in working directory {}: {}.  \
                      Please check that the file exists and is accessible for read.",
                     file.display(),
@@ -247,7 +252,7 @@ impl CompilerCommand {
         } else {
             // Try `OUT_DIR` by default
             PathBuf::from(::std::env::var("OUT_DIR").map_err(|error| {
-                ::capnp::Error::failed(format!(
+                crate::alligator::proto_01::Error::failed(format!(
                     "Could not access `OUT_DIR` environment variable: {}. \
                      You might need to set it up or instead create you own output \
                      structure using `CompilerCommand::output_path`",
@@ -265,7 +270,7 @@ impl CompilerCommand {
             .default_parent_module(self.default_parent_module.clone());
 
         run_command(command, code_generation_command).map_err(|error| {
-            ::capnp::Error::failed(format!(
+            crate::alligator::proto_01::Error::failed(format!(
                 "Error while trying to execute `capnp compile`: {}.  \
                  Please verify that version 0.5.2 or higher of the capnp executable \
                  is installed on your system. See https://capnproto.org/install.html",

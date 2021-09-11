@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 use crate::schema_capnp::{brand, node, type_};
-use capnp::Error;
+use crate::alligator::proto_01::Error;
 use crate::codegen;
 use crate::codegen::{GeneratorContext};
 use std::collections::hash_map::HashMap;
@@ -106,13 +106,13 @@ impl <'a> RustNodeInfo for node::Reader<'a> {
                 format!("{}",param)
             }).collect::<Vec<String>>().join(",");
             let where_clause = "where ".to_string() + &*(params.iter().map(|param| {
-                format!("{}: for<'c> ::capnp::traits::Owned<'c>", param)
+                format!("{}: for<'c> crate::alligator::proto_01::traits::Owned<'c>", param)
             }).collect::<Vec<String>>().join(", ") + " ");
             let where_clause_with_static = "where ".to_string() + &*(params.iter().map(|param| {
-                format!("{}:'static + for<'c> ::capnp::traits::Owned<'c>", param)
+                format!("{}:'static + for<'c> crate::alligator::proto_01::traits::Owned<'c>", param)
             }).collect::<Vec<String>>().join(", ") + " ");
             let pipeline_where_clause = "where ".to_string() + &*(params.iter().map(|param| {
-                format!("{}: ::capnp::traits::Pipelined, <{} as ::capnp::traits::Pipelined>::Pipeline: ::capnp::capability::FromTypelessPipeline", param, param)
+                format!("{}: crate::alligator::proto_01::traits::Pipelined, <{} as crate::alligator::proto_01::traits::Pipelined>::Pipeline: crate::alligator::proto_01::capability::FromTypelessPipeline", param, param)
             }).collect::<Vec<String>>().join(", ") + " ");
             let phantom_data_type = if params.len() == 1 {
                 // omit parens to avoid linter error
@@ -147,7 +147,7 @@ impl <'a> RustNodeInfo for node::Reader<'a> {
 
 impl <'a> RustTypeInfo for type_::Reader<'a> {
 
-    fn type_string(&self, gen:&codegen::GeneratorContext, module:Leaf) -> Result<String, ::capnp::Error> {
+    fn type_string(&self, gen:&codegen::GeneratorContext, module:Leaf) -> Result<String, crate::alligator::proto_01::Error> {
 
         let local_lifetime = match module {
             Leaf::Reader(lt) => lt,
@@ -172,8 +172,8 @@ impl <'a> RustTypeInfo for type_::Reader<'a> {
             type_::Uint64(()) => Ok("u64".to_string()),
             type_::Float32(()) => Ok("f32".to_string()),
             type_::Float64(()) => Ok("f64".to_string()),
-            type_::Text(()) => Ok(format!("::capnp::text::{}", module)),
-            type_::Data(()) => Ok(format!("::capnp::data::{}", module)),
+            type_::Text(()) => Ok(format!(" crate::alligator::proto_01::text::{}", module)),
+            type_::Data(()) => Ok(format!(" crate::alligator::proto_01::data::{}", module)),
             type_::Struct(st) => {
                 do_branding(gen, st.get_type_id(), st.get_brand()?, module,
                             gen.scope_map[&st.get_type_id()].join("::"), None)
@@ -187,30 +187,30 @@ impl <'a> RustTypeInfo for type_::Reader<'a> {
                 match element_type.which()? {
                     type_::Struct(_) => {
                         let inner = element_type.type_string(gen, Leaf::Owned)?;
-                        Ok(format!("::capnp::struct_list::{}<{}{}>", module.bare_name(), lifetime_comma, inner))
+                        Ok(format!(" crate::alligator::proto_01::struct_list::{}<{}{}>", module.bare_name(), lifetime_comma, inner))
                     },
                     type_::Enum(_) => {
                         let inner = element_type.type_string(gen, Leaf::Owned)?;
-                        Ok(format!("::capnp::enum_list::{}<{}{}>", module.bare_name(), lifetime_comma, inner))
+                        Ok(format!(" crate::alligator::proto_01::enum_list::{}<{}{}>", module.bare_name(), lifetime_comma, inner))
                     },
                     type_::List(_) => {
                         let inner = element_type.type_string(gen, Leaf::Owned)?;
-                        Ok(format!("::capnp::list_list::{}<{}{}>", module.bare_name(), lifetime_comma, inner))
+                        Ok(format!(" crate::alligator::proto_01::list_list::{}<{}{}>", module.bare_name(), lifetime_comma, inner))
                     },
                     type_::Text(()) => {
-                        Ok(format!("::capnp::text_list::{}", module))
+                        Ok(format!(" crate::alligator::proto_01::text_list::{}", module))
                     },
                     type_::Data(()) => {
-                        Ok(format!("::capnp::data_list::{}", module))
+                        Ok(format!(" crate::alligator::proto_01::data_list::{}", module))
                     },
                     type_::Interface(_) => {
                         let inner = element_type.type_string(gen, Leaf::Client)?;
-                        Ok(format!("::capnp::capability_list::{}<{}{}>", module.bare_name(), lifetime_comma, inner))
+                        Ok(format!(" crate::alligator::proto_01::capability_list::{}<{}{}>", module.bare_name(), lifetime_comma, inner))
                     }
                     type_::AnyPointer(_) => Err(Error::failed("List(AnyPointer) is unsupported".to_string())),
                     _ => {
                         let inner = element_type.type_string(gen, Leaf::Owned)?;
-                        Ok(format!("::capnp::primitive_list::{}<{}{}>", module.bare_name(), lifetime_comma, inner))
+                        Ok(format!(" crate::alligator::proto_01::primitive_list::{}<{}{}>", module.bare_name(), lifetime_comma, inner))
                     },
                 }
             },
@@ -229,16 +229,16 @@ impl <'a> RustTypeInfo for type_::Reader<'a> {
                             Leaf::Owned => Ok(parameter_name.to_string()),
                             Leaf::Reader(lifetime) => {
                                 Ok(format!(
-                                    "<{} as ::capnp::traits::Owned<{}>>::Reader",
+                                    "<{} as crate::alligator::proto_01::traits::Owned<{}>>::Reader",
                                     parameter_name, lifetime))
                             }
                             Leaf::Builder(lifetime) => {
                                 Ok(format!(
-                                    "<{} as ::capnp::traits::Owned<{}>>::Builder",
+                                    "<{} as crate::alligator::proto_01::traits::Owned<{}>>::Builder",
                                     parameter_name, lifetime))
                             }
                             Leaf::Pipeline => {
-                                Ok(format!("<{} as ::capnp::traits::Pipelined>::Pipeline", parameter_name))
+                                Ok(format!("<{} as crate::alligator::proto_01::traits::Pipelined>::Pipeline", parameter_name))
                             }
                             _ => Err(Error::unimplemented("unimplemented any_pointer leaf".to_string())),
                         }
@@ -246,13 +246,13 @@ impl <'a> RustTypeInfo for type_::Reader<'a> {
                     _ => {
                         match module {
                             Leaf::Reader(lifetime) => {
-                                Ok(format!("::capnp::any_pointer::Reader<{}>", lifetime))
+                                Ok(format!(" crate::alligator::proto_01::any_pointer::Reader<{}>", lifetime))
                             }
                             Leaf::Builder(lifetime) => {
-                                Ok(format!("::capnp::any_pointer::Builder<{}>", lifetime))
+                                Ok(format!(" crate::alligator::proto_01::any_pointer::Builder<{}>", lifetime))
                             }
                             _ => {
-                                Ok(format!("::capnp::any_pointer::{}", module))
+                                Ok(format!(" crate::alligator::proto_01::any_pointer::{}", module))
                             }
                         }
                     }
@@ -321,7 +321,7 @@ pub fn do_branding(gen: &GeneratorContext,
         match brand_scopes.get(&current_node_id) {
             None => {
                 for _ in params.iter() {
-                    arguments.push("::capnp::any_pointer::Owned".to_string());
+                    arguments.push(" crate::alligator::proto_01::any_pointer::Owned".to_string());
                 }
             },
             Some(scope) => {
@@ -337,7 +337,7 @@ pub fn do_branding(gen: &GeneratorContext,
                         for binding in bindings_list.iter() {
                             match binding.which()? {
                                 brand::binding::Unbound(()) => {
-                                    arguments.push("::capnp::any_pointer::Owned".to_string());
+                                    arguments.push(" crate::alligator::proto_01::any_pointer::Owned".to_string());
                                 }
                                 brand::binding::Type(t) => {
                                     arguments.push(t?.type_string(gen, Leaf::Owned)?);

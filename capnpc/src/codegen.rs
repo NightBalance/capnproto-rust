@@ -24,7 +24,7 @@ use std::collections::HashSet;
 use std::path::{Path, PathBuf};
 
 use capnp;
-use capnp::Error;
+use crate::alligator::proto_01::Error;
 
 use crate::{convert_io_err};
 use crate::pointer_constants::generate_pointer_constant;
@@ -66,13 +66,13 @@ impl CodeGenerationCommand {
     }
 
     /// Generates Rust code according to a `schema_capnp::code_generator_request` read from `inp`.
-    pub fn run<T>(&mut self, inp: T) -> ::capnp::Result<()>
+    pub fn run<T>(&mut self, inp: T) -> crate::alligator::proto_01::Result<()>
         where T: std::io::Read
     {
-        use capnp::serialize;
+        use crate::alligator::proto_01::serialize;
         use std::io::Write;
 
-        let message = serialize::read_message(ReadWrapper { inner: inp }, capnp::message::ReaderOptions::new())?;
+        let message = serialize::read_message(ReadWrapper { inner: inp }, crate::alligator::proto_01::message::ReaderOptions::new())?;
 
         let gen = GeneratorContext::new_with_default_parent_module(&self.default_parent_module[..], &message)?;
 
@@ -131,16 +131,16 @@ pub struct GeneratorContext<'a> {
 
 impl <'a> GeneratorContext<'a> {
     pub fn new(
-        message:&'a capnp::message::Reader<capnp::serialize::OwnedSegments>)
-        -> ::capnp::Result<GeneratorContext<'a>>
+        message:&'a crate::alligator::proto_01::message::Reader<capnp::serialize::OwnedSegments>)
+        -> crate::alligator::proto_01::Result<GeneratorContext<'a>>
     {
         GeneratorContext::new_with_default_parent_module(&[], message)
     }
 
     fn new_with_default_parent_module(
         default_parent_module: &[String],
-        message:&'a capnp::message::Reader<capnp::serialize::OwnedSegments>)
-        -> ::capnp::Result<GeneratorContext<'a>>
+        message:&'a crate::alligator::proto_01::message::Reader<capnp::serialize::OwnedSegments>)
+        -> crate::alligator::proto_01::Result<GeneratorContext<'a>>
     {
         let mut default_parent_module_scope = vec!["crate".to_string()];
         default_parent_module_scope.extend_from_slice(default_parent_module);
@@ -184,7 +184,7 @@ impl <'a> GeneratorContext<'a> {
         Ok(gen)
     }
 
-    fn get_last_name<'b>(&'b self, id: u64) -> ::capnp::Result<&'b str> {
+    fn get_last_name<'b>(&'b self, id: u64) -> crate::alligator::proto_01::Result<&'b str> {
         match self.scope_map.get(&id) {
             None => Err(Error::failed(format!("node not found: {}", id))),
             Some(v) => match v.last() {
@@ -195,7 +195,7 @@ impl <'a> GeneratorContext<'a> {
     }
 }
 
-fn path_to_stem_string<P: AsRef<::std::path::Path>>(path: P) -> ::capnp::Result<String> {
+fn path_to_stem_string<P: AsRef<::std::path::Path>>(path: P) -> crate::alligator::proto_01::Result<String> {
     match path.as_ref().file_stem() {
         None => Err(Error::failed(format!("file has no stem: {:?}", path.as_ref()))),
         Some(stem) => {
@@ -336,7 +336,7 @@ fn module_name(camel_case: &str) -> String {
 const NAME_ANNOTATION_ID: u64 = 0xc2fe4c6d100166d0;
 const PARENT_MODULE_ANNOTATION_ID: u64 = 0xabee386cd1450364;
 
-fn name_annotation_value(annotation: schema_capnp::annotation::Reader) -> capnp::Result<&str> {
+fn name_annotation_value(annotation: schema_capnp::annotation::Reader) -> crate::alligator::proto_01::Result<&str> {
     if let schema_capnp::value::Text(t) = annotation.get_value()?.which()? {
         let name = t?;
         for c in name.chars() {
@@ -351,7 +351,7 @@ fn name_annotation_value(annotation: schema_capnp::annotation::Reader) -> capnp:
     }
 }
 
-fn get_field_name(field: schema_capnp::field::Reader) -> capnp::Result<&str> {
+fn get_field_name(field: schema_capnp::field::Reader) -> crate::alligator::proto_01::Result<&str> {
     for annotation in field.get_annotations()?.iter() {
         if annotation.get_id() == NAME_ANNOTATION_ID {
             return name_annotation_value(annotation);
@@ -360,7 +360,7 @@ fn get_field_name(field: schema_capnp::field::Reader) -> capnp::Result<&str> {
     field.get_name()
 }
 
-fn get_enumerant_name(enumerant: schema_capnp::enumerant::Reader) -> capnp::Result<&str> {
+fn get_enumerant_name(enumerant: schema_capnp::enumerant::Reader) -> crate::alligator::proto_01::Result<&str> {
     for annotation in enumerant.get_annotations()?.iter() {
         if annotation.get_id() == NAME_ANNOTATION_ID {
             return name_annotation_value(annotation);
@@ -369,7 +369,7 @@ fn get_enumerant_name(enumerant: schema_capnp::enumerant::Reader) -> capnp::Resu
     enumerant.get_name()
 }
 
-fn get_parent_module(annotation: schema_capnp::annotation::Reader) -> capnp::Result<Vec<String>> {
+fn get_parent_module(annotation: schema_capnp::annotation::Reader) -> crate::alligator::proto_01::Result<Vec<String>> {
     if let schema_capnp::value::Text(t) = annotation.get_value()?.which()? {
         let module = t?;
         Ok(module.split("::").map(|x| x.to_string()).collect())
@@ -398,7 +398,7 @@ fn populate_scope_map(node_map: &collections::hash_map::HashMap<u64, schema_capn
                       mut ancestor_scope_names: Vec<String>,
                       mut current_node_name: String,
                       current_name_kind: NameKind,
-                      node_id: u64) -> ::capnp::Result<()> {
+                      node_id: u64) -> crate::alligator::proto_01::Result<()> {
     // unused nodes in imported files might be omitted from the node map
     let node_reader = match node_map.get(&node_id) { Some(node) => node, None => return Ok(()), };
 
@@ -466,7 +466,7 @@ fn populate_scope_map(node_map: &collections::hash_map::HashMap<u64, schema_capn
     Ok(())
 }
 
-fn prim_default(value: &schema_capnp::value::Reader) -> ::capnp::Result<Option<String>> {
+fn prim_default(value: &schema_capnp::value::Reader) -> crate::alligator::proto_01::Result<Option<String>> {
     use crate::schema_capnp::value;
     match value.which()? {
         value::Bool(false) |
@@ -504,7 +504,7 @@ pub fn getter_text(gen: &GeneratorContext,
                    field: &schema_capnp::field::Reader,
                    is_reader: bool,
                    is_fn: bool)
-                   -> ::capnp::Result<(String, FormattedText, Option<FormattedText>)> {
+                   -> crate::alligator::proto_01::Result<(String, FormattedText, Option<FormattedText>)> {
     use crate::schema_capnp::*;
 
     match field.which()? {
@@ -522,9 +522,9 @@ pub fn getter_text(gen: &GeneratorContext,
             }
 
             let getter_code = if is_reader {
-                Line("::capnp::traits::FromStructReader::new(self.reader)".to_string())
+                Line(" crate::alligator::proto_01::traits::FromStructReader::new(self.reader)".to_string())
             } else {
-                Line("::capnp::traits::FromStructBuilder::new(self.builder)".to_string())
+                Line(" crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)".to_string())
             };
 
             Ok((result_type, getter_code, None))
@@ -552,13 +552,13 @@ pub fn getter_text(gen: &GeneratorContext,
             let default_name = format!("DEFAULT_{}", snake_to_upper_case(&camel_to_snake_case(get_field_name(*field)?)));
 
             let mut result_type = match raw_type.which()? {
-                type_::Enum(_) => format!("::core::result::Result<{},::capnp::NotInSchema>", typ),
+                type_::Enum(_) => format!("::core::result::Result<{}, crate::alligator::proto_01::NotInSchema>", typ),
                 type_::AnyPointer(_) if !raw_type.is_parameter()? => typ.clone(),
                 type_::Interface(_) => {
-                    format!("::capnp::Result<{}>", raw_type.type_string(gen, Leaf::Client)?)
+                    format!(" crate::alligator::proto_01::Result<{}>", raw_type.type_string(gen, Leaf::Client)?)
                 }
                 _ if raw_type.is_prim()? => typ.clone(),
-                _ => format!("::capnp::Result<{}>", typ),
+                _ => format!(" crate::alligator::proto_01::Result<{}>", typ),
             };
 
             if is_fn {
@@ -598,12 +598,12 @@ pub fn getter_text(gen: &GeneratorContext,
                     primitive_case(&*typ, member, offset, f.to_bits(), 0),
                 (type_::Enum(_), value::Enum(d)) => {
                     if d == 0 {
-                        Line(format!("::capnp::traits::FromU16::from_u16(self.{}.get_data_field::<u16>({}))",
+                        Line(format!(" crate::alligator::proto_01::traits::FromU16::from_u16(self.{}.get_data_field::<u16>({}))",
                                      member, offset))
                     } else {
                         Line(
                             format!(
-                                "::capnp::traits::FromU16::from_u16(self.{}.get_data_field_mask::<u16>({}, {}))",
+                                " crate::alligator::proto_01::traits::FromU16::from_u16(self.{}.get_data_field_mask::<u16>({}, {}))",
                                 member, offset, d))
                     }
                 }
@@ -615,7 +615,7 @@ pub fn getter_text(gen: &GeneratorContext,
                     let default = if reg_field.get_had_explicit_default() {
                         default_decl = Some(crate::pointer_constants::word_array_declaration(
                             &default_name,
-                            ::capnp::raw::get_struct_pointer_section(default_value).get(0),
+                            crate::alligator::proto_01::raw::get_struct_pointer_section(default_value).get(0),
                             crate::pointer_constants::WordArrayDeclarationOptions {public: true, omit_first_word: false})?);
                         format!("Some(&_private::{}[..])", default_name)
                     } else {
@@ -624,27 +624,27 @@ pub fn getter_text(gen: &GeneratorContext,
 
                     if is_reader {
                         Line(format!(
-                            "::capnp::traits::FromPointerReader::get_from_pointer(&self.{}.get_pointer_field({}), {})",
+                            " crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.{}.get_pointer_field({}), {})",
                             member, offset, default))
                     } else {
-                        Line(format!("::capnp::traits::FromPointerBuilder::get_from_pointer(self.{}.get_pointer_field({}), {})",
+                        Line(format!(" crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.{}.get_pointer_field({}), {})",
                                      member, offset, default))
 
                     }
                 }
 
                 (type_::Interface(_), value::Interface(_)) => {
-                    Line(format!("match self.{}.get_pointer_field({}).get_capability() {{ ::core::result::Result::Ok(c) => ::core::result::Result::Ok(::capnp::capability::FromClientHook::new(c)), ::core::result::Result::Err(e) => ::core::result::Result::Err(e)}}",
+                    Line(format!("match self.{}.get_pointer_field({}).get_capability() {{ ::core::result::Result::Ok(c) => ::core::result::Result::Ok( crate::alligator::proto_01::capability::FromClientHook::new(c)), ::core::result::Result::Err(e) => ::core::result::Result::Err(e)}}",
                                  member, offset))
                 }
                 (type_::AnyPointer(_), value::AnyPointer(_)) => {
                     if !raw_type.is_parameter()? {
-                        Line(format!("::capnp::any_pointer::{}::new(self.{}.get_pointer_field({}))", module_string, member, offset))
+                        Line(format!(" crate::alligator::proto_01::any_pointer::{}::new(self.{}.get_pointer_field({}))", module_string, member, offset))
                     } else {
                         if is_reader {
-                            Line(format!("::capnp::traits::FromPointerReader::get_from_pointer(&self.{}.get_pointer_field({}), ::core::option::Option::None)", member, offset))
+                            Line(format!(" crate::alligator::proto_01::traits::FromPointerReader::get_from_pointer(&self.{}.get_pointer_field({}), ::core::option::Option::None)", member, offset))
                         } else {
-                            Line(format!("::capnp::traits::FromPointerBuilder::get_from_pointer(self.{}.get_pointer_field({}), ::core::option::Option::None)", member, offset))
+                            Line(format!(" crate::alligator::proto_01::traits::FromPointerBuilder::get_from_pointer(self.{}.get_pointer_field({}), ::core::option::Option::None)", member, offset))
                         }
                     }
                 }
@@ -655,7 +655,7 @@ pub fn getter_text(gen: &GeneratorContext,
     }
 }
 
-fn zero_fields_of_group(gen: &GeneratorContext, node_id: u64) -> ::capnp::Result<FormattedText> {
+fn zero_fields_of_group(gen: &GeneratorContext, node_id: u64) -> crate::alligator::proto_01::Result<FormattedText> {
     use crate::schema_capnp::{node, field, type_};
     match gen.node_map[&node_id].which()? {
         node::Struct(st) => {
@@ -719,7 +719,7 @@ fn zero_fields_of_group(gen: &GeneratorContext, node_id: u64) -> ::capnp::Result
 
 fn generate_setter(gen: &GeneratorContext, discriminant_offset: u32,
                    styled_name: &str,
-                   field: &schema_capnp::field::Reader) -> ::capnp::Result<FormattedText> {
+                   field: &schema_capnp::field::Reader) -> crate::alligator::proto_01::Result<FormattedText> {
 
     use crate::schema_capnp::*;
 
@@ -752,7 +752,7 @@ fn generate_setter(gen: &GeneratorContext, discriminant_offset: u32,
 
             initter_interior.push(zero_fields_of_group(gen, group.get_type_id())?);
 
-            initter_interior.push(Line(format!("::capnp::traits::FromStructBuilder::new(self.builder)")));
+            initter_interior.push(Line(format!(" crate::alligator::proto_01::traits::FromStructBuilder::new(self.builder)")));
 
             (None, Some(format!("{}::Builder<'a>", the_mod)))
         }
@@ -797,7 +797,7 @@ fn generate_setter(gen: &GeneratorContext, discriminant_offset: u32,
                     initter_interior.push(Line(format!("self.builder.get_pointer_field({}).init_text(size)",
                                                        offset)));
                     initter_params.push("size: u32");
-                    (Some("::capnp::text::Reader<'_>".to_string()), Some("::capnp::text::Builder<'a>".to_string()))
+                    (Some(" crate::alligator::proto_01::text::Reader<'_>".to_string()), Some(" crate::alligator::proto_01::text::Builder<'a>".to_string()))
                 }
                 type_::Data(()) => {
                     setter_interior.push(Line(format!("self.builder.get_pointer_field({}).set_data(value);",
@@ -805,17 +805,17 @@ fn generate_setter(gen: &GeneratorContext, discriminant_offset: u32,
                     initter_interior.push(Line(format!("self.builder.get_pointer_field({}).init_data(size)",
                                                        offset)));
                     initter_params.push("size: u32");
-                    (Some("::capnp::data::Reader<'_>".to_string()), Some("::capnp::data::Builder<'a>".to_string()))
+                    (Some(" crate::alligator::proto_01::data::Reader<'_>".to_string()), Some(" crate::alligator::proto_01::data::Builder<'a>".to_string()))
                 }
                 type_::List(ot1) => {
                     return_result = true;
                     setter_interior.push(
-                        Line(format!("::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field({}), value, false)",
+                        Line(format!(" crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field({}), value, false)",
                                      offset)));
 
                     initter_params.push("size: u32");
                     initter_interior.push(
-                        Line(format!("::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field({}), size)", offset)));
+                        Line(format!(" crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field({}), size)", offset)));
 
                     match ot1.get_element_type()?.which()? {
                         type_::List(_) => {
@@ -838,19 +838,19 @@ fn generate_setter(gen: &GeneratorContext, discriminant_offset: u32,
                 type_::Struct(_) => {
                     return_result = true;
                     initter_interior.push(
-                      Line(format!("::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field({}), 0)",
+                      Line(format!(" crate::alligator::proto_01::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field({}), 0)",
                                    offset)));
                     if typ.is_branded()? {
                         setter_interior.push(
                             Line(format!(
-                                "<{} as ::capnp::traits::SetPointerBuilder>::set_pointer_builder(self.builder.get_pointer_field({}), value, false)",
+                                "<{} as crate::alligator::proto_01::traits::SetPointerBuilder>::set_pointer_builder(self.builder.get_pointer_field({}), value, false)",
                                 typ.type_string(gen, Leaf::Reader("'_"))?,
                                 offset)));
                         (Some(typ.type_string(gen, Leaf::Reader("'_"))?),
                          Some(typ.type_string(gen, Leaf::Builder("'a"))?))
                     } else {
                         setter_interior.push(
-                            Line(format!("::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field({}), value, false)", offset)));
+                            Line(format!(" crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field({}), value, false)", offset)));
                         (Some(reg_field.get_type()?.type_string(gen, Leaf::Reader("'_"))?),
                          Some(reg_field.get_type()?.type_string(gen, Leaf::Builder("'a"))?))
                     }
@@ -863,8 +863,8 @@ fn generate_setter(gen: &GeneratorContext, discriminant_offset: u32,
                 }
                 type_::AnyPointer(_) => {
                     if typ.is_parameter()? {
-                        initter_interior.push(Line(format!("::capnp::any_pointer::Builder::new(self.builder.get_pointer_field({})).init_as()", offset)));
-                        setter_interior.push(Line(format!("::capnp::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field({}), value, false)", offset)));
+                        initter_interior.push(Line(format!(" crate::alligator::proto_01::any_pointer::Builder::new(self.builder.get_pointer_field({})).init_as()", offset)));
+                        setter_interior.push(Line(format!(" crate::alligator::proto_01::traits::SetPointerBuilder::set_pointer_builder(self.builder.get_pointer_field({}), value, false)", offset)));
                         return_result = true;
 
                         let builder_type = typ.type_string(gen, Leaf::Builder("'a"))?;
@@ -874,17 +874,17 @@ fn generate_setter(gen: &GeneratorContext, discriminant_offset: u32,
                                                  styled_name, builder_type)));
                         result.push(Indent(Box::new(Branch(initn_interior))));
                         result.push(Indent(Box::new(
-                            Line(format!("::capnp::any_pointer::Builder::new(self.builder.get_pointer_field({})).initn_as(length)", offset)))));
+                            Line(format!(" crate::alligator::proto_01::any_pointer::Builder::new(self.builder.get_pointer_field({})).initn_as(length)", offset)))));
                         result.push(Line("}".to_string()));
 
 
                         (Some(typ.type_string(gen, Leaf::Reader("'_"))?), Some(builder_type))
                     } else {
-                        initter_interior.push(Line(format!("let mut result = ::capnp::any_pointer::Builder::new(self.builder.get_pointer_field({}));",
+                        initter_interior.push(Line(format!("let mut result = crate::alligator::proto_01::any_pointer::Builder::new(self.builder.get_pointer_field({}));",
                                                    offset)));
                         initter_interior.push(Line("result.clear();".to_string()));
                         initter_interior.push(Line("result".to_string()));
-                        (None, Some("::capnp::any_pointer::Builder<'a>".to_string()))
+                        (None, Some(" crate::alligator::proto_01::any_pointer::Builder<'a>".to_string()))
                     }
                 }
                 _ => return Err(Error::failed(format!("unrecognized type"))),
@@ -894,7 +894,7 @@ fn generate_setter(gen: &GeneratorContext, discriminant_offset: u32,
 
     match maybe_reader_type {
         Some(ref reader_type) => {
-            let return_type = if return_result { "-> ::capnp::Result<()>" } else { "" };
+            let return_type = if return_result { "-> crate::alligator::proto_01::Result<()>" } else { "" };
             result.push(Line("#[inline]".to_string()));
             result.push(Line(format!("pub fn set_{}(&mut self, {}: {}) {} {{",
                                      styled_name, setter_param,
@@ -925,7 +925,7 @@ fn generate_union(gen: &GeneratorContext,
                   fields: &[schema_capnp::field::Reader],
                   is_reader: bool,
                   params: &TypeParameterTexts)
-                  -> ::capnp::Result<(FormattedText, FormattedText, FormattedText, Vec<FormattedText>)>
+                  -> crate::alligator::proto_01::Result<(FormattedText, FormattedText, FormattedText, Vec<FormattedText>)>
 {
     use crate::schema_capnp::*;
 
@@ -995,7 +995,7 @@ fn generate_union(gen: &GeneratorContext,
                             else {"".to_string()} );
 
 
-    getter_interior.push(Line("x => ::core::result::Result::Err(::capnp::NotInSchema(x))".to_string()));
+    getter_interior.push(Line("x => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(x))".to_string()));
 
     interior.push(
         Branch(vec!(Line(format!("pub enum {} {{", enum_name)),
@@ -1019,7 +1019,7 @@ fn generate_union(gen: &GeneratorContext,
 
     let getter_result =
         Branch(vec!(Line("#[inline]".to_string()),
-                    Line(format!("pub fn which(self) -> ::core::result::Result<{}, ::capnp::NotInSchema> {{",
+                    Line(format!("pub fn which(self) -> ::core::result::Result<{}, crate::alligator::proto_01::NotInSchema> {{",
                                  concrete_type)),
                     Indent(Box::new(Branch(vec!(
                         Line(format!("match self.{}.get_data_field::<u16>({}) {{", field_name, doffset)),
@@ -1035,7 +1035,7 @@ fn generate_union(gen: &GeneratorContext,
 fn generate_haser(discriminant_offset: u32,
                   styled_name: &str,
                   field: &schema_capnp::field::Reader,
-                  is_reader: bool) -> ::capnp::Result<FormattedText> {
+                  is_reader: bool) -> crate::alligator::proto_01::Result<FormattedText> {
     use crate::schema_capnp::*;
 
     let mut result = Vec::new();
@@ -1075,7 +1075,7 @@ fn generate_haser(discriminant_offset: u32,
 }
 
 fn generate_pipeline_getter(gen: &GeneratorContext,
-                            field: schema_capnp::field::Reader) -> ::capnp::Result<FormattedText> {
+                            field: schema_capnp::field::Reader) -> crate::alligator::proto_01::Result<FormattedText> {
     use crate::schema_capnp::{field, type_};
 
     let name = get_field_name(field)?;
@@ -1088,7 +1088,7 @@ fn generate_pipeline_getter(gen: &GeneratorContext,
                              camel_to_snake_case(name),
                              the_mod)),
                 Indent(
-                    Box::new(Line("::capnp::capability::FromTypelessPipeline::new(self._typeless.noop())".to_string()))),
+                    Box::new(Line(" crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.noop())".to_string()))),
                 Line("}".to_string()))))
         }
         field::Slot(reg_field) => {
@@ -1100,7 +1100,7 @@ fn generate_pipeline_getter(gen: &GeneratorContext,
                                      camel_to_snake_case(name),
                                      typ.type_string(gen, Leaf::Pipeline)?)),
                         Indent(Box::new(Line(
-                            format!("::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field({}))",
+                            format!(" crate::alligator::proto_01::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field({}))",
                                     reg_field.get_offset())))),
                         Line("}".to_string()))))
                 }
@@ -1110,7 +1110,7 @@ fn generate_pipeline_getter(gen: &GeneratorContext,
                                      camel_to_snake_case(name),
                                      typ.type_string(gen, Leaf::Client)?)),
                         Indent(Box::new(Line(
-                            format!("::capnp::capability::FromClientHook::new(self._typeless.get_pointer_field({}).as_cap())",
+                            format!(" crate::alligator::proto_01::capability::FromClientHook::new(self._typeless.get_pointer_field({}).as_cap())",
                                     reg_field.get_offset())))),
                         Line("}".to_string()))))
                 }
@@ -1125,7 +1125,7 @@ fn generate_pipeline_getter(gen: &GeneratorContext,
 // We need this to work around the fact that Rust does not allow typedefs
 // with unused type parameters.
 fn get_ty_params_of_brand(gen: &GeneratorContext,
-                          brand: crate::schema_capnp::brand::Reader<>) -> ::capnp::Result<String>
+                          brand: crate::schema_capnp::brand::Reader<>) -> crate::alligator::proto_01::Result<String>
 {
     let mut acc = HashSet::new();
     get_ty_params_of_brand_helper(gen, &mut acc, brand)?;
@@ -1143,7 +1143,7 @@ fn get_ty_params_of_brand(gen: &GeneratorContext,
 fn get_ty_params_of_type_helper(gen: &GeneratorContext,
                                 accumulator: &mut HashSet<(u64, u16)>,
                                 typ: crate::schema_capnp::type_::Reader<>)
-    -> ::capnp::Result<()>
+    -> crate::alligator::proto_01::Result<()>
 {
     use crate::schema_capnp::type_;
     match typ.which()? {
@@ -1189,7 +1189,7 @@ fn get_ty_params_of_type_helper(gen: &GeneratorContext,
 fn get_ty_params_of_brand_helper(gen: &GeneratorContext,
                          accumulator: &mut HashSet<(u64, u16)>,
                          brand: crate::schema_capnp::brand::Reader<>)
-                         -> ::capnp::Result<()>
+                         -> crate::alligator::proto_01::Result<()>
 {
     for scope in brand.get_scopes()?.iter() {
         let scope_id = scope.get_scope_id();
@@ -1221,7 +1221,7 @@ fn generate_node(gen: &GeneratorContext,
                  // Ugh. We need this to deal with the anonymous Params and Results
                  // structs that go with RPC methods.
                  parent_node_id: Option<u64>,
-                 ) -> ::capnp::Result<FormattedText> {
+                 ) -> crate::alligator::proto_01::Result<FormattedText> {
     use crate::schema_capnp::*;
 
     let mut output: Vec<FormattedText> = Vec::new();
@@ -1341,17 +1341,17 @@ fn generate_node(gen: &GeneratorContext,
 
             let builder_struct_size =
                 Branch(vec!(
-                    Line(format!("impl <'a,{0}> ::capnp::traits::HasStructSize for Builder<'a,{0}> {1} {{",
+                    Line(format!("impl <'a,{0}> crate::alligator::proto_01::traits::HasStructSize for Builder<'a,{0}> {1} {{",
                                  params.params, params.where_clause)),
                     Indent(Box::new(
                         Branch(vec!(Line("#[inline]".to_string()),
-                                    Line("fn struct_size() -> ::capnp::private::layout::StructSize { _private::STRUCT_SIZE }".to_string()))))),
+                                    Line("fn struct_size() -> crate::alligator::proto_01::private::layout::StructSize { _private::STRUCT_SIZE }".to_string()))))),
                    Line("}".to_string())));
 
 
             private_mod_interior.push(
                 Line(
-                    "use capnp::private::layout;".to_string()));
+                    "use crate::alligator::proto_01::private::layout;".to_string()));
             private_mod_interior.push(
                 Line(
                     format!("pub const STRUCT_SIZE: layout::StructSize = layout::StructSize {{ data: {}, pointers: {} }};",
@@ -1363,15 +1363,15 @@ fn generate_node(gen: &GeneratorContext,
 
             let from_pointer_builder_impl =
                 Branch(vec![
-                    Line(format!("impl <'a,{0}> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,{0}> {1} {{", params.params, params.where_clause)),
+                    Line(format!("impl <'a,{0}> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Builder<'a,{0}> {1} {{", params.params, params.where_clause)),
                     Indent(
                         Box::new(
                             Branch(vec!(
-                                Line(format!("fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,{}> {{", params.params)),
-                                Indent(Box::new(Line("::capnp::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))".to_string()))),
+                                Line(format!("fn init_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Builder<'a,{}> {{", params.params)),
+                                Indent(Box::new(Line(" crate::alligator::proto_01::traits::FromStructBuilder::new(builder.init_struct(_private::STRUCT_SIZE))".to_string()))),
                                 Line("}".to_string()),
-                                Line(format!("fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Builder<'a,{}>> {{", params.params)),
-                                Indent(Box::new(Line("::core::result::Result::Ok(::capnp::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))".to_string()))),
+                                Line(format!("fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Builder<'a,{}>> {{", params.params)),
+                                Indent(Box::new(Line("::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructBuilder::new(builder.get_struct(_private::STRUCT_SIZE, default)?))".to_string()))),
                                 Line("}".to_string()))))),
                     Line("}".to_string()),
                     BlankLine]);
@@ -1382,9 +1382,9 @@ fn generate_node(gen: &GeneratorContext,
                     Branch(vec!(
                         Line("#[derive(Copy, Clone)]".into()),
                         Line("pub struct Owned(());".to_string()),
-                        Line("impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }".to_string()),
-                        Line("impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }".to_string()),
-                        Line("impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }".to_string())
+                        Line("impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }".to_string()),
+                        Line("impl <'a> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }".to_string()),
+                        Line("impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Pipeline; }".to_string())
                     ))
                 } else {
                     Branch(vec!(
@@ -1392,23 +1392,23 @@ fn generate_node(gen: &GeneratorContext,
                         Line(format!("pub struct Owned<{}> {{", params.params)),
                             Indent(Box::new(Line(params.phantom_data_type.clone()))),
                         Line("}".to_string()),
-                        Line(format!("impl <'a, {0}> ::capnp::traits::Owned<'a> for Owned <{0}> {1} {{ type Reader = Reader<'a, {0}>; type Builder = Builder<'a, {0}>; }}",
+                        Line(format!("impl <'a, {0}> crate::alligator::proto_01::traits::Owned<'a> for Owned <{0}> {1} {{ type Reader = Reader<'a, {0}>; type Builder = Builder<'a, {0}>; }}",
                             params.params, params.where_clause)),
-                        Line(format!("impl <'a, {0}> ::capnp::traits::OwnedStruct<'a> for Owned <{0}> {1} {{ type Reader = Reader<'a, {0}>; type Builder = Builder<'a, {0}>; }}",
+                        Line(format!("impl <'a, {0}> crate::alligator::proto_01::traits::OwnedStruct<'a> for Owned <{0}> {1} {{ type Reader = Reader<'a, {0}>; type Builder = Builder<'a, {0}>; }}",
                             params.params, params.where_clause)),
-                        Line(format!("impl <{0}> ::capnp::traits::Pipelined for Owned<{0}> {1} {{ type Pipeline = Pipeline{2}; }}",
+                        Line(format!("impl <{0}> crate::alligator::proto_01::traits::Pipelined for Owned<{0}> {1} {{ type Pipeline = Pipeline{2}; }}",
                             params.params, params.where_clause, bracketed_params)),
                     ))
                 }),
                 BlankLine,
                 Line("#[derive(Clone, Copy)]".to_string()),
                 (if !is_generic {
-                    Line("pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }".to_string())
+                    Line("pub struct Reader<'a> { reader: crate::alligator::proto_01::private::layout::StructReader<'a> }".to_string())
                 } else {
                     Branch(vec!(
                         Line(format!("pub struct Reader<'a,{}> {} {{", params.params, params.where_clause)),
                         Indent(Box::new(Branch(vec!(
-                            Line("reader: ::capnp::private::layout::StructReader<'a>,".to_string()),
+                            Line("reader: crate::alligator::proto_01::private::layout::StructReader<'a>,".to_string()),
                             Line(params.phantom_data_type.clone()),
                         )))),
                         Line("}".to_string())
@@ -1416,44 +1416,44 @@ fn generate_node(gen: &GeneratorContext,
                 }),
                 BlankLine,
                 Branch(vec!(
-                        Line(format!("impl <'a,{0}> ::capnp::traits::HasTypeId for Reader<'a,{0}> {1} {{",
+                        Line(format!("impl <'a,{0}> crate::alligator::proto_01::traits::HasTypeId for Reader<'a,{0}> {1} {{",
                             params.params, params.where_clause)),
                         Indent(Box::new(Branch(vec!(Line("#[inline]".to_string()),
                                                Line("fn type_id() -> u64 { _private::TYPE_ID }".to_string()))))),
                     Line("}".to_string()))),
-                Line(format!("impl <'a,{0}> ::capnp::traits::FromStructReader<'a> for Reader<'a,{0}> {1} {{",
+                Line(format!("impl <'a,{0}> crate::alligator::proto_01::traits::FromStructReader<'a> for Reader<'a,{0}> {1} {{",
                             params.params, params.where_clause)),
                 Indent(
                     Box::new(Branch(vec!(
-                        Line(format!("fn new(reader: ::capnp::private::layout::StructReader<'a>) -> Reader<'a,{}> {{", params.params)),
+                        Line(format!("fn new(reader: crate::alligator::proto_01::private::layout::StructReader<'a>) -> Reader<'a,{}> {{", params.params)),
                         Indent(Box::new(Line(format!("Reader {{ reader, {} }}", params.phantom_data_value)))),
                         Line("}".to_string()))))),
                 Line("}".to_string()),
                 BlankLine,
-                Line(format!("impl <'a,{0}> ::capnp::traits::FromPointerReader<'a> for Reader<'a,{0}> {1} {{",
+                Line(format!("impl <'a,{0}> crate::alligator::proto_01::traits::FromPointerReader<'a> for Reader<'a,{0}> {1} {{",
                     params.params, params.where_clause)),
                 Indent(
                     Box::new(Branch(vec!(
-                        Line(format!("fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Reader<'a,{}>> {{",params.params)),
-                        Indent(Box::new(Line("::core::result::Result::Ok(::capnp::traits::FromStructReader::new(reader.get_struct(default)?))".to_string()))),
+                        Line(format!("fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Reader<'a,{}>> {{",params.params)),
+                        Indent(Box::new(Line("::core::result::Result::Ok( crate::alligator::proto_01::traits::FromStructReader::new(reader.get_struct(default)?))".to_string()))),
                         Line("}".to_string()))))),
                 Line("}".to_string()),
                 BlankLine,
-                Line(format!("impl <'a,{0}> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,{0}> {1} {{",
+                Line(format!("impl <'a,{0}> crate::alligator::proto_01::traits::IntoInternalStructReader<'a> for Reader<'a,{0}> {1} {{",
                             params.params, params.where_clause)),
                 Indent(
                     Box::new(Branch(vec!(
-                        Line("fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {".to_string()),
+                        Line("fn into_internal_struct_reader(self) -> crate::alligator::proto_01::private::layout::StructReader<'a> {".to_string()),
                         Indent(Box::new(Line("self.reader".to_string()))),
                         Line("}".to_string()))))),
                 Line("}".to_string()),
                 BlankLine,
-                Line(format!("impl <'a,{0}> ::capnp::traits::Imbue<'a> for Reader<'a,{0}> {1} {{",
+                Line(format!("impl <'a,{0}> crate::alligator::proto_01::traits::Imbue<'a> for Reader<'a,{0}> {1} {{",
                     params.params, params.where_clause)),
                 Indent(
                     Box::new(Branch(vec!(
-                        Line("fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {".to_string()),
-                        Indent(Box::new(Line("self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))".to_string()))),
+                        Line("fn imbue(&mut self, cap_table: &'a crate::alligator::proto_01::private::layout::CapTable) {".to_string()),
+                        Indent(Box::new(Line("self.reader.imbue( crate::alligator::proto_01::private::layout::CapTableReader::Plain(cap_table))".to_string()))),
                         Line("}".to_string()))))),
                 Line("}".to_string()),
                 BlankLine,
@@ -1464,20 +1464,20 @@ fn generate_node(gen: &GeneratorContext,
                         Indent(Box::new(Line("Reader { .. *self }".to_string()))),
                         Line("}".to_string()),
                         BlankLine,
-                        Line("pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {".to_string()),
+                        Line("pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {".to_string()),
                         Indent(Box::new(Line("self.reader.total_size()".to_string()))),
                         Line("}".to_string())]))),
                 Indent(Box::new(Branch(reader_members))),
                 Line("}".to_string()),
                 BlankLine,
                 (if !is_generic {
-                    Line("pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }".to_string())
+                    Line("pub struct Builder<'a> { builder: crate::alligator::proto_01::private::layout::StructBuilder<'a> }".to_string())
                 } else {
                     Branch(vec!(
                         Line(format!("pub struct Builder<'a,{}> {} {{",
                                      params.params, params.where_clause)),
                         Indent(Box::new(Branch(vec!(
-                            Line("builder: ::capnp::private::layout::StructBuilder<'a>,".to_string()),
+                            Line("builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>,".to_string()),
                             Line(params.phantom_data_type.clone()),
                         )))),
                         Line("}".to_string())
@@ -1485,54 +1485,54 @@ fn generate_node(gen: &GeneratorContext,
                 }),
                 builder_struct_size,
                 Branch(vec!(
-                    Line(format!("impl <'a,{0}> ::capnp::traits::HasTypeId for Builder<'a,{0}> {1} {{",
+                    Line(format!("impl <'a,{0}> crate::alligator::proto_01::traits::HasTypeId for Builder<'a,{0}> {1} {{",
                                  params.params, params.where_clause)),
                     Indent(Box::new(Branch(vec!(
                         Line("#[inline]".to_string()),
                         Line("fn type_id() -> u64 { _private::TYPE_ID }".to_string()))))),
                     Line("}".to_string()))),
                 Line(format!(
-                    "impl <'a,{0}> ::capnp::traits::FromStructBuilder<'a> for Builder<'a,{0}> {1} {{",
+                    "impl <'a,{0}> crate::alligator::proto_01::traits::FromStructBuilder<'a> for Builder<'a,{0}> {1} {{",
                     params.params, params.where_clause)),
                 Indent(
                     Box::new(Branch(vec!(
-                        Line(format!("fn new(builder: ::capnp::private::layout::StructBuilder<'a>) -> Builder<'a, {}> {{", params.params)),
+                        Line(format!("fn new(builder: crate::alligator::proto_01::private::layout::StructBuilder<'a>) -> Builder<'a, {}> {{", params.params)),
                         Indent(Box::new(Line(format!("Builder {{ builder, {} }}", params.phantom_data_value)))),
                         Line("}".to_string()))))),
                 Line("}".to_string()),
                 BlankLine,
-                Line(format!("impl <'a,{0}> ::capnp::traits::ImbueMut<'a> for Builder<'a,{0}> {1} {{",
+                Line(format!("impl <'a,{0}> crate::alligator::proto_01::traits::ImbueMut<'a> for Builder<'a,{0}> {1} {{",
                              params.params, params.where_clause)),
                 Indent(
                     Box::new(Branch(vec!(
-                        Line("fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {".to_string()),
-                        Indent(Box::new(Line("self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))".to_string()))),
+                        Line("fn imbue_mut(&mut self, cap_table: &'a mut crate::alligator::proto_01::private::layout::CapTable) {".to_string()),
+                        Indent(Box::new(Line("self.builder.imbue( crate::alligator::proto_01::private::layout::CapTableBuilder::Plain(cap_table))".to_string()))),
                         Line("}".to_string()))))),
                 Line("}".to_string()),
                 BlankLine,
 
                 from_pointer_builder_impl,
                 Line(format!(
-                    "impl <'a,{0}> ::capnp::traits::SetPointerBuilder for Reader<'a,{0}> {1} {{",
+                    "impl <'a,{0}> crate::alligator::proto_01::traits::SetPointerBuilder for Reader<'a,{0}> {1} {{",
                     params.params, params.where_clause)),
-                Indent(Box::new(Line(format!("fn set_pointer_builder<'b>(pointer: ::capnp::private::layout::PointerBuilder<'b>, value: Reader<'a,{}>, canonicalize: bool) -> ::capnp::Result<()> {{ pointer.set_struct(&value.reader, canonicalize) }}", params.params)))),
+                Indent(Box::new(Line(format!("fn set_pointer_builder<'b>(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'b>, value: Reader<'a,{}>, canonicalize: bool) -> crate::alligator::proto_01::Result<()> {{ pointer.set_struct(&value.reader, canonicalize) }}", params.params)))),
                 Line("}".to_string()),
                 BlankLine,
                 Line(format!("impl <'a,{0}> Builder<'a,{0}> {1} {{", params.params, params.where_clause)),
                 Indent(
                     Box::new(Branch(vec![
                         Line(format!("pub fn into_reader(self) -> Reader<'a,{}> {{", params.params)),
-                        Indent(Box::new(Line("::capnp::traits::FromStructReader::new(self.builder.into_reader())".to_string()))),
+                        Indent(Box::new(Line(" crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())".to_string()))),
                         Line("}".to_string()),
                         Line(format!("pub fn reborrow(&mut self) -> Builder<'_,{}> {{", params.params)),
                         Indent(Box::new(Line("Builder { .. *self }".to_string()))),
                         Line("}".to_string()),
                         Line(format!("pub fn reborrow_as_reader(&self) -> Reader<'_,{}> {{", params.params)),
-                        Indent(Box::new(Line("::capnp::traits::FromStructReader::new(self.builder.into_reader())".to_string()))),
+                        Indent(Box::new(Line(" crate::alligator::proto_01::traits::FromStructReader::new(self.builder.into_reader())".to_string()))),
                         Line("}".to_string()),
 
                         BlankLine,
-                        Line("pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {".to_string()),
+                        Line("pub fn total_size(&self) -> crate::alligator::proto_01::Result< crate::alligator::proto_01::MessageSize> {".to_string()),
                         Indent(Box::new(Line("self.builder.into_reader().total_size()".to_string()))),
                         Line("}".to_string())
                         ]))),
@@ -1543,18 +1543,18 @@ fn generate_node(gen: &GeneratorContext,
                     Branch(vec![
                         Line(format!("pub struct Pipeline{} {{", bracketed_params)),
                         Indent(Box::new(Branch(vec![
-                            Line("_typeless: ::capnp::any_pointer::Pipeline,".to_string()),
+                            Line("_typeless: crate::alligator::proto_01::any_pointer::Pipeline,".to_string()),
                             Line(params.phantom_data_type),
                         ]))),
                         Line("}".to_string())
                     ])
                 } else {
-                    Line("pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }".to_string())
+                    Line("pub struct Pipeline { _typeless: crate::alligator::proto_01::any_pointer::Pipeline }".to_string())
                 }),
-                Line(format!("impl{} ::capnp::capability::FromTypelessPipeline for Pipeline{} {{", bracketed_params, bracketed_params)),
+                Line(format!("impl{} crate::alligator::proto_01::capability::FromTypelessPipeline for Pipeline{} {{", bracketed_params, bracketed_params)),
                 Indent(
                     Box::new(Branch(vec!(
-                        Line(format!("fn new(typeless: ::capnp::any_pointer::Pipeline) -> Pipeline{} {{", bracketed_params)),
+                        Line(format!("fn new(typeless: crate::alligator::proto_01::any_pointer::Pipeline) -> Pipeline{} {{", bracketed_params)),
                         Indent(Box::new(Line(format!("Pipeline {{ _typeless: typeless, {} }}", params.phantom_data_value)))),
                         Line("}".to_string()))))),
                 Line("}".to_string()),
@@ -1586,7 +1586,7 @@ fn generate_node(gen: &GeneratorContext,
                 match_branches.push(
                     Line(format!("{} => ::core::result::Result::Ok({}::{}),", ii, last_name, enumerant)));
             }
-            match_branches.push(Line("n => ::core::result::Result::Err(::capnp::NotInSchema(n)),".to_string()));
+            match_branches.push(Line("n => ::core::result::Result::Err( crate::alligator::proto_01::NotInSchema(n)),".to_string()));
 
             output.push(Branch(vec!(
                 Line("#[repr(u16)]".to_string()),
@@ -1597,12 +1597,12 @@ fn generate_node(gen: &GeneratorContext,
 
             output.push(
                 Branch(vec!(
-                    Line(format!("impl ::capnp::traits::FromU16 for {} {{", last_name)),
+                    Line(format!("impl crate::alligator::proto_01::traits::FromU16 for {} {{", last_name)),
                     Indent(Box::new(Line("#[inline]".to_string()))),
                     Indent(
                         Box::new(Branch(vec![
                             Line(format!(
-                                "fn from_u16(value: u16) -> ::core::result::Result<{}, ::capnp::NotInSchema> {{",
+                                "fn from_u16(value: u16) -> ::core::result::Result<{}, crate::alligator::proto_01::NotInSchema> {{",
                                 last_name)),
                             Indent(
                                 Box::new(Branch(vec![
@@ -1612,7 +1612,7 @@ fn generate_node(gen: &GeneratorContext,
                                         ]))),
                             Line("}".to_string())]))),
                     Line("}".to_string()),
-                    Line(format!("impl ::capnp::traits::ToU16 for {} {{", last_name)),
+                    Line(format!("impl crate::alligator::proto_01::traits::ToU16 for {} {{", last_name)),
                     Indent(Box::new(Line("#[inline]".to_string()))),
                     Indent(
                         Box::new(Line("fn to_u16(self) -> u16 { self as u16 }".to_string()))),
@@ -1620,7 +1620,7 @@ fn generate_node(gen: &GeneratorContext,
 
             output.push(
                 Branch(vec!(
-                    Line(format!("impl ::capnp::traits::HasTypeId for {} {{", last_name)),
+                    Line(format!("impl crate::alligator::proto_01::traits::HasTypeId for {} {{", last_name)),
                     Indent(Box::new(Line("#[inline]".to_string()))),
                     Indent(
                         Box::new(Line(format!("fn type_id() -> u64 {{ {}u64 }}", format_u64(node_id)).to_string()))),
@@ -1684,26 +1684,26 @@ fn generate_node(gen: &GeneratorContext,
 
                 dispatch_arms.push(
                     Line(format!(
-                        "{} => server.{}(::capnp::private::capability::internal_get_typed_params(params), ::capnp::private::capability::internal_get_typed_results(results)),",
+                        "{} => server.{}( crate::alligator::proto_01::private::capability::internal_get_typed_params(params), crate::alligator::proto_01::private::capability::internal_get_typed_results(results)),",
                         ordinal, module_name(name))));
                 mod_interior.push(
                     Line(format!(
-                        "pub type {}Params<{}> = ::capnp::capability::Params<{}>;",
+                        "pub type {}Params<{}> = crate::alligator::proto_01::capability::Params<{}>;",
                         capitalize_first_letter(name), params_ty_params, param_type)));
                 mod_interior.push(
                     Line(format!(
-                        "pub type {}Results<{}> = ::capnp::capability::Results<{}>;",
+                        "pub type {}Results<{}> = crate::alligator::proto_01::capability::Results<{}>;",
                         capitalize_first_letter(name), results_ty_params, result_type)));
                 server_interior.push(
                     Line(format!(
-                        "fn {}(&mut self, _: {}Params<{}>, _: {}Results<{}>) -> ::capnp::capability::Promise<(), ::capnp::Error> {{ ::capnp::capability::Promise::err(::capnp::Error::unimplemented(\"method not implemented\".to_string())) }}",
+                        "fn {}(&mut self, _: {}Params<{}>, _: {}Results<{}>) -> crate::alligator::proto_01::capability::Promise<(), crate::alligator::proto_01::Error> {{ crate::alligator::proto_01::capability::Promise::err( crate::alligator::proto_01::Error::unimplemented(\"method not implemented\".to_string())) }}",
                         module_name(name),
                         capitalize_first_letter(name), params_ty_params,
                         capitalize_first_letter(name), results_ty_params
                     )));
 
                 client_impl_interior.push(
-                    Line(format!("pub fn {}_request(&self) -> ::capnp::capability::Request<{},{}> {{",
+                    Line(format!("pub fn {}_request(&self) -> crate::alligator::proto_01::capability::Request<{},{}> {{",
                                  camel_to_snake_case(name), param_type, result_type)));
 
                 client_impl_interior.push(Indent(
@@ -1736,16 +1736,16 @@ fn generate_node(gen: &GeneratorContext,
 
             mod_interior.push(BlankLine);
             mod_interior.push(Line(format!("pub struct Client{} {{", bracketed_params)));
-            mod_interior.push(Indent(Box::new(Line("pub client: ::capnp::capability::Client,".to_string()))));
+            mod_interior.push(Indent(Box::new(Line("pub client: crate::alligator::proto_01::capability::Client,".to_string()))));
             if is_generic {
                 mod_interior.push(Indent(Box::new(Line(params.phantom_data_type.clone()))));
             }
             mod_interior.push(Line("}".to_string()));
             mod_interior.push(
                 Branch(vec!(
-                    Line(format!("impl {} ::capnp::capability::FromClientHook for Client{} {{", bracketed_params, bracketed_params)),
-                    Indent(Box::new(Line(format!("fn new(hook: Box<dyn (::capnp::private::capability::ClientHook)>) -> Client{} {{", bracketed_params)))),
-                    Indent(Box::new(Indent(Box::new(Line(format!("Client {{ client: ::capnp::capability::Client::new(hook), {} }}", params.phantom_data_value)))))),
+                    Line(format!("impl {} crate::alligator::proto_01::capability::FromClientHook for Client{} {{", bracketed_params, bracketed_params)),
+                    Indent(Box::new(Line(format!("fn new(hook: Box<dyn ( crate::alligator::proto_01::private::capability::ClientHook)>) -> Client{} {{", bracketed_params)))),
+                    Indent(Box::new(Indent(Box::new(Line(format!("Client {{ client: crate::alligator::proto_01::capability::Client::new(hook), {} }}", params.phantom_data_value)))))),
                     Indent(Box::new(Line("}".to_string()))),
                     Line("}".to_string()))));
 
@@ -1754,8 +1754,8 @@ fn generate_node(gen: &GeneratorContext,
                 Branch(vec!(
                     Line("#[derive(Copy, Clone)]".into()),
                     Line("pub struct Owned(());".to_string()),
-                    Line("impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Client; type Builder = Client; }".to_string()),
-                    Line("impl ::capnp::traits::Pipelined for Owned { type Pipeline = Client; }".to_string())))
+                    Line("impl <'a> crate::alligator::proto_01::traits::Owned<'a> for Owned { type Reader = Client; type Builder = Client; }".to_string()),
+                    Line("impl crate::alligator::proto_01::traits::Pipelined for Owned { type Pipeline = Client; }".to_string())))
             } else {
                 Branch(vec!(
                     Line("#[derive(Copy, Clone)]".into()),
@@ -1763,46 +1763,46 @@ fn generate_node(gen: &GeneratorContext,
                     Indent(Box::new(Line(params.phantom_data_type.clone()))),
                     Line("}".to_string()),
                     Line(format!(
-                        "impl <'a, {0}> ::capnp::traits::Owned<'a> for Owned <{0}> {1} {{ type Reader = Client<{0}>; type Builder = Client<{0}>; }}",
+                        "impl <'a, {0}> crate::alligator::proto_01::traits::Owned<'a> for Owned <{0}> {1} {{ type Reader = Client<{0}>; type Builder = Client<{0}>; }}",
                         params.params, params.where_clause)),
                     Line(format!(
-                        "impl <{0}> ::capnp::traits::Pipelined for Owned <{0}> {1} {{ type Pipeline = Client{2}; }}",
+                        "impl <{0}> crate::alligator::proto_01::traits::Pipelined for Owned <{0}> {1} {{ type Pipeline = Client{2}; }}",
                         params.params, params.where_clause, bracketed_params))))
             });
 
             mod_interior.push(Branch(vec!(
-                Line(format!("impl <'a,{0}> ::capnp::traits::FromPointerReader<'a> for Client<{0}> {1} {{",
+                Line(format!("impl <'a,{0}> crate::alligator::proto_01::traits::FromPointerReader<'a> for Client<{0}> {1} {{",
                     params.params, params.where_clause)),
                 Indent(
                     Box::new(Branch(vec![
-                        Line(format!("fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, _default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Client<{}>> {{",params.params)),
-                        Indent(Box::new(Line(format!("::core::result::Result::Ok(::capnp::capability::FromClientHook::new(reader.get_capability()?))")))),
+                        Line(format!("fn get_from_pointer(reader: & crate::alligator::proto_01::private::layout::PointerReader<'a>, _default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Client<{}>> {{",params.params)),
+                        Indent(Box::new(Line(format!("::core::result::Result::Ok( crate::alligator::proto_01::capability::FromClientHook::new(reader.get_capability()?))")))),
                         Line("}".to_string())]))),
                 Line("}".to_string()))));
 
             mod_interior.push(Branch(vec![
-                Line(format!("impl <'a,{0}> ::capnp::traits::FromPointerBuilder<'a> for Client<{0}> {1} {{",
+                Line(format!("impl <'a,{0}> crate::alligator::proto_01::traits::FromPointerBuilder<'a> for Client<{0}> {1} {{",
                              params.params, params.where_clause)),
                 Indent(
                     Box::new(
                         Branch(vec![
-                            Line(format!("fn init_pointer(_builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Client<{}> {{", params.params)),
+                            Line(format!("fn init_pointer(_builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _size: u32) -> Client<{}> {{", params.params)),
                             Indent(Box::new(Line("unimplemented!()".to_string()))),
                             Line("}".to_string()),
-                            Line(format!("fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _default: ::core::option::Option<&'a [capnp::Word]>) -> ::capnp::Result<Client<{}>> {{", params.params)),
-                            Indent(Box::new(Line("::core::result::Result::Ok(::capnp::capability::FromClientHook::new(builder.get_capability()?))".to_string()))),
+                            Line(format!("fn get_from_pointer(builder: crate::alligator::proto_01::private::layout::PointerBuilder<'a>, _default: ::core::option::Option<&'a [capnp::Word]>) -> crate::alligator::proto_01::Result<Client<{}>> {{", params.params)),
+                            Indent(Box::new(Line("::core::result::Result::Ok( crate::alligator::proto_01::capability::FromClientHook::new(builder.get_capability()?))".to_string()))),
                             Line("}".to_string())]))),
                 Line("}".to_string()),
                 BlankLine]));
 
             mod_interior.push(Branch(vec![
                 Line(format!(
-                    "impl <{0}> ::capnp::traits::SetPointerBuilder for Client<{0}> {1} {{",
+                    "impl <{0}> crate::alligator::proto_01::traits::SetPointerBuilder for Client<{0}> {1} {{",
                     params.params, params.where_clause)),
                 Indent(
                     Box::new(
                         Branch(vec![
-                            Line(format!("fn set_pointer_builder(pointer: ::capnp::private::layout::PointerBuilder<'_>, from: Client<{}>, _canonicalize: bool) -> ::capnp::Result<()> {{",
+                            Line(format!("fn set_pointer_builder(pointer: crate::alligator::proto_01::private::layout::PointerBuilder<'_>, from: Client<{}>, _canonicalize: bool) -> crate::alligator::proto_01::Result<()> {{",
                                          params.params)),
                             Indent(Box::new(Line(
                                 "pointer.set_capability(from.client.hook);".to_string()))),
@@ -1813,7 +1813,7 @@ fn generate_node(gen: &GeneratorContext,
 
             mod_interior.push(
                 Branch(vec!(
-                    Line(format!("impl {0} ::capnp::traits::HasTypeId for Client{0} {{",
+                    Line(format!("impl {0} crate::alligator::proto_01::traits::HasTypeId for Client{0} {{",
                                  bracketed_params)),
                     Indent(Box::new(Line("#[inline]".to_string()))),
                     Indent(Box::new(Line("fn type_id() -> u64 { _private::TYPE_ID }".to_string()))),
@@ -1823,7 +1823,7 @@ fn generate_node(gen: &GeneratorContext,
                 Branch(vec!(
                     Line(format!("impl {0} Clone for Client{0} {{", bracketed_params)),
                     Indent(Box::new(Line(format!("fn clone(&self) -> Client{} {{", bracketed_params)))),
-                    Indent(Box::new(Indent(Box::new(Line(format!("Client {{ client: ::capnp::capability::Client::new(self.client.hook.add_ref()), {} }}", params.phantom_data_value)))))),
+                    Indent(Box::new(Indent(Box::new(Line(format!("Client {{ client: crate::alligator::proto_01::capability::Client::new(self.client.hook.add_ref()), {} }}", params.phantom_data_value)))))),
                     Indent(Box::new(Line("}".to_string()))),
                     Line("}".to_string()))));
 
@@ -1844,7 +1844,7 @@ fn generate_node(gen: &GeneratorContext,
 
             mod_interior.push(Branch(vec![
                 Line(
-                    format!("impl <_S: Server{1} + 'static, {0}> ::capnp::capability::FromServer<_S> for Client{1} {2}  {{",
+                    format!("impl <_S: Server{1} + 'static, {0}> crate::alligator::proto_01::capability::FromServer<_S> for Client{1} {2}  {{",
                             params.params, bracketed_params, params.where_clause_with_static)),
                 Indent(Box::new(Branch(vec![
                     Line(format!("type Dispatch = ServerDispatch<_S, {}>;", params.params)),
@@ -1881,16 +1881,16 @@ fn generate_node(gen: &GeneratorContext,
             mod_interior.push(
                 Branch(vec!(
                     (if is_generic {
-                        Line(format!("impl <{}, _T: Server{}> ::capnp::capability::Server for ServerDispatch<_T,{}> {} {{", params.params, bracketed_params, params.params, params.where_clause))
+                        Line(format!("impl <{}, _T: Server{}> crate::alligator::proto_01::capability::Server for ServerDispatch<_T,{}> {} {{", params.params, bracketed_params, params.params, params.where_clause))
                     } else {
-                        Line("impl <_T: Server> ::capnp::capability::Server for ServerDispatch<_T> {".to_string())
+                        Line("impl <_T: Server> crate::alligator::proto_01::capability::Server for ServerDispatch<_T> {".to_string())
                     }),
-                    Indent(Box::new(Line("fn dispatch_call(&mut self, interface_id: u64, method_id: u16, params: ::capnp::capability::Params<::capnp::any_pointer::Owned>, results: ::capnp::capability::Results<::capnp::any_pointer::Owned>) -> ::capnp::capability::Promise<(), ::capnp::Error> {".to_string()))),
+                    Indent(Box::new(Line("fn dispatch_call(&mut self, interface_id: u64, method_id: u16, params: crate::alligator::proto_01::capability::Params< crate::alligator::proto_01::any_pointer::Owned>, results: crate::alligator::proto_01::capability::Results< crate::alligator::proto_01::any_pointer::Owned>) -> crate::alligator::proto_01::capability::Promise<(), crate::alligator::proto_01::Error> {".to_string()))),
                     Indent(Box::new(Indent(Box::new(Line("match interface_id {".to_string()))))),
                     Indent(Box::new(Indent(Box::new(Indent(
                         Box::new(Line(format!("_private::TYPE_ID => ServerDispatch::<_T, {}>::dispatch_call_internal(&mut self.server, method_id, params, results),",params.params)))))))),
                     Indent(Box::new(Indent(Box::new(Indent(Box::new(Branch(base_dispatch_arms))))))),
-                    Indent(Box::new(Indent(Box::new(Indent(Box::new(Line("_ => { ::capnp::capability::Promise::err(::capnp::Error::unimplemented(\"Method not implemented.\".to_string())) }".to_string()))))))),
+                    Indent(Box::new(Indent(Box::new(Indent(Box::new(Line("_ => { crate::alligator::proto_01::capability::Promise::err( crate::alligator::proto_01::Error::unimplemented(\"Method not implemented.\".to_string())) }".to_string()))))))),
                     Indent(Box::new(Indent(Box::new(Line("}".to_string()))))),
                     Indent(Box::new(Line("}".to_string()))),
                     Line("}".to_string()))));
@@ -1902,10 +1902,10 @@ fn generate_node(gen: &GeneratorContext,
                     } else {
                         Line("impl <_T :Server> ServerDispatch<_T> {".to_string())
                     }),
-                    Indent(Box::new(Line("pub fn dispatch_call_internal(server: &mut _T, method_id: u16, params: ::capnp::capability::Params<::capnp::any_pointer::Owned>, results: ::capnp::capability::Results<::capnp::any_pointer::Owned>) -> ::capnp::capability::Promise<(), ::capnp::Error> {".to_string()))),
+                    Indent(Box::new(Line("pub fn dispatch_call_internal(server: &mut _T, method_id: u16, params: crate::alligator::proto_01::capability::Params< crate::alligator::proto_01::any_pointer::Owned>, results: crate::alligator::proto_01::capability::Results< crate::alligator::proto_01::any_pointer::Owned>) -> crate::alligator::proto_01::capability::Promise<(), crate::alligator::proto_01::Error> {".to_string()))),
                     Indent(Box::new(Indent(Box::new(Line("match method_id {".to_string()))))),
                     Indent(Box::new(Indent(Box::new(Indent(Box::new(Branch(dispatch_arms))))))),
-                    Indent(Box::new(Indent(Box::new(Indent(Box::new(Line("_ => { ::capnp::capability::Promise::err(::capnp::Error::unimplemented(\"Method not implemented.\".to_string())) }".to_string()))))))),
+                    Indent(Box::new(Indent(Box::new(Indent(Box::new(Line("_ => { crate::alligator::proto_01::capability::Promise::err( crate::alligator::proto_01::Error::unimplemented(\"Method not implemented.\".to_string())) }".to_string()))))))),
                     Indent(Box::new(Indent(Box::new(Line("}".to_string()))))),
                     Indent(Box::new(Line("}".to_string()))),
                     Line("}".to_string()))));
@@ -2005,14 +2005,14 @@ fn generate_node(gen: &GeneratorContext,
     Ok(Branch(output))
 }
 
-// The capnp crate defines a blanket impl of capnp::Read for R where R: std::io::Read,
+// The capnp crate defines a blanket impl of crate::alligator::proto_01::Read for R where R: std::io::Read,
 // but we can't use that here because it lives behind the "std" feature flag.
 struct ReadWrapper<R> where R: std::io::Read {
     inner: R,
 }
 
-impl <R> capnp::io::Read for ReadWrapper<R> where R: std::io::Read {
-    fn read(&mut self, buf: &mut [u8]) -> capnp::Result<usize> {
+impl <R> crate::alligator::proto_01::io::Read for ReadWrapper<R> where R: std::io::Read {
+    fn read(&mut self, buf: &mut [u8]) -> crate::alligator::proto_01::Result<usize> {
         loop {
             match std::io::Read::read(&mut self.inner, buf) {
                 Ok(n) => return Ok(n),
@@ -2024,7 +2024,7 @@ impl <R> capnp::io::Read for ReadWrapper<R> where R: std::io::Read {
 }
 
 #[deprecated(since = "0.14.2", note = "Use CodeGenerationCommand::run() instead.")]
-pub fn generate_code<T>(inp: T, out_dir: &::std::path::Path) -> ::capnp::Result<()>
+pub fn generate_code<T>(inp: T, out_dir: &::std::path::Path) -> crate::alligator::proto_01::Result<()>
     where T: ::std::io::Read
 {
     let mut command = CodeGenerationCommand::new();

@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-use capnp::{any_pointer, message};
+use crate::alligator::proto_01::{any_pointer, message};
 
 use crate::codegen::{FormattedText, GeneratorContext};
 use crate::codegen::FormattedText::{Indent, Line, Branch};
@@ -32,7 +32,7 @@ pub struct WordArrayDeclarationOptions {
 
 pub fn word_array_declaration(name: &str,
                               value: any_pointer::Reader,
-                              options: WordArrayDeclarationOptions) -> ::capnp::Result<FormattedText> {
+                              options: WordArrayDeclarationOptions) -> crate::alligator::proto_01::Result<FormattedText> {
     let allocator = message::HeapAllocator::new()
         .first_segment_words(value.target_size()?.word_count as u32 + 1);
     let mut message = message::Builder::new(allocator);
@@ -61,14 +61,14 @@ pub fn generate_pointer_constant(
     styled_name: &str,
     typ: type_::Reader,
     value: any_pointer::Reader)
-    -> ::capnp::Result<FormattedText>
+    -> crate::alligator::proto_01::Result<FormattedText>
 {
     Ok(Branch(vec![
-        Line(format!("pub static {}: ::capnp::constant::Reader<{}> = {{",
+        Line(format!("pub static {}: crate::alligator::proto_01::constant::Reader<{}> = {{",
                      styled_name, typ.type_string(gen, Leaf::Owned)?)),
         Indent(Box::new(Branch(vec![
             word_array_declaration("WORDS", value, WordArrayDeclarationOptions { public: false, omit_first_word: false })?,
-            Line("::capnp::constant::Reader {".into()),
+            Line(" crate::alligator::proto_01::constant::Reader {".into()),
             Indent(Box::new(Branch(vec![
                 Line("phantom: ::std::marker::PhantomData,".into()),
                 Line("words: &WORDS,".into()),
